@@ -3,7 +3,7 @@ var GameList = [];
 function C_Game(szName, szDesc, szSubDir){
     this.m_szName = szName;
     this.m_szDesc = szDesc;
-    this.m_szPicLoc = "games/" + szSubDir + "/Image.png";
+    this.m_szPicLoc = "games/" + szSubDir + "/image.png";
     this.m_szCodeLink = "games/" + szSubDir + "/index.txt";
     this.m_szGameLink = "games/" + szSubDir + "/index.html";
 }
