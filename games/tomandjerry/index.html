@@ -1,0 +1,250 @@
+<html>
+
+    <body>
+        <style>
+            .hide {
+                display: none;
+            }
+
+            button {
+                padding: 5px 8px;
+                background-color: orange;
+                border: none;
+                color: black;
+            }
+        </style>
+
+        <div id="main">
+            <h1> Adventures of Tom the Cat!</h1>
+
+            <p>
+                Tom is a cat that lives by himself and has a mouse problem. As a cat he hates mice, and so does his neighbor Garfield. Garfield goes out of his way and sells Tom stuff from his store that will help him get rid of Jerry.
+                <br> But in order to get to Jerry you have to go through his body guards, Spike the dog and his cousin Nibbles.
+            </p>
+            <img src="https://vignette.wikia.nocookie.net/villains/images/e/eb/Tom_with_Jerry_%26_Spike.jpg/revision/latest/scale-to-width-down/300?cb=20120810005143" width="300" height="200">
+
+            <p id="demo"></p>
+            <p id="name"></p>
+            <button onclick="startadventure();">Start your adventure</button>
+            <button onclick="showShop();">Enter the mousetrap</button>
+        </div>
+
+        <div id="shop" class="hide">
+            <h1>Welcome to the mousetrap!</h1>
+
+            <img id="myImage" src="https://static.giantbomb.com/uploads/scale_small/0/5768/538199-tomthecat.jpg" width="150" height="200">
+            <img id="myImage" src="http://assets.stickpng.com/thumbs/596dba3fed07ad6118f998fc.png" width="150" height="200">
+            <hr>
+            <button onclick="showMain();">Go Back</button>
+            <p id="currency"></p>
+            <p id="mitochondria"></p>
+            <p id="backpack"></p>
+            <p>Sell (1) Cheese: </p>
+            <button onclick="sell(0);">50 Cat Treats</button>
+            <br>
+            <hr>
+            <br>
+            <p>Dynamite:</p>
+                    <button onclick="purchase(0);">200 Cat Treats</button>
+                    <br>
+                    <hr>
+                    <br>
+                    <p>Hammer:</p>
+                            <button onclick="purchase(1);">150 Cat Treats</button>
+                            <br>
+                            <hr>
+                            <br>
+                            <p>Knife:</p>
+                                    <button onclick="purchase(2);">150 Cat Treats</button>
+                                    <br>
+                                    <hr>
+                                    <br>
+                                    <p>Bat:</p>
+                                            <button onclick="purchase(3);">100 Cat Treats</button>
+                                            <br>
+                                            <hr>
+                                            <br>
+                                            <p>Machete:</p>
+                                                    <button onclick="purchase(4);">300 Cat Treats</button>
+                                                    <br>
+                                                    <hr>
+                                                    <br>
+                                                    <p>Frying Pan:</p>
+                                                            <button onclick="purchase(5);">150 Cat Treats</button>
+                                                            <br>
+                                                            <hr>
+                                                            <br>
+                                                            <p>Vacuum:</p>
+                                                                    <button onclick="purchase(6);">350 Cat Treats</button>
+                                                                    <br>
+                                                                    <hr>
+                                                                    <br>
+                                                                    <p>Hand Gun:</p>
+                                                                            <button onclick="purchase(7);">500 Cat Treats</button>
+                                                                            <br>
+                                                                            <hr>
+                                                                            <br>
+                                                                            <p>AWP:</p>
+                                                                                    <button onclick="purchase(8);">750 Cat Treats</button>
+        </div>
+        <div id="adventure" class="hide">
+            <h1>Adventure</h1>
+
+            <p id="adventureoutput"></p>
+        </div>
+
+
+
+        <script>
+            // ================================
+            // |                              |
+            // |        Setting up vars       |
+            // |          Game Init           |
+            // |                              |
+            // ================================
+            var characters = ["Spike", "Nibbles", "Jerry"];
+            var characterHealth = [115, 112, 200];
+            var characterDefense = [70, 45, 100];
+            var characterAttack = [15, 12, 25];
+            var playerBackpack = [];
+            var playerCurrency = 500;
+			var Cheese = 1;
+			var playerName = "";
+			var bootyhole;
+			
+            if (characterHealth[0] == 0) {
+                document.getElementById("demo").innerHTML = "Game over";
+            }
+
+            function choosename() {
+                playerName = prompt("Insert a Username:", "Tom");
+                if (playerName != null && playerName != "") {
+                    document.getElementById("name").innerHTML = "Welcome " + playerName;
+                }
+            }
+
+            function showMain() {
+                document.getElementById("main").classList.remove("hide");
+                document.getElementById("shop").classList.add("hide");
+            }
+
+
+
+            // ================================
+            // |                              |
+            // |            Store             |
+            // |                              |
+            // ================================
+
+
+            document.getElementById("currency").innerHTML = "You have " + playerCurrency + " Cat Treats ";
+            var shopItems = ["Dynamite", "Hammer", "Knife", "Bat", "Machete", "Frying Pan", "Vacuum", "Hand Gun", "AWP"];
+            var shopCosts = [250, 150, 150, 100, 300, 150, 350, 500, 750];
+
+
+            function showShop() {
+                displayInventory();
+                document.getElementById("main").classList.add("hide");
+                document.getElementById("shop").classList.remove("hide");
+            }
+
+            function displayInventory() {
+                document.getElementById("currency").innerHTML = "You have: " + playerCurrency + " Cat Treats and " + Cheese + " Cheese.";
+
+                document.getElementById("backpack").innerHTML = "Backpack: ";
+                for (var i = 0; i < playerBackpack.length; i++) {
+                    if (i > 0) document.getElementById("backpack").innerHTML += ", "
+                    document.getElementById("backpack").innerHTML += playerBackpack[i];
+                }
+            }
+
+            function purchase(itemID) {
+                if (playerCurrency >= shopCosts[itemID]) {
+                    document.getElementById("mitochondria").innerHTML =
+                        "Garfield: Alright " + playerName + " looks like you have enough Cat Treats";
+                    playerCurrency -= shopCosts[itemID];
+                    playerBackpack.push(shopItems[itemID]);
+                } else {
+                    document.getElementById("mitochondria").innerHTML =
+                        "Garfield: Sorry " + playerName + " looks like you don't have enough Cat Treats";
+                }
+                displayInventory();
+            }
+
+            function sell(itemID) {
+                if (itemID == 0 && Cheese > 0) {
+                    Cheese--;
+                    playerCurrency += 50;
+                }
+                displayInventory();
+            }
+
+
+
+            // ================================
+            // |                              |
+            // |           Adventure          |
+            // |                              |
+            // ================================
+			curFightChar = 0;
+			
+			
+			function runAway(){
+				var RNG = Math.floor(Math.random() * 2);
+				if(RNG == 0){
+					alert("You successfully ran away!");
+				}else{
+					alert("You failed to run away!");
+					startFight()
+				}
+			}
+			
+			function startFight(){
+				var choice;
+				var hits = 0;
+				alert("you scratched " + characters[bootyhole]);
+				var rand = Math.floor(Math.random() * 2);
+				if(curFightChar == 2 && hits == 0){
+					if(rand == 1){
+						alert("You hit Jerry, but he is still alive!");
+						rand = Math.floor(Math.random() * 2);
+						
+						if(rand == 1){
+							alert("You hit Jerry, and he died! spike and nibbles panicked and ran out the house. you succesfully got rid of Jerry and his foes You won!");
+						}else{
+							alert("you lost the fight.");
+						}
+					}else{
+						alert("you lost the fight");
+					}
+					
+				}else {
+					if(rand == 1 ){
+						alert("you have won! but your adventure is far from over.");
+						Cheese++;
+					}else{
+						alert("you lost the fight.");
+					}
+				}
+			}
+			
+            function startadventure() {
+				bootyhole = Math.floor(Math.random() * 2);
+				do{
+					choice = prompt("You encountered: " + characters[bootyhole] + "\nWould you like to run, fight");
+				}while(!choice || (choice.toLowerCase() != "run" && choice.toLowerCase() != "fight"));
+				
+				if(choice == "fight"){				// Player Fights
+					startFight();
+				}
+				else{ // Player Ran
+					runAway();
+				}
+            }
+
+			choosename();
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE>
+<html>
+<body>
+<h2>Stygian</h2>
+
+<h1>
+<button class="button button2" onclick="Quest()">Quest</button>
+<button class="button button2" onclick="Duel()">Duel</button>
+</h1>
+<h2>_____________________________</h2>
+
+<div id="demo"></div> 
+<style>
+
+
+	.item{
+		padding: 5px 0px;
+	}
+	.item .title{
+		font-size: 18px;
+	}
+	.item button{
+    color: #fff;
+    background-color: #000000;
+    border: none;
+	padding: 10px 15px;
+	border-radius: 2px;
+	}
+	
+	
+	body{
+	background : url("https://pa1.narvii.com/6618/ab4bcf8e3ad421916079ae1ab9c438d2f7306baa_hq.gif");
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center;
+	}
+
+	.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+	
+	
+	.button {
+    background-color: #000000; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+	
+	h1 {
+    color: #000000;
+    text-align: center;
+	text-shadow: 4px 4px 10px #B22222;
+	}
+	
+	
+h2 {
+    color: #000000;
+    text-align: center;
+	text-shadow: 2px 2px 5px #B22222;
+	}
+	
+h3 {
+	color: black;
+	text-align: right;
+}
+
+p {
+	color: black;
+	text-align: center;
+}
+	
+	
+	
+</style>
+<div id="gold"></div>
+<div id="inventory"></div>
+<div id="demo"></div> 
+
+<h1>Store</h1>
+<h2>_____________________________</h2>
+<br>
+<h1>Daggers</h1>
+<div class="item">
+	<div class="title">Bandits Knife</div>
+	<img src="http://darksouls3.wiki.fextralife.com/file/Dark-Souls-3/bandits_knife.png" width="100" height="180">
+	<button onclick="BuyDagger(0);">210 Gold</button>
+	<div class="desc">Very light. Does 70 Damage (110 Critical). Increases bleeding (33 bleed).</div>
+</div>
+<br>
+<div class="item">
+	<div class="title">Brigands Twin Daggers</div>
+	<img src="http://darksouls3.wiki.fextralife.com/file/Dark-Souls-3/brigand_twindaggers.png" width="100" height="180">
+	<button onclick="BuyDagger(1);">250 Gold</button>
+	<div class="desc">Very light. Does 80 Damage (125 Critical). Enhanced with Fire (82 Fire Damage).</div>
+</div>
+<br>
+<div class="item">
+	<div class="title">Aquamarine Dagger</div>
+	<img src="http://darksouls3.wiki.fextralife.com/file/Dark-Souls-3/aquamarine_dagger.png" width="100" height="180">
+	<button onclick="BuyDagger(2);">230 Gold</button>
+	<div class="desc">Very Light. Does 67 Damage (100 critical). Enhanced with Magic (67 Magic Damage).</div>
+</div>
+<br><br><br><br><br>
+
+
+<h1>Greatswords</h1>
+<div class="item">
+	<div class="title">Moonlight Greatsword</div>
+	<img src="http://darksouls3.wiki.fextralife.com/file/Dark-Souls-3/moonlight_greatsword.png" width="100" height="180">
+	<button onclick="BuyGreatsword(0);">850 Gold</button>
+	<div class="desc">Medium Heaviness. Does 100 Damage. Enhanced with Magic (130 Magic Damage).</div>
+</div>
+<br>
+<div class="item">
+	<div class="title">Gaels Greatsword</div>
+	<img src="http://darksouls3.wiki.fextralife.com/file/Dark-Souls-3/gaels_greatsword.png" width="100" height="180">
+	<button onclick="BuyGreatsword(1);">550 Gold</button>
+	<div class="desc">Medium Heaviness. Does 150 Damage (100 Critical). Enhanced with Fire (100 Fire Damage).</div>
+</div>
+<br>
+<div class="item">
+	<div class="title">Bastard Sword</div>
+	<img src="http://darksouls3.wiki.fextralife.com/file/Dark-Souls-3/bastard_sword.png" width="100" height="180">
+	<button onclick="BuyGreatsword(2);">475 Gold</button>
+	<div class="desc">Light. Does 138 Damage (100 Critical).</div>
+</div>
+<br><br><br><br><br>
+
+
+<h1>Miracles</h1>
+<div class="item">
+	<div class="title">Estus Flask</div>
+	<img src="http://darksouls3.wiki.fextralife.com/file/Dark-Souls-3/EstusFlask.png" width="100" height="180">
+	<button onclick="BuyMiracle(0);">10 Gold</button>
+	<div class="desc">Fill up with Estus at any Campfire to gain your HP back.</div>
+</div>
+<br>
+<div class="item">
+	<div class="title">Heal Aid</div>
+	<img src="http://darksouls3.wiki.fextralife.com/file/Dark-Souls-3/heal_aid-icon.png" width="100" height="180">
+	<button onclick="BuyMiracle(1);">50 Gold</button>
+	<div class="desc">Light. Does 138 Damage (100 Critical).</div>
+</div>
+<br>
+<div class="item">
+	<div class="title">Heal</div>
+	<img src="http://darksouls3.wiki.fextralife.com/file/Dark-Souls-3/heal-icon.png" width="100" height="180">
+	<button onclick="BuyMiracle(2);">50 Gold</button>
+	<div class="desc">Restores HP for yourself and those around you.</div>
+</div>
+<br>
+<div class="item">
+	<div class="title">Med Heal</div>
+	<img src="http://darksouls3.wiki.fextralife.com/file/Dark-Souls-3/med_heal-icon.png" width="100" height="180">
+	<button onclick="BuyMiracle(3);">100 Gold</button>
+	<div class="desc">Restores moderate HP for yourself and those around you.</div>
+</div>
+<br>
+<div class="item">
+	<div class="title">Great Heal</div>
+	<img src="http://darksouls3.wiki.fextralife.com/file/Dark-Souls-3/great_heal-icon.png" width="100" height="180">
+	<button onclick="BuyMiracle(4);">150 Gold</button>
+	<div class="desc">Restores a large amount of HP for yourself and those around you</div>
+</div>
+
+
+
+<script>
+//====================
+//-- WEAK ENIMIES --\\
+//====================
+
+var badguy1 = "Hound rat"
+
+	var badguy2 = "Cage spider"
+
+		var badguy3 = "Giant fly"
+
+//======================================
+//-- MID ENEMIES & SIDE QUEST NPC'S --\\
+//======================================
+
+var badguy4 = "Old man"
+
+	var badguy5 = "Bandit"
+
+		var badguy6 = "Longfinger Kirk"
+
+			var badguy7 = "Moaning Knight"
+
+//===============
+// -- BOSSES --\\
+//===============
+
+var badguy8 = "Crystal Lizard"
+
+	var badguy9 = "Nameless King"
+
+		var badguy10 = "Soul of Cinder"
+
+//======================
+// -- DUEL ENEMIES -- \\		
+//======================
+		
+var iduel1 = "Shira"
+
+var iduel2 = "Sister Friede";
+
+var iduel3 = "Aldrich";
+
+var iduel4 = "Fire Demon";
+
+var iduel5 = "Dancer of the Boreal Valley";
+
+var iduel6 = "Jailer";
+
+var iduel7 = "Crystal Sage's Rapier";
+
+var iduel8 = "Deacons of the Deep";
+
+var iduel9 = "Ghru Grunt";
+
+var iduel10 = "Sir Vilhelm";
+
+var iduel11 = "Nameless King";
+
+var iduel12 = "Yhorm the Giant";
+
+var iduel13 = "Demon Prince";
+
+var iduel14 = "High Lord Wolnir";
+
+var iduel15 = "Slave Knight Gael";
+	
+//================
+//-- YOUR HP -- \\
+//================
+var HP = 500; // HP for your player (WILL BE CHANGED LATER ON, JUST A TESTING VALUE)
+
+// ======WEAK ENEMIES===== \\
+var HP1 = 111;
+	var HP2 = 174;
+		var HP3 = 215;
+// =====MID ENEMIES======= \\		
+var HP4 = 100;
+	var HP5 = 150;
+		var HP6 = 1446;
+			var HP7 = 1637;
+// ========BOSSES========= \\			
+var HP8 = 1309;
+	var HP9 = 5100;
+		var HP10 = 1637;
+// ======================= \\
+
+
+//=========================
+// -- CHARACTER DIALOG -- \\
+//=========================
+alert ('You arise from a tomb in the middle of nowhere\n "You: "Ugh, was I dreaming?"\n You exit the tomb and come to find a humongous castle in the distance');
+alert ('"You: Where am I?" \n\n ???: ..save us..save us..." \n\n *You put up your fists* \n\n"???: ...Thou has been chosen to adventure off to the lands for the fallen Gods..." \n\n You: "Whos speaking, show yourself!"');
+person1 = prompt ('"???: ..And who are you, kind sir , \n\n You: "Im: ');
+alert ('" ..Well then I am an illusion, a figment of your imagination, I have been sent here to inform you about the dangers ahead of you and the task you must complete for me and in your condition you look rather weak--brittle and cold.."');
+alert ('\n " What dangers, tell me more! How did I get here, Who are you and why is my body overlayed with scars and bruises?" \n\n "???: Never mind that, I have something for you to do for me, and with a noble prize IF completed"');
+alert ('"But I..."');
+alert ('The mist fades and you no longer hear the maidens voice');
+alert ('You find a campfire in the distance to rest at');
+
+
+//================================
+// -- USERNAME INPUT & GENDER -- \\
+//================================
+function username() {
+    var txt1;
+    var person1 = prompt("Please enter your name:");
+    if (person1 != null && person1 != "") {
+        txt1 = " Hello " + person1 + ", nice to meet you! ";
+    }
+	document.getElementById("demo").innerHTML = txt1;
+	
+	
+    var txt2;
+    var person2 = prompt("Please enter your Gender:"); 
+    if (person2 != null && person2 != "") {
+        txt2 = person2 + ", Are you a Sir or a Madam? ";
+    }
+    document.getElementById("demo").innerHTML = txt2;
+	
+	
+    var txt3;
+    var person3 = alert("Thank you!"); 
+    if (person3 != null && person3 != "") {
+        txt3 = " You are now " + person3;
+    }
+
+    document.getElementById("demo").innerHTML = txt1;
+}
+
+
+//=====================================
+// -- VARIBLES & AID NAMES & COSTS -- \\
+//=====================================
+	var gold = 300;
+	var miracles = ["Heal Aid", "Heal", "Med Heal", "Great Heal"];
+	var prices = [50, 50, 100, 150];
+	var inventory = [];
+
+	
+	//=================================
+	// -- DAGGER ITEM NAMES & COST -- \\
+	//=================================
+	var daggerNames = ["Bandits Knife", "Brigands Twin Daggers", "Aquamarine Dagger"];
+	var daggerPrices = [210, 250, 230];
+	function BuyDagger(itemID){
+		if (gold >= daggerPrices[itemID]) {
+			document.getElementById("demo").innerHTML = "";
+			gold -= daggerPrices[itemID];
+			inventory.push(daggerNames[itemID]);
+		} else {
+			document.getElementById("demo").innerHTML = "You dont have enough bum";
+		}
+		DisplayInventory();
+	}
+	
+	
+	//=====================================
+	// -- GREATSWORD ITEM NAMES & COST -- \\
+	//=====================================
+	var greatSwordNames = ["Moonlight Greatsword", "Gaels Greatsword", "Bastard Sword"];
+	var greatSwordPrices = [900, 440, 400];
+	function BuyGreatsword(itemID){
+		if (gold >= greatSwordPrices[itemID]) {
+			document.getElementById("demo").innerHTML = "";
+			gold -= greatSwordPrices[itemID];
+			inventory.push(greatSwordNames[itemID]);
+		} else {
+			document.getElementById("demo").innerHTML = "You dont have enough bum";
+		}
+		DisplayInventory();
+	}
+	
+	
+	//==================================
+	// -- MIRACLE ITEM NAMES & COST -- \\
+	//==================================
+	var miraclesNames = ["Estus Flask", "Heal Aid", "Heal", "Med Heal", "Great Heal"];
+	var miraclesPrices = [10, 25, 100, 25, 150];
+	function BuyMiracle(itemID){
+		if (gold >= miraclesPrices[itemID]) {
+			document.getElementById("demo").innerHTML = "";
+			gold -= miraclesPrices[itemID];
+			inventory.push(miraclesNames[itemID]);
+		} else {
+			document.getElementById("demo").innerHTML = "You dont have enough bum";
+		}
+		DisplayInventory();
+	}
+	
+	
+	//=======================
+	// -- USER INVENTORY -- \\
+	//=======================
+	function DisplayInventory(){
+		document.getElementById("inventory").innerHTML = "Inventory: ";
+		for(var i = 0; i < inventory.length; i++){
+			if(i > 0){
+				document.getElementById("inventory").innerHTML += ", "; 	
+			}
+			document.getElementById("inventory").innerHTML += inventory[i];
+		}
+		
+		document.getElementById("gold").innerHTML = "You have: " + gold + " Gold ";
+	}
+	
+	
+	//==========================================================================
+	// -- QUEST FUNCTION THAT GIVES RANDOM ENEMY AND MAY DROP ITEMS & GOLD -- \\
+	//==========================================================================
+	function Quest(){
+	var randomNumber = Math.floor(Math.random() * 11); 
+	run = 0
+	if (randomNumber == 1){
+	badguy1 = "Hound Rat"
+	HP1 = 111
+	alert ('You ran into a ' + badguy1);
+	}
+	
+	
+	if (randomNumber == 2){
+	badguy2 = "Giant Fly"
+	HP2 = 215
+	alert ('You ran into a ' + badguy2);
+	}
+	
+	
+	if (randomNumber == 3){
+	badguy3 = "Cage Spider"
+	HP3 = 174
+	alert ('You ran into a ' + badguy3);
+	}
+	
+	
+	if (randomNumber == 4){
+	badguy4 = "Old man"
+	HP4 = 100
+	alert ('You encountered a ' + badguy4 + ' \n He is very friendly but weilds a Aquamarine Dagger on his side');
+	}
+
+	
+	if (randomNumber == 5){
+	badguy5 = "Bandit"
+	HP5 = 150
+	alert ('You encountered a ' + badguy5 + ' \n He is VERY dangerous and weilds a Bandits Knife and a Estus Flask on his side');
+	}
+
+	
+	if (randomNumber == 6){
+	badguy6 = "Longfinger Kirk"
+	HP6 = 1446
+	alert ('You encountered a ' + badguy6 + ' \n He is friendly and holds 2 Estus Flasks');
+	}
+
+	
+	if (randomNumber == 7){
+	badguy = "Moaning Knight"
+	HP7 = 1637
+	alert ('You encountered a ' + badguy7 + ' \n He is VERY dangerous and will follow you everywhere untill killed. He weilds a Moonlight Greatsword');
+	}
+
+	
+	if (randomNumber == 8){
+	badguy8 = "Crystal Lizard"
+	HP8 = 3019
+	alert ('You have encountered The Great ' + badguy8 + ' \n He is strong but slow. He does high FROST DAMAGE');
+	}
+
+	
+	if (randomNumber == 9){
+	badguy = "Nameless King"
+	HP9 = 5100
+	alert ('You have encountered The Great ' + badguy9 + ' \n He is mighty strong and fast. He does high LIGHTNING DAMAGE and is weak to FIRE DAMAGE');
+	}
+
+	
+	if (randomNumber == 10){
+	badguy10 = "Soul of Cinder"
+	HP10 = 9209
+	alert ('This is The Great ' + badguy10 + ' \n Cinder is HIGHLY strong and FAST and can have you killed with 1 strike of his fiery straight sword. Losing to cinder can cost you your soul and all your items');
+	}}
+	
+	
+	//======================================================================================================================
+	// -- DUEL FUNCTION THAT GIVES A RANDOM NUMBER TO PLAYER. WHEN DEFEATED, THE PLAYER GETS THEIR DROPPED ITEM & GOLD -- \\
+	//======================================================================================================================
+	function Duel(){
+	var playerduel = prompt ('"WELCOME ALL TO THE BATTLE ARENA!\nYOU HAVE THE CHANCE TO FIGHT 15 RANDOM ENEMIES AND BOSSES TO TAKE THE THRONE AND BECOME THE NEW CHAMPION!\nIF YOU DEFEAT AN ENEMY YOU CAN TAKE THEIR WEAPONS AND THEIR GOLD!\n\n WANNA GIVE IT A SHOT?"');
+	if (playerduel == "yes"){
+		txt = "OOOOOKAAAAY!";
+	} else {
+	if (playerduel == "no")
+		txt = "ALRIGHTY, COME BACK WHEN YOUR READY TO BE A REAL MAN";
+	}
+	
+	var randomNumber1 = Math.floor(Math.random() * 15 + 1);
+	console.log;
+	run = 0
+	if (randomNumber1 == 1){
+	iduel1 = "Shira"
+	alert ('You have been chosen to battle ' + iduel1);
+	}
+	
+	
+	if (randomNumber1 == 2){
+	iduel2 = "Sister Friede"
+	alert ('You have been chosen to battle ' + iduel2);
+	}
+	
+	
+	if (randomNumber1 == 3){
+	iduel3 = "Aldrich"
+	alert ('You have been chosen to battle ' + iduel4);
+	}
+	
+	
+	if (randomNumber1 == 4){
+	iduel4 = "Fire Demon"
+	alert ('You have been chosen to battle ' + iduel4);
+	}
+	
+	
+	if (randomNumber1 == 5){
+	iduel5 = "Dancer of Boreal Valley"
+	alert ('You have been chosen to battle ' + iduel5);
+	}
+	
+	
+	if (randomNumber1 == 6){
+	iduel6 = "Jailer"
+	alert ('You have been chosen to battle ' + iduel6);
+	}
+	
+	
+	if (randomNumber1 == 7){
+	iduel7 = "Crystal Sage's Rapier"
+	alert ('You have been chosen to battle ' + iduel7);
+	}
+	
+	
+	if (randomNumber1 == 8){
+	iduel8 = "Deacons of the Deep"
+	alert ('You have been chosen to battle ' + iduel8);
+	}
+	
+	
+	if (randomNumber1 == 9){
+	iduel9 = "Ghru Grunt"
+	alert ('You have been chosen to battle ' + iduel9);
+	}
+	
+	
+	if (randomNumber1 == 10){
+	iduel10 = "Sir Vilhelm"
+	
+	alert ('You have been chosen to battle ' + iduel10);
+	}
+	
+	
+	if (randomNumber1 == 11){
+	iduel1 = "Nameless King"
+	alert ('You have been chosen to battle ' + iduel1);
+	}
+	
+	
+	if (randomNumber1 == 12){
+	iduel12 = "Yhorm the Giant"
+	alert ('You have been chosen to battle ' + iduel12);
+	}
+	
+	if (randomNumber1 == 13){
+	iduel13 = "Demon Prince"
+	alert ('You have been chosen to battle ' + iduel13);
+	}
+	
+	
+	if (randomNumber1 == 14){
+	iduel14 = "High Lord Wolnir"
+	alert ('You have been chosen to battle ' + iduel14);
+	}
+	
+	
+	if (randomNumber1 == 15){
+	iduel15 = "Slave Knight Gael"
+	alert ('You have been chosen to battle ' + iduel15);
+	}}
+	
+	
+	
+</script>
+</body>
+</html>
