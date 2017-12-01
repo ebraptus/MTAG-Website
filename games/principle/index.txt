@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MTAG Game</title>
+    </head>
+	<link rel="stylesheet" type="text/css" href="CSS.css">
+    <h2 id="playername" align="center">    
+    </h2>
+	<p class="p">
+	*The store is always accesible.*
+	<br/>
+	*Remember to always close the store when done*
+	<br/>
+	</p>
+    <div align="left">
+    <div id="Currency" class="Currency">Money: 100</div>
+    <div id="playerinventory" class="playerinventory">Player Inventory :0</div>
+    </div>
+	<br/>
+	<div class="navbar">
+	<button class="dropbtn" id="store" onclick="myFunction()">
+	The Store
+	<i class="fa fa-caret-down"></i>
+	</button>
+	<div class="dropdown-content" id="myDropdown">
+	<a onclick="Coffeegrounds()" id="coffee"> Chicken Nugget</a>
+	<a onclick="Mouse()">Monster Energy Drink</a>
+	<a onclick="Keyboard()">Textbook</a>
+	</div>
+	</div>
+	<p id="final" class="final" align="center">
+	</p>
+	<p id="enemyhealth" align="left" class="enemyhealth">
+	</p>
+    <br/>
+	<p id="Health" align="right" class="Health">
+	Health: 50
+	</p>
+	<p id="Armor" align="right" class="Armor">
+	Armor: 0
+	</p>
+	<p id="Attack" align="right" class="xp">
+	EXP: 0
+	</p>
+	<p id="Level" align="right" class="Level">
+	Level: 1
+	</p>
+    <br/>
+    <h3>
+    <div align="center">
+    <div id="reset" class="reset"></div>
+	<div id="yourdisplay" class="yourdisplay">
+	</div>
+    </h3>
+    </div>
+    <!-- <button onclick="Coffeegrounds()" id="coffee" class="btn"> Chicken Nugget </button>
+    <br/>
+    <button onclick="Mouse()" id="ball" class="btn2"> Monster Energy Drink </button>
+    <br/>
+    <button onclick="Keyboard()" id="key" class="btn3"> Textbook </button>
+    <br/> -->
+	
+	<p align="center" id="reset">
+	</p>	
+
+	
+    <body>
+        <script>
+			function myFunction() {
+			document.getElementById("myDropdown").classList.toggle("show");
+			//document.getElementById("boss").disabled = true;
+			}
+			var level = 1;
+			var playername = prompt("What is your Name");
+			document.getElementById("playername").innerHTML = "Welcome " + playername + " we need your help in fighting the deadly principle. " + "<br/>"
+			+ " He has gone mad with power and you are the only one who can stop him. Go on " + playername + " and protect us."; "<br/>"
+			"*Remember to write down your stats so you can transfer them onto the first fight.*";
+			var enemyhealth1 = 40;
+			var randommoney = Math.floor(Math.random()*5)+25;
+			var attack = 0;
+			var armor = 0;
+			var health = 50;
+            var storeinventory = Math.floor(Math.random() * 5) + 3;
+            var currency = 100
+            var playerinventory = [];
+            var store
+            var products = ["Coffee Grounds", "Logitech Roll-Ball Mouse", "Logitech Wireless Keyboard"];
+            document.getEl
+            var store = [];
+            var ten = 100;
+            var ant = ""
+            var cost = [3, 12, 30];
+            var randomnumber = Math.floor(Math.random()*75) + 40;
+            var randomattack = Math.floor(Math.random() * 15) + 10;
+			var randomdamage = Math.floor(Math.random() * 10) + 5;
+			var xp = 0;
+			var bosshealth = 150;
+            /*function displayInventory(){
+                    document.getElementById("playerinventory").innerHTML = "Player Inventory: ";
+                    for(var i = 0; i < playerinventory.length; i++){
+                       document.getElementById("playerinventory").innerHTML += playerinventory[i]; 
+                    } */ 
+            //}
+            function Coffeegrounds() {
+			if (currency > 5 || currency == 5){
+					health += 5;
+					currency -= 5;
+					playerinventory.push(" Chicken Nuggets ");
+					document.getElementById("Currency").innerHTML = "Money: " + currency;
+					document.getElementById("playerinventory").innerHTML = "Player Inventory: " + playerinventory;
+					document.getElementById("reset").innerHTML = "";
+					document.getElementById("Health").innerHTML = "Health: " + health;
+					//document.getElementById("treasure").disabled = true;
+				}else {
+					document.getElementById("reset").innerHTML = "Not Enough";
+				}	
+				}
+				document.getElementById("Currency").innerHTML = "Currency: " + currency;
+				document.getElementById("yourdisplay").innerHTML = "";
+				//document.getElementById("dice").disabled = true;
+				//document.getElementById("coffee").disabled = true;
+				//document.getElementById("reset").innerHTML = "That's eneough Health.";
+				document.getElementById("Health").innerHTML = "Health: " + health;
+				document.getElementById("playerinventory").innerHTML = "Player Inventory: " + playerinventory;
+				//document.getElementById("Currency").disabled = true;
+				//document.getElementById("dice").disabled = true;
+				
+				
+				//document.getElementById("boss").disabled = true;
+				//document.getElementById("treasure").disabled = true;
+                
+
+                  
+                
+                
+            function Mouse(){ 
+				//document.getElementById("treasure").disabled = true;
+				//document.getElementById("boss").disabled = true;
+				//document.getElementById("dice").disabled = true;
+				document.getElementById("yourdisplay").innerHTML = "";
+                if (currency > 15 || currency == 15){
+					xp += 15;
+					currency -= 15;
+                    playerinventory.push(" Monster Energy Drink ")
+                document.getElementById("playerinventory").innerHTML = "Player Inventory: " + playerinventory
+                document.getElementById("Currency").innerHTML = "Money: " + currency
+				document.getElementById("reset").innerHTML = "";
+				document.getElementById("Attack").innerHTML = "EXP: " + xp;
+				document.getElementById("Health").innerHTML = "Health: " + health;
+                }else {
+                document.getElementById("reset").innerHTML = "Not enough"
+                }if (xp == 50 || xp > 50){
+				xp = 0;
+				level ++;
+				currency += 5;
+				health = 105;
+				document.getElementById("yourdisplay").innerHTML = "You leveled up! You are now Level " + level + "!";
+				document.getElementById("Health").innerHTML = "Health: " + health;
+				document.getElementById("Attack").innerHTML = "EXP: " + xp;
+				document.getElementById("Currency").innerHTML = "Currency: " + currency;
+				document.getElementById("Level").innerHTML = "Level: " + level;
+				
+				}
+				//document.getElementById("dice").disabled = true;
+            }
+               
+                
+            /*function ClearInventory(){
+                
+                document.getElementById("playerinventory").reset();
+                document.getElementById("Currency").reset();
+            }*/
+            function Keyboard(){
+				//document.getElementById("treasure").disabled = true;
+				//document.getElementById("boss").disabled = true;
+				document.getElementById("yourdisplay").innerHTML = "";
+				//document.getElementById("dice").disabled = true;
+                if (currency > 20 || currency == 20){
+				armor += 10;
+				playerinventory.push(" Textbook ");
+				currency -= 20;
+				document.getElementById("playerinventory").innerHTML = "Player Inventory: " + playerinventory;
+				document.getElementById("Currency").innerHTML = "Money: " + currency;
+				document.getElementById("reset").innerHTML = "";
+				document.getElementById("yourdisplay").innerHTML = "";
+				document.getElementById("Armor").innerHTML = "Armor: " + armor;
+				
+            }else{
+				document.getElementById("reset").innerHTML = "Not Enough";
+				}
+				//document.getElementById("dice").disabled = true;
+			}
+			function next(){
+				document.getElementById("next").disabled = true;
+				function myFunction() {
+				document.getElementById("myDropdown").classList.toggle("show");
+				}
+				if(confirm("Are You sure you are done in the store?") == true){
+				document.getElementById("playername").innerHTML = "You exit the shop and start to walk the creepy hallway of the school. you take a sharp right turn from the boys bathroom and out of no were a hall monitor stops you. you have no choice in beating him up to get to the real problem at hand.";
+				//document.getElementById("coffee").disabled = true;
+				document.getElementById("")
+				document.getElementById("reset").innerHTML = "";
+				//document.getElementById("key").disabled = true;
+				//document.getElementById("ball").disabled = true;
+				document.getElementById("enemyhealth").innerHTML = "Enemy Health: " + enemyhealth1;
+				//document.getElementById("enemyattack").innerHTML = "Enemy Attack: " + randomdamage;
+				//document.getElementById("treasure").disabled = true;
+				document.getElementById("yourdisplay").innerHTML = "";
+				//document.getElementById("store").disabled = true;
+				//document.getElementById("boss").disabled = true;
+				document.getElementById("dice").disabled = false;
+			}else {
+			alert("Okay Take as much time as you want");
+			}			
+			}
+			function attackP(){
+				document.getElementById("yourdisplay").innerHTML = "You did " + randomdamage + " Damage";
+				enemyhealth1 -= randomattack;
+				health -= randomdamage;
+				document.getElementById("reset").innerHTML = "Hall Monitor did " + randomdamage + " Damage."
+				//health -= randomdamage;
+				document.getElementById("enemyhealth").innerHTML = "Enemy Health: " + enemyhealth1;
+				
+				/*while (armor > 0){
+					armor -= randomdamage;
+					enemyhealth -= randomattack;
+					document.getElementById("Health").innerHTML = "Health: " + health;
+					document.getElementById("Currency").innerHTML = "Currency: " + currency;
+					document.getElementById("Armor").innerHTML = "Armor: " + armor;
+					document.getElementById("Attack").innerHTML = "EXP: " + xp;
+					document.getElementById("enemyhealth").innerHTML = "Enemey Health: " + enemyhealth1;
+					document.getElementById("reset").innerHTML = "Hall Monitor did " + randomdamage + " damage!";
+					
+				}*/
+				if (armor < 0 || armor == 0){
+				armor = 0;
+				health -= randomdamage;
+				document.getElementById("Armor").innerHTML = "Armor: " + armor;
+				document.getElementById("reset").innerHTML = "Hall monitor did " + randomdamage + " damage";
+				document.getElementById("yourdisplay").innerHTML = "You did " + randomattack + " damage";
+				document.getElementById("Health").innerHTML = "Health: " + health;
+				document.getElementById("Currency").innerHTML = "Currency: " + currency;
+				document.getElementById("yourdisplay").innerHTML = "You did " + randomattack + " damage.";
+				}else if (armor > 0 || armor == 0){
+					if (armor - randomdamage < 0){
+						health += armor - randomdamage;
+						armor = 0;
+					}
+					enemyhealth1 -= randomattack;
+					document.getElementById("Health").innerHTML = "Health: " + health;
+					document.getElementById("Armor").innerHTML = "Armor: " + armor;
+					
+					document.getElementById("enemyhealth").innerHTML = "Enemy Health: " + enemyhealth1;
+				}
+				if (enemyhealth1 == 0 || enemyhealth1 < 0){
+					xp += randomdamage;
+					currency += randommoney;
+					document.getElementById("yourdisplay").innerHTML = "Congratulaions you have defeated the Hall Monitor! You earned " + randommoney + " money."
+					document.getElementById("enemyhealth").innerHTML = ""
+					//document.getElementById("enemyattack").innerHTML = "";
+					document.getElementById("Health").innerHTML = "Health: " + health;
+					document.getElementById("Armor").innerHTML = "Armor: " + armor;
+					document.getElementById("Attack").innerHTML = "EXP: " + xp;
+					document.getElementById("Currency").innerHTML = "Currency: " + currency;
+					document.getElementById("dice").disabled = true;
+					document.getElementById("next").disabled = true;
+					document.getElementById("treasure").disabled = false;
+					document.getElementById("Attack").innerHTML = "EXP: " + xp;
+				}//else {
+				//document.getElementById("treasure").disabled = true;
+				//}
+				/*if (armor == 0){
+				health -= randomdamage;
+				document.getElementById("Health").innerHTML = "Health: " + health;
+				document.getElementById("Armor").innerHTML = "Armor: " + armor;
+				document.getElementById("Attack").innerHTML = "Attack: " + attack;
+				document.getElementById("Currency").innerHTML = "Currency: " + currency;
+				document.getElementById("reset").innerHTML = ""; 
+				}*/
+				
+			}	
+			if (xp == 50 || xp > 50){
+				xp = 0;
+				level ++;
+				currency += 5;
+				health = 105;
+				document.getElementById("yourdisplay").innerHTML = "You leveled up! You are now Level 2!";
+				document.getElementById("Health").innerHTML = "Health: " + health;
+				document.getElementById("Attack").innerHTML = "EXP: " + xp;
+				document.getElementById("Currency").innerHTML = "Currency: " + currency;
+				document.getElementById("Level").innerHTML = "Level: " + level;
+				}
+			function Treasure(){
+				function myFunction() {
+				document.getElementById("myDropdown").classList.toggle("show");
+				}
+				document.getElementById("boss").disabled = false;
+				document.getElementById("playername").innerHTML = "You just defeated the Hall Monitor, so you keep going down the hall and find an open locker. You decide to open the locker and:";
+				document.getElementById("next").disabled = true;
+				document.getElementById("treasure").disabled = true;
+				var randomtreasure = Math.floor(Math.random() * 5) + 1;
+				document.getElementById("treasure").disabled = true;
+				if (randomtreasure == 1){
+				health += 5;
+				document.getElementById("reset").innerHTML = "You Found A Chicken Nugget!"
+				document.getElementById("yourdisplay").innerHTML =" +5 Added to your health!"
+				document.getElementById("Health").innerHTML = "Health: " + health;
+				}else if (randomtreasure == 2){
+				xp += randomattack;
+				document.getElementById("yourdisplay").innerHTML = "You Earned " + randomattack + " XP";
+				document.getElementById("reset").innerHTML = "";
+				document.getElementById("Attack").innerHTML = "EXP: " + xp; 
+				}else if (randomtreasure == 3){
+				armor += randomdamage;
+				document.getElementById("Armor").innerHTML = "Armor: " + armor;
+				document.getElementById("reset").innerHTML = "You found more armor!";
+				document.getElementById("yourdisplay").innerHTML = armor + " Added to armor!";
+				
+				}else if (randomtreasure == 4){
+				health = 0;
+				document.getElementById("Health").innerHTML = "";
+				document.getElementById("Armor").innerHTML = "";
+				document.getElementById("Attack").innerHTML = "";
+				document.getElementById("playername").innerHTML = "YOU DIED" 
+				document.getElementById("yourdisplay").src = 'http://shrines.rpgclassics.com/ps2/dcloud/Pics/kingmimic.jpg';
+				document.getElementById("reset").innerHTML = "";
+				document.getElementById("yourdisplay").innerHTML = "";
+				document.getElementById("boss").disabled = true;
+				document.getElementById("dice").disabled = true;
+				document.getElementById("treasure").disabled = true;
+				document.getElementById("next").innerHTML = true;
+				document.getElementById("store").disabled = true;
+				
+				}else{
+				//document.getElementById("")
+				currency += randommoney;
+				document.getElementById("yourdisplay").innerHTML = "You Earned " + randommoney + " money!"
+				document.getElementById("Currency").innerHTML = "Money: " + currency;
+				document.getElementById("Health").innerHTML = "Health: " + health;
+				document.getElementById("Attack").innerHTML = "EXP: " + xp;
+				document.getElementById("Armor").innerHTML = "Armor: " + armor;
+				document.getElementById("reset").innerHTML = "";
+				document.getElementById("playername").innerHTML = "You defeated the Hall Monitor and found some stuff in the locker. you find your way to the office to fight the principle. Get ready " + playername + ", this is going to be tough."
+				}
+				}
+				function boss(){
+				document.getElementById("boss").disabled = true;
+				document.getElementById("dice").disabled = true;
+				document.getElementById("bossbattle").disabled = false;
+				document.getElementById("yourdisplay").innerHTML = "";
+				document.getElementById("reset").innerHTML = "";
+				document.getElementById("enemyhealth").innerHTML = "Principle: " + bosshealth;
+				document.getElementById("playername").innerHTML = "You defeated the Hall Monitor and find your way to the office to fight the principle. Get ready " + playername + ", this is going to be tough."
+				function myFunction() {
+				document.getElementById("myDropdown").classList.toggle("show");
+				//document.getElementById("playername").innerHTML = "You defeated the Hall Monitor and find your way to the office to fight the principle. Get ready " + playername + ", this is going to be tough."
+				}
+				}
+				function bossbattle(){
+				document.getElementById("dice").disabled = true;
+				document.getElementById("boss").disabled = true;
+				document.getElementById("dice").disabled = true;
+				document.getElementById("next").disabled = true;
+				document.getElementById("treasure").disabled = true;
+				//document.getElementById("store").disabled = true;
+				document.getElementById("Health").innerHTML = "Health: " + health;
+				document.getElementById("enemyhealth").innerHTML = "Boss: " + bosshealth;
+				document.getElementById("Health").innerHTML = "Health: " + health;
+				document.getElementById("Armor").innerHTML = "Armor: " + armor;
+				
+				
+				if (armor < 0 || armor == 0){
+				armor = 0;
+				health -= randomdamage;
+				bosshealth -= randomattack;
+				document.getElementById("Armor").innerHTML = "Armor: " + armor;
+				document.getElementById("reset").innerHTML = "Principle " + randomdamage + " damage";
+				document.getElementById("yourdisplay").innerHTML = "You did " + randomattack + " damage";
+				document.getElementById("Health").innerHTML = "Health: " + health;
+				document.getElementById("Currency").innerHTML = "Currency: " + currency;
+				}else if (armor > 0 || armor == 0){
+					armor -= randomdamage;
+					bosshealth -= randomattack
+					document.getElementById("Armor").innerHTML = "Armor: " + armor;
+					document.getElementById("reset").innerHTML = "Principle did " + randomdamage + " damage.";
+					document.getElementById("yourdisplay").innerHTML = "You did " + randomattack + " damage.";
+					document.getElementById("enemyhealth").innerHTML = "Enemy Health: " + bosshealth;
+				}if (armor - randomdamage < 0){
+						health += armor - randomdamage;
+						armor = 0;
+					}
+				
+				if (health == 0 || health < 0){
+				health = 0;
+				document.getElementById("Health").innerHTML = "";
+				document.getElementById("Armor").innerHTML = "";
+				document.getElementById("Attack").innerHTML = "";
+				document.getElementById("playername").innerHTML = "YOU DIED" 
+				document.getElementById("yourdisplay").src = 'http://shrines.rpgclassics.com/ps2/dcloud/Pics/kingmimic.jpg';
+				document.getElementById("reset").innerHTML = "";
+				document.getElementById("yourdisplay").innerHTML = "";
+				document.getElementById("boss").disabled = true;
+				document.getElementById("dice").disabled = true;
+				document.getElementById("treasure").disabled = true;
+				document.getElementById("next").innerHTML = true;
+				}
+				
+				if (bosshealth == 0 || bosshealth < 0){
+				document.getElementById("enemyhealth").innerHTML = "";
+				document.getElementById("yourdisplay").innerHTML = "";
+				document.getElementById("reset").innerHTML = "";
+				document.getElementById("Health").innerHTML = "";
+				document.getElementById("Armor").innerHTML = "";
+				document.getElementById("Attack").innerHTML = "";
+				document.getElementById("Level").innerHTML = "";
+				document.getElementById("bossbattle").disabled = true;
+				document.getElementById("store").disabled = true;
+				document.getElementById("final").innerHTML = "to be continued."
+				document.getElementById("playername").innerHTML = "you just defeated the principle and on your way to you get your phone. you open the drawer and find that your phone isn't there. instead there is a note with your mothers signiture. looks like you have a bigger problem on your hands now."
+				}
+				}
+				
+				//document.getElementById("dice").disabled = true; 
+		
+		</script>
+		<button onclick="next()" id="next" class="button" align="center">
+		Fight 1
+		</button>
+		<button onclick="attackP()" class="button" id="dice" align="center" disabled>
+		Battle Button
+		</button>
+		<button onclick="Treasure()" id="treasure" class="button" align="center" disabled>
+		Treasure
+		</button>
+		<button onclick="boss()" id="boss" class="button" align="center" disabled>
+		Boss
+		</button>
+		<button onclick="bossbattle()" class="button" id="bossbattle" disabled>
+		Boss Battle Button
+		</button>
+    </body>
+</html>
