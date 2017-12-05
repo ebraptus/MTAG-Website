@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+body{
+	background-image: url("http://www.artflyz.com/server16-cdn/2016/03/19/mansion-sweet-homes-mansions-pools-and-amazing-mansions-vs-mega-mansion-800x600-d725f7951b07c239.jpg");
+	background-size: 1500px 850px;
+}
+p{
+	color: red;
+}
+</style>
+<button onclick="showStoreList()">Store</button>
+<button onclick="showArrayList()">Choose Character</button>
+<button onclick="showInventory()">Inventory</button>
+<button onclick="getMoney()">Search</button>
+<script>
+/*============
+Programmer Name: Hunter Hoehn
+Last Updated:
+12/04/2014: added ccss background and more story
+11/29/2017: added all the story
+11/27/2017: got a background url for the MTAG,
+ body /* { background-image: url("http://www.artflyz.com/server16-cdn/2016/03/19/mansion-sweet-homes-mansions-pools-and-amazing-mansions-vs-mega-mansion-800x600-d725f7951b07c239.jpg");
+			background-size: 1500px 800px
+}
+
+============*/
+// VARIABLES Section
+// =================
+var character = ["Chad","Brittany","Sebastion","luna","jordan"];
+var whichCharacter;
+var inventory = [key];
+var prices = [10, 5, 15,10,20,15,5,8,25,10]
+var Item =["Hint","Donut","Antidote","Password","Bookbag","key","energy drink","Screwdriver","Cell phone","Charger"]
+var whichItem;
+var currency = 5;
+var keyFound = false;
+// FUNCTION Section
+// ================
+function showArrayList() {
+	
+	characterList =""; 
+	for (i = 0; i < character.length;i++) {
+		characterList += (i+1)+". "+ character[i] + "\n";
+
+	}
+	whichCharacter = (prompt(characterList)-1);  
+	//if (whichCharacter = Chad
+quest1();
+}
+function showStoreList() { 
+	toText = "";
+	for (i = 0; i < Item.length;i++) { //puts store in a list
+		toText += (i+1)+". "+ Item[i] + "\n";
+			
+	}
+		whichItem = (prompt(toText)-1);
+	if (confirm("you chose "+Item[whichItem]+"= \n price is "+prices[whichItem]+" will you pay the price\n") == true){
+	buyItem();
+	} else {
+		alert("not enough funds")
+	}
+
+}
+function showInventory() {
+	alert(inventory); // shows Inventory
+	alert ("You have "+ currency +" dollars") // shows how much money you have
+	}
+function buyItem() {
+	// use [whichItem]
+	if (currency >= prices[whichItem]){ // to but an item
+	inventory.push(Item[whichItem])
+		(currency -= Prices[whichItem])
+		alert("purchase Succsesful")
+	//	}
+	//if Item[whichItem]==key {
+	//	 keyFound = true
+	} else {
+	"Not Enough Funds"
+	}
+}
+
+function getMoney() {
+	var randomNumber = Math.floor(Math.random() * 10)+ 1;
+	alert(randomNumber)
+	if(randomNumber>7){
+	currency+=randomNumber // adds money to your inventory
+	alert ("You have "+currency + "dollars")
+	}else{ 
+	alert("you didnt find anything")
+	}
+
+}
+
+function quest1(){
+	alert("Prologue: \n Party Till You Drop");
+	//alert("your name is"+ character{whichCharacter})
+	alert("You and a small group of friends are having a small get together. You arrive at this mansion on the hillside in the evening to start the party. Your having fun and you start to drink with your other friends;	the night was crazy. You had too much to drink and went to sleep for the rest of the night.")
+	alert("You wake up with no recollection of last night, besides the faint colorful blurs of the party. You start to get dressed and hear a scream coming from downstairs. As fast as you can run down stairs and see (victim) dead. The sight of the bright crimson mess on the floor almost makes you vomit. But, you know you have to pull yourself together to figure out who did this for your friend!")
+	quest2();
+}
+
+function quest2(){
+	alert("Chapter 2: The First Investigation");
+	 if (confirm("you try to think of what to do; either check the body or ask the others if they know anything. so you think should i ask the others, will they be ok talking about it?") == true) {
+        alert(" you begin with asking when they were with (victim) last . they all say last night after they went to their rooms and passed out. You also ask who was invited and receive a list of names. You go over this list of names and see a name that you don't recognize. But you assume it's the hangover hindering you.")
+		quest3();
+    } else {
+        txt = "you walk over to the victim and look over the body for any distinguishable characteristics. You notice some hair on the victim that isn't his and what appears to be a knife wound.So it definitely wasn't a accident.";
+		loneWolf();
+    }
+	//quest3();
+}
+
+function quest3(){
+	alert("Chapter 3: Strange Noises");
+	alert ("you hear a noise upstairs and you think to yourself, who wouldnt have came down to see what happened after that scream")
+	//make if they have the key the get to open the door
+	 var openDoor = confirm("you find a locked door on the way to the room.\n do want to open it?")
+	 if ((OpenDoor == true) && (keyfound = true)) {
+	 alert("you open the door to see and office; you look at some papers and see your friend had many enemies")
+	alert ("you also open a drawer with 10 Dollars")
+      currency.push(10)
+	
+    } else {
+	alert("you cant open the open")
+        txt = "you walk over to the victim and look over the body for any distinguishable characteristics. You notice some hair on the victim that isn't his and what appears to be a knife wound.So it definitely wasn't a accident.";
+
+    }
+	//quest4();
+}
+
+function quest4(){
+	alert("The First Investigation");
+
+	quest5();
+}
+
+function quest5(){
+	alert("The First Investigation");
+
+	alert ("Game over")
+	//location.reload
+}
+ function loneWolf(){
+ 	alert("Lone wolf or the pack");
+	 if (confirm("you think to yourself if you should get a friend to help you or do it by yourself \n will you go solo?") == true) {
+        txt = "You decide to take this one solo; because you dont feel like you can trust anyone";
+		quest3();
+    } else {
+        txt = "you decide to get a partner and you look around for someone you can trust and see your friend jake";
+		
+    }
+ 
+ }
+// MAIN Section
+// ============n what this line does for Question #3
+//quest1();
+
+
+</script>
+
+</body>
+</html>

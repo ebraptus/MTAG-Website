@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Text Adventure</title>
+		<meta charset="utf-8">
+		<link rel= "stylesheet" href="MTAGformating.css">
+		<style>
+		</style>
+	</head>
+	<body>
+	<div id="wrapper">
+		<header>
+			<h1>The Invasion You Could Never See Coming</h1>
+		</header>
+	<main>
+	<p><b>You head out the door and start walking to school."Bye honey, hope you have a good first day of school!" Yells your mom. "Thanks, hope you have a good day at work!" You yell back. After awhile you check your phone for the time. It seems even though the rush to get out the door, you have left the house really early. So, you figure you could wander around for a bit and still make it to school on time.</b></p>
+	Programmer: Chandler Shettleroe
+	</main>
+	
+	<script type="text/javascript">
+	// COMMENTS SECTION
+
+/* 
+// Part a:  
+Need any help go to https://www.youtube.com/watch?v=Sw4bN9t4Co4&feature=youtu.be
+Need any help for random number: http://www.screencast.com/users/Johnvader1/folders/Jing/media/0afef2cd-b3d3-4859-a38b-3de007624313
+Programmer: Chandler Shettleroe
+Date Last Modified:11-27-17
+Goal/Purpose:Make a text adventure. 
+*/
+   
+// Variables section
+var health =10;
+var money=3.00; //make a random number for random encounters to earn money for future use.
+var userInput = 1;
+var toDisplay="";
+var alive=true;//states that the player has health points left
+//var check;
+var inventory = ["Pencils","English text book","Scraps of paper","Raspberry Pi (the coding tool)","Notebooks"];
+
+var shop = ["Excalibur","Reinforced shield","Enchanted wand","Potion of minor healing","Potion of major healing","Splash potion of minor healing","Splash potion of major healing","Scroll of revival","The book of the great Forrest Le Torneau","Reinforced bow" ];
+var shopPrices = [1.50, 1.00, 1.50, 0.50, 0.75, 0.75, 1.00, 1.50, 1.50, 1.00];
+//Functions section
+function checkBackpack(){
+	var toDisplay="";
+	alert("You look in your backpack")
+	for(i=0; i<inventory.length; i++){ //shows the player's inventory
+		toDisplay+=(i+1)+". " + inventory[i]+"\n";
+	}
+	alert (toDisplay);
+}
+function visitStore(){
+	var toDisplay="";
+	
+	for(i=0; i<shop.length; i++){
+		toDisplay+=(i+1)+". " + "$" + shopPrices[i]+ " " + shop[i]+"\n"; //shows all the items in the shop
+	}
+	
+	var userInput = prompt("Choose what you would like to buy from the list?\n\n"+toDisplay);
+	userInput--;
+	if (money >= shopPrices[userInput]){
+		var reallyBuy = confirm ("Are you sure you want to buy " + shop[userInput]+ "?")
+		if (reallyBuy == true){
+			inventory.push(shop[userInput])//moves the item into the player's inventory
+			alert("You have bought" + " "+ shop[userInput])//tells the player what they bought.
+			money-=shopPrices[userInput]//takes the player's money away for the item purchased.
+			alert("You have" + " $" +money +" "+"left in your bag.")//tells the player how much money they left.
+		}
+		else {
+			alert("Ok, be like that, I don't need your money anyway.")
+		}
+	}
+	else{
+		alert("You don't have enough money.") 
+	} 
+}
+function checkMoney(){ //function to show the player how much money they have.
+var toDisplay="";
+alert ("You look in the front pocket of your bag, checking how much money you have.")
+alert ("You have " + "$" + money)
+}
+
+
+// MAIN program execution
+   //checkBackpack();
+   
+	
+
+	
+    </script>
+</body>
+	<footer>
+	<h2>What will you do?</h2>
+	<a href="atSchool.html">Go to School</a>
+	<input type= "button" value = "Check Inventory" onClick="checkBackpack()">
+	<input type= "button" value = "Check how much money you have" onClick="checkMoney()">
+	
+	</footer>
+</html>

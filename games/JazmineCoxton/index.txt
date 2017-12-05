@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+
+	<head>
+		<title>Beach House Mysteries Part I</title>
+	</head>
+		
+	<body style="background-image: pictureDownload3" src= "H:\pictureDownload3.jpg" >
+	Testing by: (Jazmine Coxton)
+
+	<h2>Beach House Mysteries Part I<h2>
+	<button onclick="background()">Bless your soul with a visual</button>
+	<button onclick="storyQuest1()">Start Quest 1</button><br><br>
+	<button onclick="storyQuest5()">Start Quest 5</button>
+	<button onclick="storyQuest4()">Start Quest 4</button>
+	<button onclick="storyQuest3()">Start Quest 3</button>
+	<button onclick="storyQuest2()">Start Quest 2</button><br><br>
+	<button onclick="displayInventory()">Check Inventory</button>
+	<button onclick="displayStore()">Store</button><br>
+	<button onclick="displayStats()">Check Stats</button><br>
+	<button onclick="resetButton()">Start Over</button>
+	<script type="text/javascript">
+// COMMENTS SECTION
+
+
+
+/* 
+// Part a:  
+Programmer:Jazmine Coxton
+Date Last Modified:11/21/17
+Goal/Purpose:
+Status:
+11/20/17: The day I finally got the buyItem function to work
+11/21/17: Improvement on the storyline
+11/27/17: Start of the quest making
+ll/28/17; Start quest 2-4
+11/29/17: Start quest 4 and 5
+
+*/
+   
+// Variables section
+var money = 3;
+var level = 1;
+var health = 100;
+var status;
+var display = " ";//Helps display the arrays
+var whichItem;
+var userInput;
+var whichPrice;
+var whichInventory;
+var items = [//Items to buy in the store
+		" Hint", 
+		" Donut", 
+		" Antidote",
+		" Password", 
+		" Moon Key", 
+		" Energy Drink", 
+		" Screwdriver", 
+		" Cell Phone Charger",
+		" Protein Shake"
+];
+
+var prices = [//The prices of the items in the store
+		10,
+		1,
+		3,
+		5,
+		4,
+		2,
+		4,
+		5,
+		5
+];
+//The items in the inventory are there from the beginning
+var inventory = [
+		"\n" +
+		"Candy Bar" + "\n" +
+		"Cell Phone"
+];
+
+// Functions section
+function displayInventory(){//Items already in the user's inventory
+	display="";
+	for (i = 0; i < inventory.length; i++){
+			display += (i + 1) + ". " + inventory[i] + "\n";
+	}
+		alert("Your inventory includes: " + inventory)
+}
+
+function displayStore() {//The items are displayed in a list and the user can buy them
+	display="";
+	for (i = 0; i < items.length; i++){
+		display += (i + 1) + ". " + items[i] + "\n";
+	}	
+		whichItem = prompt(display)
+		whichItem--;
+		alert("You chose " + " " + items[whichItem])
+	if (money >= prices[whichItem]){
+			alert("transferring" + " " + items[whichItem])
+		inventory.push(items[whichItem])
+			alert("Purchase successful")
+		money -= prices[whichItem]
+			alert("You have" + " " + "$" + money + " " + "left")
+	}
+	//Tells the user that they're too broke and can't afford the item
+	else { alert("Strange Guy with a Trench Coat: Too bad, come back when you have money to spend.")
+	}
+	
+}
+
+function storyQuest1() {//Storyline: including the characters actions, user's choices, scenery or environment, and script
+	var userInput;
+				alert("Quest 1: The Power of Friendship!!!")
+				alert("Narrator: The game begins in a modern beach house." + "\n" + "Owned by our Jock of the storyline: Steven." + "\n" + "When I say own, I mean his parents owns it.");
+				alert("Narrator: Steven invites all his friends to the beach house during Winter break." + "\n" + "The group of friends (Victor, Ben-Slacker, Nancy-Bookworm, Bryan-Nerd, Cheryl-Cheerleader, and Steven-Jock) has been together since Kindergarten." + "\n" + "They are known to have the closest relationships in the school." + "\n" + "No one would’ve predicted this betrayal." + "\n" + "*Sinister music*")
+				alert("Narrator: Everyone was supposed to meet at 6PM, but when you arrived no one was there." + "\n" + "Narrator: Were you misinformed, or maybe everyone is late.");
+				alert("*ScreEeEeEeEech*")
+				alert("Narrator: Suddenly you hear a screech.")
+			if(confirm("Should you check?") == true) {
+				alert("Narrator: You run towards the loud noise. Expecting to see you friends trying to prank you.")
+				alert("Narrator: Instead, you walk upon your friend, Victor, surrounded by blood." +"\n" + "You: This is one messed up prank guys!" +"\n" + "*Silence*" + "You: What?! This is real?")
+				alert("Narrator: You couldn't believe what was happening.")
+			}
+			else{
+				alert("Narrator: Relying on your instincts, you run away from the loud noise." + "\n" + "What is going on?!")
+				alert("*Slam*" + "\n" +"Narrator: Suddenly the door slams and the lights turn off. Leaving the only pathway of light towards a door.")
+				alert("Narrator: You go towards the light, and find your friend, Victor, in a puddle of blood.")
+				alert("Narrator: You couldn't believe what was happening.")
+			}
+				alert("Narrator: You call the police, but there is no signal.")
+				alert("Narrator: Your first instinct is to run anywhere but here.")
+			if(confirm("Continue to the next quest?") == true) {
+				storyQuest2();
+			}
+}
+
+function storyQuest2() {
+		alert("Quest 1: Questions")
+		alert("Narrator: You find yourself upstairs." + "\n" + "You see two doors that are unlocked. ")
+		alert("Narrator: You see too doors: right or left.")
+	if(confirm("Do you want to go into the left room?") == true) {
+		alert("Narrator: You walk into the left room. You search the room to find anything to answer your questions." + "\n" + "You find nothing and decide to head back to the hallway.")
+		alert("Narrator: You find Steven outside" + "\n" +"Steven-Jock: I'm so glad I found you." +"\n"+  "Victor-Victim was killed." +"\n"+ "You: I saw it too.  We shouldn't wander off.  Let's join up together." + "Narrator: Steven-Jock nods in agreement")
+		alert("Steven has joined your side")
+	}
+	else {
+		health -= 30;
+		alert("Narrator: You walk into the right room. You search the room to find anything to answer your questions." + " You hear something rattle in the closet.")
+		alert("Narrator: Out of sheer adrenaline, you open the closet door. " + "\n" + "*Punch* " + "\n" + health  + " health left")
+		alert("Narrator: After almost getting killed by Steven-Jock's punch,  you stumble on the ground." + "\n" + "Steven-Jock: I'm sorry about that buddy.  Let me give you a hand." + "\n" + "Narrator: Steven helps you up.")
+		alert ("You: Geez Steven, you almost killed me!!  What is going on?!" + "\n"+ "Steven-Jock: Chill, I said that I was sorry, besides I don't know either.  I just showed up and I saw Victor-Victim.")
+		alert("You: you too, we have to get out of here." + "\n"+ "Steven-Jock: But the front door is locked." +"\n"+ "You: It's dangerous to be alone, so let's join up together.")
+		alert("Narrator: Steven-Jock nods in agreement" + "\n"  + "Steven has joined your side")
+	}
+		alert("Narrator: Steven and you walk around the hallway aimlessly." + "\n"+"Steven finds a flashlight.")
+	inventory.push("  Flashlight");	
+		alert("Steven-Jock: This should help us see a little." + "\n"+ "Narrator: You shine the light up to find a note"+"\n"+ "Note: Steven, please put some gas into the truck when your done with your little gathering. And don't forgeet to feed the cat. ~Love Mom")
+		alert("Steven-Jock: That reminds me, maybe there still is some gas in the truck." +"\n"+ "Narrator: Steven and You head out to check the truck.")
+		alert("Quest 1 end")
+	storyQuest3();
+}	
+
+function storyQuest3() {
+		alert("Quest 2: Changes")
+		alert("Narrator: On your way to the truck you notice that the front door is locked." + "\n"+ "Steven-Jock: Huh, the door wasn't locked when came through here!"+"\n"+ "You: Well the door did slam shut earlier, so maybe that's when it locked. " +" Steven-Jock: I guess that makes sense, but who slammed it?")
+		alert("You: Let's worry about that later and just focus on getting out of here." +"\n"+ "Steven-Jock: Right, and how are we supose to do that?"+"\n"+ "Narrator: Suddenly, a strange man with a trench coat appears")
+		alert("You: Umm who are you?" +"\n"+ "Strange Guy with a Trench Coat: Just a guy that's trying to make a profit."+"\n"+ "You: How did you even get in here?" +"\n"+ "Steven-Jock: Don't question it just buy something from the guy.  Here, I'll give you $3.  Your welcome by the way.")
+	money += 3;
+		alert("!You need a Moon key to be able to open this door!")
+	displayStore();
+	if(money == 2) {
+		alert("Narrator: The door opens leading to the porch." +"\n"+ "Steven-Jock: Wow, time sure pass by fast. It's really dark out here." + "  You: Yea, it didn't even seem like we were in there for that long." +"\n"+ "Steven-Jock: I think I can see the truck from here.")
+		alert("Narrator: The truck is in the driveway." + "\n"+ "You and Steven head towards the truck. When you get closer to the truck you notice the door is open." +"\n"+ "Steven-Jock: Oh man, I left Cheryl-Cheerleader in the truck. She's going to kill me." + "\n" + "You: You are the worst boyfriend." +"\n"+ "Steven-Jock: I know.")
+		alert("Narrator: You look inside the car there isn't any gas in the tank." + "\n"+ "You: There is no gas in the truck." +"\n"+ "Steven-Jock: Well, my mom did say to add fuel")
+		alert("You: Great, now we're stuck here. Since we're gonna be stuck here for a while, let's do some investigating." + "\n" + "Steven-Jock: Well, I plan to look for Cheryl.")
+			if(confirm("Steven-Jock: Are you gonna join me to search for Cheryl?") == true)	{
+				alert("Narrator: You and Steven head inside looking for Cheryl.")
+				alert("Narrator: You run into Cheryl and Nancy-Bookworm.")
+			}
+			else {
+				alert("Narrator: Steven heads inside looking for Cheryl. You stay searching outside." +"\n"+ "You find $1")
+				++money
+				alert("Narrator: Steven calls for you. You run towards his voice." +"\n"+ "There Cheryl stood next to Steven with and Nancy-Bookworm.")
+			}
+		alert("Narrator: Cheryl hugs Steven." + "\n" + "Cheryl-Cheerleader: You are the worst boyfriend." +"\n"+ "You: That's what I said. Are you guys alright?" +"Cheryl-Cheerleader: Well, after Steven left me in the car, I got out to look for him. And then I found Nancy."+ "\n"+ "Nancy-Bookworm: When we met eachother we searched the house and saw Victor-Victim. We were so shocked that we screamed and ran.")
+		alert("Steven and You: You guys were the one screaming." +"\n"+ "Steven: When I heard the scream I hid in the closet; Don't judge me!" +"\n"+ "Cheryl-Cheerleader: We need to get out of here!" +"\n"+ "You: We're already ahead of it.")
+		alert("Narrator: You and Steven updatee the girls of what is happening.  Nancy suggests that everyone should search the area of the crime scene." +"\n"+ "The group walks into the room to find that Victor's body is missing")
+		alert("Quest 3 end")
+	storyQuest4();
+	}
+	else {
+		alert("Try again when you get the Moon Key")
+	}	
+}
+
+function storyQuest4() {
+		alert("Quest 4: Friendly Gathering")
+		alert("You: Okay this isn't adding up. Where did the body go?"+ "\n"+ "Nancy-Bookworm: As if this couldn't get any more creepier. That means the murderer is still around." +"\n"+ "Narrator: The thought of the killer still being near by sends chills down everyone's spine.")
+		alert("Steven-Jock: We need to find clues to get out of here as soon as possible." +"\n"+ "Narrator: Everyone starts to search. You look all around the room to find an air vent.")
+		alert("Narrator: You get closer the the air vent. You point your flashlight towards the air vent to find a strange object." + "\n"+ "The object was covered up with some type of fabric, but you could see some type of liquid leaking out of the fabric." +"\n"+ "It took you a while to figure out that the liquid was blood.")
+		alert("You: Guys look! I found the murder weapon!" +"\n"+ "Steven-Jock; Really?!"+"\n"+"Nancy-Bookworm: What kind of idiot would leave the murder weapon close to the crime scene."+"\n"+ "Cheryl-Cheerleader: Obvisously the idiot that set it there.")
+		alert("Nancy-Bookworm: Something is wrong with this whole scenario." +"\n"+ "Cheryl-Cheerleader: 	Stop creating conspiracy theories and help get this thing off.")
+		alert("Steven-Jock: We need a screwdriver" + "\n" + "Nancy-Bookworm: Well that would be nice if we had one. *Wink*" +"\n"+ "Strange Guy with a Trench Coat: And that is my sign to come in.  If you're looking for an item come to me.")
+		alert("!You need a Screwdriver to be able to open the air vent!")
+	displayStore();
+		alert("Steven-Jock: Do you need more money?  Man, you're needy.")
+		money += 2
+	displayStore();
+	if(money <= 2) {
+		alert("Narrator: Now that you have the screwdriver you can open the vent.  You open the vent and pull the murder weapon out."+"\n"+ "The weapon was covered in a navy blue silk handkerchief.")
+		alert("Nancy-Bookworm: Be careful, that's evidence. We can give that to the police."+"\n"+ "Steven: Maybe we can use the handkerchief as a clue for who did it."+"\n"+ "Cheryl-Cheerleader: That sounds like a good idea")
+		alert("You: Steven, have we searched every part of the beach house"+"\n"+ "Steven-Jock: No we still didn't search the basement and the backyard.")
+		alert("Narrator: Everyone heads to the basement." +"\n"+ "Steven-Jock: Stay close to me, Cheryl."+"\n"+ "Cheryl-Cheerleader: Weird that you said that since you left me in the truck."+"\n"+ "Nancy-Bookworm: Can you guys please argue later when there isn't a killer on the loose.")
+		alert("*CRAAAASH*"+"\n"+"Narrator: Suddenly, you hear glass break."+"\n"+ "Nancy-Bookworm: What was that?"+"\n"+ "Narrator: With a flash of the flash light you find your friend Bryan-Nerd.")
+		alert("Steven-Jock: Bryan, I'm glad to see that you're still alive"+"\n"+"Bryan-Nerd: Well, I can say the same for you guys."+"\n"+"Ben-Slacker: By the way, I found this")
+		inventory.push(" Old Vintage Photo")
+		status = items[" Old Vintage Photo"]
+		alert("Steven-Jock: Wow, I haven't seen this since High School."+"\n"+"Narrator: The photo includes the gang together at Steven's 6th birthday."+"\n"+"You: Good memories!"+"\n"+"Cheryl-Cheerleader: Seeing this picture makes me sad. Look at poor Victor; He didn't deserve any of this."+"\n"+ "Nancy-Bookworm: Bless his soul"+"\n"+"Narrator: Everyone is here except for Ben-Slacker")
+		
+		
+		alert("Quest 4 end")
+	storyQuest5();
+	}	
+	else {
+		alert("Try again when you get the Moon Key")
+	}	
+}
+
+function storyQuest5() {
+		alert("Quest 5: Is This The End?")
+		alert("Narrator: Everyone heads outside to look for more clues. Heading towards the backyard you see a silhouette."+"\n"+"Steven-Jock: Hey!! What are you doing back here!"+"\n"+"Narrator: Mistaking the figure for the killer you all go after."+"\n"+"The silhouette runs from you.")
+		alert("Narrator: Steven catches the silhouette."+"\n"+"Silhouette: Wait, I'm not the killer. It's me Ben."+"\n"+"Narrator: Suprised from the outburst you step back."+"\n"+"You flash the flashlight on his face to check.")
+		alert("Ben-Slacker: Hey! That's bright, can you not do that."+"\n"+"You: I'm sorry, Ben. Are you okay?"+"\n"+"Ben-Slacker: Yea, the light was a little blinding, but I'm good. *Thumbs up*"+"\n"+"Bryan-Nerd: Why did you start running?"+"\n"+"Ben-Slacker: Who wouldn't start running if someone was coming for them at night."+"\n"+"Bryan-Nerd: Sure, but it made you look suspicious.")
+		alert("Ben-Slacker: Thanks for your concern; I'm doing quite fine, Bryan."+"\n"+"Bryan-Nerd: Well, there still is a killer on the loose. Do you blame me for being paranoid."+"\n"+"Nancy-Bookworm: Enough blaming, we need to leave before someone else dies."+"\n"+"Narrator: Everyone agrees to continue with the search including Ben.")
+		alert("Narrator: You look inside the garage to find a gas can. It was enough to get you far away from here."+"\n"+"You: We can finally gete out of here guys. It's enough to get us far away from here."+"\n"+"Cheryl-Cheerleader: Finally a sign of hope. I can't wait to get into my bed."+"\n"+"Steven-Jock: I'm really upset that something like this happened. If I would've known that this would have happened, I wouldn't have planned this meeting."+"\n"+"Nancy-Bookworm: It's not your fall. No one woould have guessed that this would happen."+"\n"+"Bryan-Nerd: I think that everyone needs to calm down and head to the car.")
+		alert("Narrator: Everyone heads to the truck."+"\n"+"Ben-Slacker: We're finally getting out of here!! *runs to the truck*"+"\n"+"Steven-Jock: Wait for me bro!!! *chases after Ben*"+"\n"+"Nancy-Bookworm: Wait, what about Victor-Victim?! Are we just gonna leave without finding out what happened?!"+"\n"+"Cheryl-Cheerleader: Yes, we are!! Our safety is way more important! We'll leave that to the police!"+"\n"+"Nancy-Bookworm: Victor deserves better!")
+	if(confirm("Should you head back into the house and search for more clues?") == true){
+		alert("Cheryl-Cheerleader: No way am I going back in there, and the same for Steven."+"\n"+"Nancy-Bookworm: Well, I guess that just leaves us. You guys can wait in the car."+"\n"+"Steven-Jock: We'll be waiting for you in the car.")
+		alert("Nancy-Bookworm: Let's head inside."+"\n"+"Narrator: You head back inside to find more clues."+"\n"+"After not finding anything you try to connect the dots.")
+		alert("Narrator: Bryan looks at the handkerchief"+"\n"+"Bryan-Nerd: Hey! My handkerchief."+"\n"+"Nancy-Bookworm: This is your handkerchief."+"\n"+"Bryan-Nerd: Yea, I lost it, but here it is."+"\n"+"You: I don't think we can find any more clues."+"\n"+"Narrator: Suspicious of Bryan you all go to the truck")
+		alert("Narrator: It's time to confront the killer. Everyone decides that the killer is Bryan.")
+	status = prompt("Please enter killer:", "Bryan");
+		if(status == "Nancy") {
+			alert("Narrator: You leave Nancy for the police to handle. Everyone else gets in the car and take off.  As soon as you get a signal you call the police, and inform them of the misfortunes of today.")
+		}
+		else {
+			alert("Narrator: You chose the wrong person. They were wrongfully accused with murder.")
+		}
+	
+		//alert("Narrator: Everyone gets in the car and Steven pulls off."+"\n"+"Cheryl-Cheerleader: I feel as if a weight is lifted off of my shoulders. No more worrying that I'll get killed."+"\n"+"Narrator: As soon as you get a signal you call the police, and inform them of the misfortunes of today.")
+		
+	}
+	else {
+		alert("You: No way am I staying here!!"+"\n"+"Narrator: Everyone gets in the car and Steven pulls off."+"\n"+"Cheryl-Cheerleader: I feel as if a weight is lifted off of my shoulders. No more worrying that I'll get killed."+"\n"+"Narrator: As soon as you get a signal you call the police, and inform them of the misfortunes of today."+"\n"+"Nancy was upset that you didn't go back inside, but eeveryone is satisfied with your choice. The killer is still on the loose(hint: in the car).")
+	}
+		alert("The End")
+		alert("Thank you for playing!")
+}
+
+function displayStats() {//dispaly your status: including money and health
+	alert("You have " + "$" + money + " left." + "\n" + "Your health is at: " + health + "\n" + "Your current level is " + level);
+}
+
+function resetButton() {//The funciton to restart the game
+location.reload();
+}
+// MAIN program execution
+ 
+
+	
+    </script>
+	</body>
+</html>

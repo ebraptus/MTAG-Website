@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+background: #ffffff url("mtagbackground2.jpg") no-repeat fixed right top;
+}
+
+h1 {
+	color: white;
+	text-align: center;
+}
+
+p {
+	color: white;
+	text-align: center;
+}
+
+button {
+	
+    position:relative;
+    top:50%; 
+    left:50%;	
+}	
+</style>
+<title>MTAG v1 By: Ryan Kuehne</title>
+</head>
+<body>
+
+<h1> Space Exploration </h1>
+<button onClick="startStory()">Start your Adventure!</button>
+<button onClick="itemSelect()">Store</button>
+<button onClick="showInven()">Inventory</button>
+<button onClick="events()">Explore</button>
+<p id="personName"></p>
+<p id="creds"></p>
+<script type="text/javascript">
+/* ============================================================================================
+// Part a:  
+Programmer: Ryan Kuehne
+Date Last Modified: 11/29/17
+Goal/Purpose: Making a basic text adventure game in JS
+Status: Functional (Still working on random events and a combat system.)
+
+// Part b: Add comments with details/explanations throughout the code as needed
+// If you had to do some 'good thinking' or get help to solve something, it deserves a comment!
+===============================================================================================*/
+
+// VARIABLE SECTION
+
+var ShowStore = "";
+var inventory = ["Survival Knife","Rations"]; // This is the player's inventory.
+var chosenItem; //This is the item that the player picked in the store.
+var credits = 100
+var bossPirateEncounter = 1
+var creditJackpotEvent = 1
+var abandonedOutpostEvent = 1
+var superWeaponEvent = 1
+var criminalEvent = 1
+var eventNumber; //This determines the event you recieve in the Explore button
+var items = [ // These are the items in my store.
+"Basic Laser Pistol",
+"Katana",
+"Advanced Laser Pistol",
+"Energy Shield",
+"Health Kit",
+"Combat Serum",
+"Space Exploration Manual",
+"Prototype Plasma Gun",
+"Amulet of Fortune"
+];
+
+var prices = [ //These are the prices in my store
+500,
+50,
+750,
+300,
+100,
+150,
+20,
+2500,
+10000
+];
+
+var itemDMG = [
+4,
+2,
+6,
+3,
+]
+
+var eventItems = [
+"Distress Beacon",
+"Prototype Plasma Weapon MK. II"
+]
+
+var storeItemDesc = [ 																									// This array is used for the store. It sets a description for each of the items in the store.
+"An older design of the well-known laser pistol. It gets the job done.",
+"A timeless blade that still has use in current events. Along with the bonus style points, it does well in combat.",
+"The newest model of the laser pistol. Packs a bigger punch than the older versions.",
+"This advancement in technology allows pure energy to deflect and disperse projectiles.",
+"This is a standard issue first aid kit. Useful for staying alive",
+"An experimental injectable drug that enhances focus, reflexes, and strength.",
+"The standard-issue manual given to all upcoming pilots and explorers.",
+"A very unstable looking weapon. It might give you the edge in a battle.",
+"This ancient artifact makes you a very powerful and influencial person. Wear it with pride and honor."
+];
+
+
+// MAIN Program Execution
+
+function startStory(){ // This is where the player can enter their name for it to appear in later text.
+   alert("Hello players, and welcome to the very early release of my MTAG. There is a lot of work to be done, and it may not seem like much of a game yet, but please test all the basics and tell me if there are any bugs! To win in this version of the game, you must acquire enough credits to purchase the Amulet of Fortune. You have lost if your credits go into the negatives. Other than that, have fun.")
+var nameStuff
+    var person = prompt("Please enter your name:", "Adventurer");
+    if (person == null || person == "") {
+        nameStuff = "You did not enter your name...";
+    } else {
+        nameStuff = "Hello " + person + "! The ship is ready to travel whenever you are. You have been allocated 100 credits to start. Simply click the Explore button to start. ";
+    }
+    alert(nameStuff);
+document.getElementById('personName').innerHTML = "Name: " + person;
+}
+
+function itemSelect(){  // This function is my function for the store. 
+
+ShowStore = "";
+
+for(i=0; i < items.length; i++){             // This code is for listing the items in my store.
+ShowStore += (i+1) + ". " + items[i] + "\n"; 
+}  
+chosenItem = (prompt(ShowStore)-1);          
+if(credits >= prices[chosenItem] && confirm(items[chosenItem] + "\nPrice: " + prices[chosenItem] + " Credits" + "\nDescription:" + storeItemDesc[chosenItem]) == true){
+	credits -= prices[chosenItem];
+	inventory.push(items[chosenItem]);
+	alert("Your business is appreciated. (You bought the item!)")
+        document.getElementById('creds').innerHTML = "Credits: " + credits;
+
+if(confirm("Would you like to buy something else?") == true){
+itemSelect();
+}	else 
+{
+	alert("Come back and see us again soon.");
+} 
+} 		else if(credits <= prices[chosenItem] && confirm(items[chosenItem] + "\nPrice: " + prices[chosenItem] + " Credits"+ "\nDescription:" + storeItemDesc[chosenItem]) == true){
+			alert("It appears you lack the credits required...");
+			itemSelect();
+}
+else{
+	alert("Come back and see us again soon.");
+}
+}
+
+function showInven(){
+	alert(inventory); //This is the function to show the player what is currently in their inventory
+}
+
+function getRandomNumber(){ //This function determines the random number that I use for events.
+	eventNumber = Math.floor(Math.random() * 14) + 1;}
+
+function events(){ //I use if and else if statements for my events that can happen when you click the explore button.
+	getRandomNumber()
+		if (eventNumber == 1){
+			alert("You encounter a lone escape pod. After a short scan for life and dangerous substances, there seems to be none. You bring it aboard and find a small amount of credits. You scrap it for parts and continue on your way. (150 credits have been added to your account.)")
+			credits += 150
+			document.getElementById('creds').innerHTML = "Credits: " + credits
+}
+			else if (eventNumber == 2){
+				alert("After sometime has passed, it appears that you aren't near any points of interest. You report back to the navigation console, and it appears a small amount of credits have gone missing. You shrug it off and continue. (You have lost 50 credits.)")
+				credits -= 50 
+				document.getElementById('creds').innerHTML = "Credits: " + credits
+}
+		else if (eventNumber == 3 && abandonedOutpostEvent == 1){
+			alert("We have discovered an abandoned outpost hidden on an asteroid. The supplies inside are mostly food rations, but a distress beacon was found in the corner, giving off an extremely faint signal. It appears that the thing has been transmitting for quite some time before you found it. You decide to take it with you. (Distress Beacon has been added to your inventory.)")
+			abandonedOutpostEvent = 0
+			inventory.push(eventItems[0])
+}
+			else if (eventNumber == 4 && credits >= 1000 && bossPirateEncounter == 1){ // Boss pirate encounter = 1 means it hasn't been done. I will change the variable to 0 when the event is complete to make sure the player doesn't get this event twice.
+				alert("Things have been going well so far. Your explorations have provided you with a decent amount of credits. Your thoughts have been interrupted as another ship hails you. It appears to be another cruiser class vessel, like your own, but it shows pirate colors and insignias. Your screen fills with the video feed from the pirate. Surprisingly, the captain of this ship isn't a generic scary looking guy, but a young looking female who's looks could kill. Your crew informs you that the other ship is charging weapons. You are about to do the same, but realize that the enemy ship is equipped with high-quality tech and equipment. A stark contrast to the weaponry on your ship. This isn't an encounter that you can win using violence. Before you let her say anything, you power your engines and close communication channels. Your ship quickly flees from this situation, unharmed. Hopefully you won't see her again, but you have put a bounty on your head with all the credits you've accumulated.") 
+				bossPirateEncounter = 0
+}
+		else if (eventNumber == 5) {
+			alert("Alerts pop on on your screen, and you bring the ship to a halt. Expecting an attack of some sort, you power the weapons. Surprisingly, the ship was warning you about debri from the remains of what appears to have been a massive battle. You skirt around the outskirts of the battle, and leave the scene with a respectable amount of credits. (You have gained 500 credits.)")
+			credits += 500
+			document.getElementById('creds').innerHTML = "Credits: " + credits
+}
+			else if (eventNumber == 6 && creditJackpotEvent == 1) { 
+				alert("You happen to travel near a renowned trading station. With no other options, you dock at the station and wander around the vast shopping centers and local traders. Suddenly, you are approached by a unremarkable man wearing the space equivalent of a trenchcoat. He asks if you are the real " + 'person' + " . You say you are and he slides you a package before briskly walking away. (You have gained 1,000 credits!)")
+				credits += 1000 
+				creditJackpotEvent = 0
+				document.getElementById('creds').innerHTML = "Credits: " + credits
+}
+		else if (eventNumber == 7) {
+			alert("You've found another ship nearby. It bears pirate markings so you ready the weapons. They quickly open communication channels and offer some credits in exchange for their freedom. You accept their offer and let them go. (You gained 250 credits.)")
+			credits += 250
+			document.getElementById('creds').innerHTML = "Credits: " + credits
+}
+			else if (eventNumber == 8) {
+				alert("You ship is running low on fuel. As if that wasn't bad enough, a few pirate ships have been detected closing in on your location. You open communication channels and try to ransom for some fuel and your freedom. The ships pull in closer and decide that some credits will ensure your safety. Your crew is displeased, but what other option is there? You transfer them the credits and they leave you alone. (You lost 600 credits!)")
+				credits -= 600
+				document.getElementById('creds').innerHTML = "Credits: " + credits
+}
+		else if (eventNumber == 9 && superWeaponEvent == 1) {
+			alert("You are passing by a nearby outpost. The outpost hails your ship and requests you to dock. You do as they say. When you dock, it is revealed that it is a privately owned research facility. They recognized your ship and request for you to field-test their latest weapon. You quickly accept the offer and depart the station. (200 credits and the Prototype Plasma Weapon MK. II has been added to your inventory.) ")
+			superWeaponEvent = 0
+			credits += 200
+			inventory.push(eventItems[1])
+			document.getElementById('creds').innerHTML = "Credits: " + credits
+}
+			else if (eventNumber == 10 && criminalEvent == 1) {
+				alert("An alert pops on on your screen. It appears that a nearby planet is harboring a well known criminal. The planet looks to be unguarded, so you set your destination to the criminal's last known location. You find the criminal without any disturbances and leave the area to turn him over for a reward. (You've gained 750 credits!)")
+				credits += 750
+				document.getElementById('creds').innerHTML = "Credits: " + credits
+				criminalEvent = 0
+}
+		else if (eventNumber == 11) {
+			alert("You encounter a refugee vessel during this exploration period. They have run out of fuel and request some from you. Unfortunately, you lack any spare fuel and decide to give them some credits instead. They will have to wait until someone else comes along. (You lost 200 credits.)")
+			credits -= 200
+			document.getElementById('creds').innerHTML = "Credits: " + credits
+}
+			else if (eventNumber == 12 && credits <= 1000 ) { 
+				alert("A passing ship requests to open communication channels, and you accept out of curiosity. It turns out it is the personal transport of a eccentric politician who is known for his generosity. He asks who you are and what you are doing. You explain that you are just a humble adventurer, seeking the unknown. His face lights up and he then exclaims that he will help your cause. He graciously transfers over a sizable amount of credits before he departs. (You've gained 1,500 credits!)")
+				credits += 1500
+				document.getElementById('creds').innerHTML = "Credits: " + credits
+}
+		else if (eventNumber == 13) {
+			alert("The time that you've spent traveling can sometimes lead you to a completely unremarkable place with nothing of interest nearby. This is one of those times...")
+}
+			else if (eventNumber == 14 && bossPirateEncounter == 0) {
+				alert("You were hoping that this day would never come. The dreaded pirate that you've encountered previously is closing in on your position, with quite a few ships following. It looks like she brought out all her friends. Before you get a chance to run or even open communication channels, the pirates charge their weapons and lock onto your ship. You put additional power into the engines and shields to try and mitigate the oncoming damage. The enemy weapons finally start firing, one after the other without much delay. Your piloting skills allow you to avoid a few of the harder hitting projectiles, but you can't dodge all of them. Eventually, the shots start to puncture your shields and damage your hull directly. With all hope lost, you transmit a white flag signal, hoping they will spare you. The pirate overlord that you met earlier has reappeared on your screen, with a smile across her face. She has accomplished what she set out to do. She demands that you hand over all of your credits and some of your cargo. You begrudgingly accept the terms. After the transfer of items, the pirates keep their word ,surprisingly, and allow you to leave. You repair your ship with your emergency credit account before getting ready to travel once more. (You've lost all your credits and the last item in your inventory...)")
+				credits = 0
+				bossPirateEncounter = 2
+				inventory.pop()
+				document.getElementById('creds').innerHTML = "Credits: " + credits
+}
+
+}
+document.getElementById('creds').innerHTML = "Credits: " + credits;
+
+</script>
+</body>
+</html>

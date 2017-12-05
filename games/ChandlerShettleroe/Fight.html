@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Text Adventure</title>
+		<meta charset="utf-8">
+		<link rel= "stylesheet" href="MTAGformating.css">
+		<style>
+		</style>
+	</head>
+	<body>
+	<div id="wrapper">
+		<header>
+			<h1>The Invasion You Could Never See Coming</h1>
+		</header>
+	<main>
+	<p><b>As you look towards Elizabeth, you don't see the young girl that was their before. Instead, you see a robotic figure and nearly yell out loud. You control yourself and decide that you should confront her, or whatever "she" is. "Hey, Elizabeth? When do your parents usually get home?" You ask, trying to sound calm. "They went on vacation a few days ago and won't be home for another week." She states. That's odd, to leave your kid behind when you go on vacation. "You know what I'm really not that hungry right now" you say. "What's up all of a sudden with you?" She says jokingly as she turns towards you. "Where did you get those glasses?" She says in a hostile voice. "Uhm someone gave them to me at school today." You say back. "Give me them." She says in a total robotic voice. "No way I know what you are and whatever these glasses are you are not getting them." You retort. "Fine, then I will just have to take them." She says as she stomps towards you. 
+	Programmer: Chandler Shettleroe
+	</main>
+	
+	<script type="text/javascript">
+	//<input id="checkInventory" type="text" value="Check Inventory"> maybe not use a text input, just use buttons...
+	// COMMENTS SECTION
+
+/* 
+// Part a:  
+Need any help go to https://www.youtube.com/watch?v=Sw4bN9t4Co4&feature=youtu.be
+Need any help for random number: http://www.screencast.com/users/Johnvader1/folders/Jing/media/0afef2cd-b3d3-4859-a38b-3de007624313
+Programmer: Chandler Shettleroe
+Date Last Modified:11-28-17
+Goal/Purpose:Make a text adventure.
+*/
+   
+// Variables section
+var health=10;
+var elizabethHealth=25;
+var money=3.00; //make a random number for random encounters to earn money for future use.
+var userInput = 1;
+var toDisplay="";
+var questOneComplete = false;
+//var check;
+var inventory = ["Pencils","English text book","Scraps of paper","Raspberry Pi (the coding tool)","Notebooks","Weird Glasses"];
+
+var shop = ["Excalibur","Reinforced shield","Enchanted wand","Potion of minor healing","Potion of major healing","Splash potion of minor healing","Splash potion of major healing","Scroll of revival","The book of the great Forrest Le Torneau","Reinforced bow" ];
+var shopPrices = [1.50, 1.00, 1.50, 0.50, 0.75, 0.75, 1.00, 1.50, 1.50, 1.00];
+//function section
+function checkBackpack(){
+	var toDisplay="";
+	alert("You look in your backpack")
+	for(i=0; i<inventory.length; i++){
+		toDisplay+=(i+1)+". " + inventory[i]+"\n"; //shows the player their inventory
+	}
+	alert (toDisplay);
+}
+function visitStore(){
+	var toDisplay="";
+	
+	for(i=0; i<shop.length; i++){
+		toDisplay+=(i+1)+". " + "$" + shopPrices[i]+ " " + shop[i]+"\n"; //shows all the items in the shop
+	}
+	
+	var userInput = prompt("Choose what you would like to buy from the list?\n\n"+toDisplay);
+	userInput--;
+	if (money >= shopPrices[userInput]){
+		var reallyBuy = confirm ("Are you sure you want to buy " + shop[userInput]+ "?")
+		if (reallyBuy == true){
+			inventory.push(shop[userInput])//puts the item into the players inventory
+			alert("You have bought" + " "+ shop[userInput])//tells the player what item they bought
+			money-=shopPrices[userInput]//takes the player's money away for the item purchased.
+			alert("You have" + " $" +money +" "+"left in your bag.")//shows the player how much money they have left
+		}
+		else {
+			alert("Ok, be like that, I don't need your money anyway.")
+		}
+	}
+	else{
+	alert("You don't have enough money.") 
+	} 
+}
+function checkMoney(){ //function for the player to see how much money they have
+	var toDisplay="";
+	alert ("You check the front pocket of your bag, checking how much money you have.")
+	alert ("You have " + "$" + money)
+}
+
+function quest1(){
+	alert ("Defeat Elizabeth to escape")
+	var playerInput=1
+	var enemy="Elizabeth" //gives the enemy a variable
+	var DPS=Math.floor(Math.random()*10+1); //sets the numbers the player can do for damage with unarmed combat
+	var bookDamage=Math.floor(Math.random()*12+2);//sets the numbers the player can do for damage with their English book
+	var enemyAttack=Math.floor(Math.random()*5+1);//sets the numbers the enemy can do for damage
+   while (elizabethHealth > 1){ //while the enemie's health is greater than 1 go through this function
+		playerInput=prompt ("What are you going to do?\n1: Attack with your fists\n2: Use English Text Book", playerInput)
+			if (playerInput==1){//if the player chose regular attack, go through this funciton
+			DPS=Math.floor(Math.random()*10+1)
+			alert ("You did " + DPS + " damage to " + enemy) //tells the player how much damage they did
+			elizabethHealth-=DPS //subtracts the amount of damage the player did from the enemie's health
+			}
+				if (playerInput==2){ //if the player chose the book, go through this funciton
+				bookDamage=Math.floor(Math.random()*12+2)
+				alert ("You did " + bookDamage + " damage to " + enemy)//tells the player how much damage they did with the book
+				elizabethHealth-=bookDamage
+				}
+						if (elizabethHealth>0){ //if enemie's health is greater than zero, go through this function
+						enemyAttack=Math.floor(Math.random()*5+1);
+						alert ("Elizabeth comes charging at you and hits you with a hard punch dealing " + enemyAttack + " damage to you.")//tells the player how much the enemy hit for
+						health-=enemyAttack//subtracts the amount of damage the enemy did from the player's health
+						alert ("You have " + health + " left")//shows the player how much health they have
+						if (health<1){ //if the player runs out of health, go through this function
+						alert ("You have perished and Elizabeth now has the glasses. The world is doomed")
+						location.reload() //reloads the page on a defeat
+						}
+						}
+   }
+   if (elizabethHealth<1){ //if the enemy's health goes below 1, go through this funciton
+   alert ("You knock Elizabeth to the ground but it doesn't look like it's staying down. You rush out the door and jump over a hedge, ducking behind it to hide.")
+   questOneComplete = true
+   if (questOneComplete = true){
+	//try to figure out how to make the a href invisible until questOneComplete=true
+   }
+   }
+}
+// MAIN program execution
+	
+    </script>
+</body>
+	<footer>
+	<h2>What will you do?</h2>
+	<a href="Help.html">Got Away</a>
+	<input type= "button" value = "Attack" onClick="quest1()">
+	<input type= "button" value = "Check Inventory" onClick="checkBackpack()">
+	<input type= "button" value = "Check how much money you have" onClick="checkMoney()">
+	
+	</footer>
+</html>

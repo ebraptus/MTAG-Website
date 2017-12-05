@@ -1,0 +1,43 @@
+function quest1(){
+	var playerInput=1
+	var enemy="Tier 1 synth"
+	var DPS=Math.floor(Math.random()*10+1);
+	var bookDamage=Math.floor(Math.random()*12+2);
+   while (enemyHealth > 1){
+		playerInput=prompt ("What are you going to do?\n1: Attack\n2: Use a potion", playerInput)
+			if (playerInput==1){
+			var text=" "
+			for (i=0; i<inventory.length; i++){
+			text+= i + 1+ ": " + inventory[i]+ "\n";
+			document.getElementById("inventory").innerHTML=text
+			}
+			i =prompt ("What are you going to use?\n\n"+text, 2)
+			i--
+			DPS=Math.floor(Math.random()*10+1)
+			alert ("You did " + DPS + " damage to " + enemy)
+			enemyHealth-=DPS
+			}
+				if (playerInput==2){
+				bookDamage=Math.floor(Math.random()*12+2)
+				alert ("You did " + bookDamage + " damage to " + enemy)
+				enemyHealth-=bookDamage
+				}
+						if (enemyHealth>0){
+						var damage=Math.floor(Math.random()*5+1);
+						alert (enemy+ " comes charging at you and hits you with a hard punch dealing " + damage + " damage to you.")
+						health-=damage
+						alert ("You have " + health + " left")
+						if (health<1){
+						alert ("You have perished and the synths now have the glasses. The world is doomed")
+						location.reload()
+						}
+						}
+   }
+   if (enemyHealth<1){
+   alert ("You knock Elizabeth to the ground but it doesn't look like it's staying down. You rush out the door and jump over a hedge, ducking behind it to hide.")
+   questthreeComplete = true
+   if (questthreeComplete = true){
+	quest4();
+   }
+   }
+}

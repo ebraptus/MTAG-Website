@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<body style="background-image: url('nTqDfEE.jpg');"> 
+<style>
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid orange;
+}
+
+.button1:hover {
+    background-color: red;
+    color: white;
+}
+.center {
+	text-align: center;
+    margin: auto;
+    width: 20%;
+    padding: 200px 0;
+} 
+</style>
+<h2 style="color: white">A Seraphs Mission.</h2>
+
+<p id="demo"></p> 
+<div class="center">
+<button class="button button1" onclick="beginStory()">STORY</button>
+<br>
+<button onclick="displayInventory()" style="background-color:orange; color:black">Click For Current Inventory</button>
+<br>
+<button onclick="buyItem()" style="background-color:orange; color:black">Click To Visit Store</button>
+<br>
+<button onclick="sellItem()" style="background-color:orange; color:black">Sell something</button>
+<br>
+<button onclick="displayCurrency()" style="background-color:orange; color:black">Current Currency</button>
+
+<script>
+/*Programmer: Adrian Shareef
+Date Last Modified: 11/20/17
+Goal/Purpose: Make a mini text adventure game with a story and a unique coding style.
+Status: WIP*/
+
+
+//Variables Section
+var prices = [150,
+30,
+700,
+4,
+45,
+10,
+3300,
+1373,
+300,
+2336,
+];
+var invPrices = [];
+var currency = 6000;
+var items = ["A Tachyon Device Prototype",
+"A Speedster Top",
+"Some Speed dampening serums", 
+"A Pocket knife",
+"A Speedster Bottom",
+"Some Gloves",
+"A Carbine Cell",
+"A Speedster Treadmill",
+"Health Potions",
+"A MicroTech Suit Holder"
+];
+var text = "";
+var select;
+var inv = [];
+var words = "";
+var userName;
+var storyChoice = ["Travel to a universe where interdimensional travel is prohibited.", 
+"Just discovered you are in the hospital"];
+var health = 50;
+var vvv = ["Velocity 9"];
+var choices = ["Left", "Right"];
+var choices2 = ["Explore more!", "I want to leave!!"];
+var unichoices = ["Try to explain to the officer that it was a mistake.", "Try to recreate what you did and get back home."]
+//Functions section
+function buyItem() {
+	text = ""; //This resets the list everytime you reload the page because other wise the list would double.
+	for (i = 0; i<items.length; i++) {
+		text+= (i + 1) + ". " + items[i] + " $" + prices[i] +  "\n";
+	} 	
+	select = (prompt(text)); //"select" is What ever you put in will equal what you put into the prompt 
+
+	if (select == null || select == false) {
+		alert("You are leaving the store.") //This entire if statement is just a response if you do not put in anything.
+	
+	
+		
+	}else{ 
+			select--; //subtracts the number you put in because since the arrays start at zero, you want them to know what you are talking about.
+			if(currency >= prices[select]) { 
+				console.log("Starting buyItem if statement(if the player has enough money)....")			
+				alert("You have decided to buy " + items[select] + " which will cost you " + prices[select] + " dollars. You currently have " + currency)
+				currency -= prices[select]
+				alert("You have purchased this item for " + prices[select] + ". You have " + currency + ".")
+				status = items[select];
+				inv.push(items[select]);
+				invPrices.push(prices[select] / 2);
+				
+				items.splice(select, 1); //This rids of value in the array removing it from the placeholder of what the person has selecting it.
+				prices.splice(select, 1);
+				
+				} else { 
+					if (currency <= prices[select]) {
+					select--;
+					alert("Not enough cash boy/girl")
+				}//NEXT if-else-if is just letting you purchase whether or not you have enough money.
+			}
+	} 
+	
+	
+}	
+function displayInventory() {
+	words="";
+	for(i = 0; i<inv.length; i++) {
+		words += (i+1) + ". " +inv[i] + "\n";
+	}
+	alert("Current Inventory:" + " \n" + words); //EVERYTHING YOU HAVE BOUGHT FROM THE BUY ITEM FUNCTION THAT IS LISTED.
+}
+function sellItem() {
+	text = "";
+	for (i = 0; i < inv.length; i++) {
+		text+= (i+1) + ". " + inv[i] + "\n";
+	}
+	select = (prompt(text));
+	if (select == null || select == false) {
+		alert("You chose to not sell an item.")
+		
+	} else {
+		select--;
+			if (inv.length >= 1 && select == true) {
+			select--;
+			alert("You have chose to sell " + inv[select] + ".");
+			currency += invPrices[select];
+			inv.splice(select, 1);
+			alert("You now have sold the item for " + invPrices[select] + ". You now have " + currency + " dollars.");
+			invPrices.splice(select, 1);
+		
+
+	}	
+			
+	}
+	
+	}
+function displayCurrency() {
+	alert(currency + " is how much money you have!")
+	}
+function beginStory(){
+	text = "";
+	userName = prompt("Please enter in your name before choosing a quest."); 
+	if(userName == null || userName == "") {
+	alert("Until Next Time!")
+	} else {
+		text = "";
+		for(i = 0; i < storyChoice.length;  i++){
+		text += (i+1) + ". " + storyChoice[i] + "\n";
+		}
+		
+		select = prompt(text);
+		if(select == null || select == "") {
+			alert("Choose some other time.")
+		} else {
+			
+			if (select == 1){
+				first();
+			} else if(select == 2) {
+				second();
+			} 
+		}
+	}
+}
+function first(){ //This is the second optional quest which will potentially call another function.
+	alert("Greetings " + userName + "! You have chosen the quest of going to a universe where interdimensional travel is prohibited")
+	alert("You are a girl that goes by the name of Vivian Niflheim. She has special abilities to utilize the speedforce to move at super speeds. One day she decides to go on a test run.. but runs too fast...")
+	alert("Vivian creates a resonance field that smashes the interdimensional barrier and ends up in another universe... where they would kill anyone who they did not recognize. An officer sees you breach in. What do you want to do?");
+	text ="";
+	for (i = 0; i<unichoices.length; i++) {
+		text+= (i + 1) + ". " + unichoices[i] +"\n";
+	} 	
+	select = (prompt(text));
+		if(select == null || select == "") {
+			alert("By choosing nothing you chose to go back to the start.")
+			beginStory();
+		} else if (select == 1) {
+		lucky();
+		} else if (select == 2) {
+		notsoLucky();
+		}
+	
+	
+
+}
+		function lucky() {
+			alert("Man did Vivian get lucky, enough though a bullet grazed her she was able to reason with the officer, he said he would let her go without anyone knowing.")
+			alert("Thanks for playing " +userName)
+}
+		function notsoLucky() {
+			alert("By trying to run away, you ran into an electrical fence that puts you into shock... killing you. Bad mistake and game over!")
+}
+function second(){
+	alert("Greetings " + userName + "! I see you have chosen to do the story of figuring out how to get yourself of the hospital!")
+	alert("You will always have the prompted with store items whenever you want to purchase something, Who you are playing as is a girl who goes by the name of Vivian Niflheim.");
+	velocity9();
+	alert("You have gotten up, choose left or right.");
+	text =  "";
+	for (i = 0; i<choices.length; i++) {
+		text+= (i + 1) + ". " + choices[i] +"\n";
+	} 	
+	select = (prompt(text));
+	if(select == null || select == ""){
+		alert("Backing out now? I guess I will let this happen...")
+		} else {
+		if(select == 1){
+		leftChoice2();
+		} else if(select == 2) {
+			rightChoice2();
+		
+	}
+}
+}
+
+	function leftChoice2(){ //The numbers next to the function correlates to the numbered story.
+		alert("NO!!! A time wraith was waiting for you there! I am sorry but it has killed you and it is now game over.")
+}
+	function rightChoice2(){ //Same as the comment in the leftchoice1.
+		alert("Coast seems to be clear, but Vivian notices the sound of a time wraith. She gets the impression that she is somewhere out of time, and that's she is the reason it is after her. She finds a small store with future tech. that might help her. What would you like to buy first?");
+		buyItem();
+		alert("Okay, good idea buying that. Like it is actually going to help you fight off the enforces of the source of your own power...")
+		alert("Okay, the hospital seems to be an infinite maze to Vivian, she is using her super speed to find her way out, but right then she discovers a possible exit... do you want her to leave or explore more?");
+		text = "";
+			for (i = 0; i<choices2.length; i++) {
+				text+= (i + 1) + ". " + choices2[i] +"\n";
+		} 	
+				select = (prompt(text));
+					if(select == null || select == ""){
+					alert("By choosing nothing, you have to restart the story.")
+					beginStory();
+						} else if (select == 1) { //These are simple decisions that will lead to other functions that will continue the story.
+						explore();
+						} else if (select == 2) {
+						exit();
+				}
+}
+			function exit(){
+				alert("Excellent! Good thing you have the V9 that you were given, not you can make one last sprint home!")
+			}
+			function explore() {
+				alert("Have you forgotten?! There were time wraiths after you and now they caught you! You lose.")
+			}
+			
+function velocity9() {
+text = "";
+	for (i = 0; i < vvv.length; i++) {
+		text+= (i+1) + ". " + vvv[i] + "\n";
+	}
+	alert("You will need these... these Velocity 9's if you want to keep in check." + " \n" + text)
+	inv.push(vvv[0]);
+}	
+	
+	
+
+
+
+		
+
+
+		
+</script>
+
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<title> 5e Episode 1: The Matron's Call </title>
+<style>
+body { 
+text-align: center;
+background-repeat: no-repeat; 
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgJ8hgmVfz3soeodeN0dsJWtU3uI8B5-n451bhcEqDPREfJBuw")
+  }
+</style>
+</head>
+<body>
+<h1> 5e Episode 1: The Matron's Call </h1>
+Push here first
+<br><input type = "button" value = "Begin the Adventure" Onclick= "Quest()">
+<p id = "message"></p>
+<p id="stats"></p>
+Here is where you choose your class.<br>
+You will choose who you will experience during your adventure <br>
+<input type = "button" value = "Druid" Onclick="classA()"><a href="#" class="rainbow-button" alt="Button"></a>
+
+<input type = "button" value = "Paladin" Onclick="classB()"><a href="#" class="rainbow-button" alt="Button"></a>
+
+<input type = "button" value = "Ranger" Onclick="classC()"><a href="#" class="rainbow-button" alt="Button"></a>
+
+<input type = "button" value = "Rogue" Onclick="classD()"><a href="#" class="rainbow-button" alt="Button"></a>
+
+<input type = "button" value = "Fighter" Onclick="classE()"><a href="#" class="rainbow-button" alt="Button"></a>
+<p id="message"></p> 
+<br>
+Please dont click the buttons again after you have decided on a class. Will update in future to insert vanishing buttons.
+<br><input type = "button" value = "The mission" Onclick = "TheQuest()">
+<input type = "button" value = "Inventory" Onclick="classInventory()"><a href="#" class="rainbow-button" alt="Button"></a>
+<p id="message"></p>
+<p id = "character">Inside Your Bag</p>
+<input type = "button" value = "Violet's Shop" Onclick="shOp()"></br>
+<input type = "button" value = "Leave the Town" Onclick = "firstFight()">
+<input type = "button" value = "Attack" Onclick = "wolfPack()">
+<br>
+Now In this situation you will be fighting the Boss and her minions. Unlike the last one you have choices on who to attack. <br>
+<input type = "button" value = "Matron" Onclick= "MatronATK()">
+<input type = "button" value = "Minions" Onclick= "minionsATK()">
+<script type = "text/javascript">
+
+// Patch / Release Notes
+
+// As of 11/15 inventory working
+// As of 11/27 The story has been created. 
+//as of 11/28 The first fight was created
+//As of 11/29 The inventories were edited
+// As of 11/ 29 The first playable game was released
+// Variables section
+	//first 5 are inventories for each of the classes. The Cast have been commented out due to crunch time. Will update within the future to add them
+var asiliInventory= [ "5 torches", "QuarterStaff"/*, "Cast: Flame Sword"*/];
+var naivaraInventory= [ "5 torches", "Long Sword"/*, "Cast: Searing Smite"*/];
+var kryobanInventory= [ "5 torches", "bow"/*, "Cast: Deadly Shot"*/];
+var crimsonInventory= ["scythe"/*, "Cast: swing  " */];
+var lonkInventory= ["Master Sword"/*, "Cast: song of time"*/];
+var shopPrices= [100,10 , 5  , 15 , 30, 50, 70, 10, 10];
+var shopItems= ["Heal Potion","Pot Lid","Pots", "Rotted cheese", "Wood Boards", "A Shovel","Canteen Of Water", "Questionable Liquid", "Wooden Spoon" ];
+var gold = 0;
+var Luck = 0;
+var HP = 0;
+var ATK = 0;
+var toDisplay="";
+var whichItem= "";
+var character = "";
+var wolves = ""	// The main enemy of the game
+var roll20 =  d20Roll()	//My 20 sided die
+var wolves = ""
+var hpWolf= 46
+var hpMatron= 27;
+
+
+//Function classA through classE display the stats for each of the classes 	
+	//Class A is for Asili the druid, B for the Paladin, C for the Ranger, D for the Rogue, and E for the fighter.
+function d20Roll(){
+	return(Math.floor(Math.random() * 20 + 1)	)//My 20 sided die\
+	
+}	
+	
+function classA() {
+	character = "Druid"
+	ATK = 5 ;
+	HP = 34 ;
+	Luck = 3 ;
+	gold = 100 ;
+	document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold;
+	alert("Asili, the Druid of fire");
+	alert("Your ATK is now 5, HP is 34 and Luck is 3" + "\n");
+//	alert ('test');
+	//alert (ATK)
+	
+}
+
+function classB () {
+	character = "Paladin"
+	ATK = 7, HP = 41, Luck = 1;
+	gold = 100;
+document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold;
+	alert("Naivara, the noble paladin");
+	alert("Your ATK is now 7, HP is 41, and Luck is 1" + "\n");
+	}
+function classC () {
+	character = "Ranger"
+	ATK = 9, HP = 27, Luck = 2 
+	gold = 100;
+document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold;
+	alert("Kryoban, the calm archer ");
+	alert("Your ATK is now 10, HP is 27, and Luck is 2" + "\n");
+}
+function classD () {
+	character = "Rogue"
+	ATK = 9, HP = 29, Luck = 0
+	gold = 100;
+document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold;
+	alert("Crimson, the mysterious rogue");
+	alert("Your ATK is now 9, HP is 29, and Luck is 0" + "\n");
+}
+function classE () {
+	character = "Fighter"
+	ATK = 8, HP = 30, Luck = -1
+	gold = 100;
+document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold;
+	alert("Lonk, the adventurous fighter");
+	alert("Your ATK is now 8, HP is 30 and Luck is -1" + "\n");
+}
+function TheQuest() { 	// This area will Introduce the Quest of the game and introduce the character and slight background on it. 
+	if (character == "Druid") {
+		alert ('Durnham smiles "Welcome Asili, this is Naivara, Lonk, Kryoban, and Crimson." You shrug and raise a hand. You have never been the type of person to appreciate humans. After all they are the reason your parents died. But the wolves Durnham spoke of did not sound like the normal wolves you know, and you would know. Durnham doesnt seem to notice your disgust and continues "So now that you are all here I can go into detail on the quest. ');
+			alert ('So as you can tell our village isnt exactly the most impressive.We make by with farming and trading. But recently a nasty group of wolves have been coming from the west into the village and terrorising the townfolk and killing the cows we need. But ill need some proof to make sure of your kills. Not that I dont trust you but you know how things go. So for each wolf ear you bring back Ill give you 5 gold. For each actual wolf ill give you 10 gold." Durnham smiles. "That seems fair. and if i dont see you in 5 days ill just assume you are dead or ran off. Hopefully i wont have to think about that."') 
+				alert ('You and the rest of the group get up. Lonk jumps into the air and shouts "adventure" then runs out of the room and straight out the door then shortly comes back in "ummm, which way is west" You smile but only for a second. stupid humans.')}
+	else if (character == "Paladin"){
+		alert ('Durnham smiles "Welcome Naivara , this is Asili, Lonk, Kryoban, and Crimson." You smile and bow. These seem like a well enough lot to get you the gold you need."So now that you are all here I can go into detail on the quest.');
+			alert ('So as you can tell our village isnt exactly the most impressive.We make by with farming and trading. But recently a nasty group of wolves have been coming from the west into the village and terrorising the townfolk and killing the cows we need. But ill need some proof to make sure of your kills. Not that I dont trust you but you know how things go. So for each wolf ear you bring back Ill give you 5 gold. For each actual wolf ill give you 10 gold." Durnham smiles. "That seems fair. and if i dont see you in 5 days ill just assume you are dead or ran off. Hopefully i wont have to think about that."')
+				alert ('You and the rest of the group get up. Lonk jumps into the air and shouts "adventure" then runs out of the room and straight out the door then shortly comes back in "ummm, which way is west" You laugh and think to yourself "He is gonna die"')}
+	else if (character == "Ranger") {
+		alert ('Durnham smiles "Welcome Kryoban, this is Naivara, Lonk, Asili, and Crimson." You nod to the crowd "Good day Gentleman and Lady" Durnham nods back "So now that you are all here I can go into detail on the quest. ');
+			alert ('So as you can tell our village isnt exactly the most impressive.We make by with farming and trading. But recently a nasty group of wolves have been coming from the west into the village and terrorising the townfolk and killing the cows we need. But ill need some proof to make sure of your kills. Not that I dont trust you but you know how things go. So for each wolf ear you bring back Ill give you 5 gold. For each actual wolf ill give you 10 gold." Durnham smiles. "That seems fair. and if i dont see you in 5 days ill just assume you are dead or ran off. Hopefully i wont have to think about that."')
+				alert ('You and the rest of the group get up. Lonk jumps into the air and shouts "adventure" then runs out of the room and straight out the door then shortly comes back in "ummm, which way is west" You roll your eyes at the action. "This should be interesting"') }
+	else if (character == "Rogue") {
+		alert ('Durnham smiles "Welcome Crimson, this is Naivara, Lonk, Kryoban, and Asili." You dont react and sit down. You arent here to make friends "So now that you are all here I can go into detail on the quest. ');
+			alert ('So as you can tell our village isnt exactly the most impressive.We make by with farming and trading. But recently a nasty group of wolves have been coming from the west  into the village and terrorising the townfolk and killing the cows we need. But ill need some proof to make sure of your kills. Not that I dont trust you but you know how things go. So for each wolf ear you bring back Ill give you 5 gold. For each actual wolf ill give you 10 gold." Durnham smiles. "That seems fair. and if i dont see you in 5 days ill just assume you are dead or ran off. Hopefully i wont have to think about that."')
+				alert ('You and the rest of the group get up. Lonk jumps into the air and shouts "adventure" then runs out of the room and straight out the door then shortly comes back in "ummm, which way is west" you scowl "What an idiot"') }
+	else if (character == "Fighter") {
+		alert ('Durnham smiles "Welcome Lonk, this is Naivara, Asili, Kryoban, and Crimson." You ecstatically wave "HI EVERYONE IM LONK" you run to your seat vibrating with joy "So now that you are all here I can go into detail on the quest. ');
+			alert ('So as you can tell our village isnt exactly the most impressive.We make by with farming and trading. But recently a nasty group of wolves have been coming from the west into the village and terrorising the townfolk and killing the cows we need. But ill need some proof to make sure of your kills. Not that I dont trust you but you know how things go. So for each wolf ear you bring back Ill give you 5 gold. For each actual wolf ill give you 10 gold." Durnham smiles. "That seems fair. and if i dont see you in 5 days ill just assume you are dead or ran off. Hopefully i wont have to think about that."')
+				alert ('You and the rest of the group get up. You run out excitedly and dash out the door. Upon realizing you dont know where you are going you dash back inside. "Ummm which way is west " you blush and put your hand behind the back of your head. "I got ahead of myself" ') }
+}
+function wolfPack() {
+
+	switch(character) {
+			case "":
+			alert ("Don't try breaking the game please just choose a class.")
+			location.reload
+			break;
+			case "Druid":
+				alert ("Asili Attacks") 
+				roll20 = d20Roll()
+				if (roll20 >= 13 > 20) {
+							alert ("Asili hits the wolf")
+					hpWolf -= 5 
+						}
+				else if (roll20 < 13) {
+							alert ("Asili misses and the wolf takes a scratch at you; you take 5 damage")
+							HP-= 5;
+							document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold
+				}
+				else if (roll20 == 20) {
+					alert ("Asili crushes the quarterstaff on the wolf's head and crits for 8 damage")
+					hpWolf -= 8
+				}		
+				break;
+			case "Paladin":
+				alert ("Naivara Attacks") 
+				roll20 = d20Roll() + Luck
+						if (roll20 >= 13 > 20) {
+				alert ("Naivara hits the wolf")
+				hpWolf -= 7
+			}
+			else if (roll20 < 13) {
+			alert ("Naivara misses and the wolf bites your side and you take 5 damage")
+			HP-= 5
+			document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold
+			}
+			else if (roll20 == 20) {
+					alert ("Naivara slashes through the wolves armor dealing 10 damage ")
+					hpWolf-= 10
+						}
+			break;	
+			case "Ranger":
+				alert ("Kryoban Attacks") 
+				roll20 = d20Roll() + Luck
+				
+				if (roll20 >= 13 > 20) {	
+				alert ("Kryoban shoots the wolf and pierces its leg ")
+				hpWolf -= 10 
+				}
+			else if (roll20 < 13) {
+			alert ("Kryoban whifs the shot.")
+			roll20=d20() 
+			document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold
+			}
+			else if (roll20 == 20) {
+					alert ("The arrow pierces the wolves skull and crits for 13 damage")
+					hpWolf -= 13
+					}
+					
+			break;
+			case "Rogue":
+				alert ("Crimson Attacks") 
+				roll20 = d20Roll() + Luck
+					if (roll20 >= 13 > 20) {
+				alert ("Crimson stabs the wolf")
+				hpWolf -= 9 
+			}
+			else if (roll20 < 13) {
+			alert ("Crimson  misses the wolf and her scythe gets caught in the ground")
+			HP -= 8
+			document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold 
+			}
+			else if (roll20 == 20) {
+					alert ("Crimson slashes through the wolf with her scythe dealing 13 damage")
+					hpWolf -= 13
+			}
+			break;
+			case "Fighter":
+				alert ("Lonk attacks") 
+				roll20 = d20Roll() + Luck
+					if (roll20 >= 13 > 20) {
+				alert ("Lonk swings the Master Sword into the wolf ")
+				hpWolf -= 9 
+			}
+			else if (roll20 < 13) {
+			alert ("Lonk swings the Master sword and it flies out of his hand. He runs and picks it up")
+			roll20=d20() 
+			HP -= 8
+			document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold
+			}
+			break;
+		}
+		
+	if (hpWolf >= 1) {
+		
+		alert ("The wolves uniformly attack")
+		roll20 = d20Roll() }
+			if (roll20 >= 10 ) {
+		alert ("They  scratch at you and you take 7 damage")
+		HP -=7
+		document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold
+				}
+					else if (roll20 < 10 ) {
+				alert ("The party avoids the attack and gets ready to counter attack")
+					}
+			
+		if (hpWolf < 1 ) {
+		alert ("The wolves have been defeated. But the party has been wounded. ")
+		}
+		if (HP = 0) {
+alert ("You died and that means you lose")
+location.reload() }
+}
+
+/*switch (character) {
+	case ("Druid")
+	if (HP < 34)
+	alert ("You are wounded and should probably take a rest. But resting is dangerous and ")
+	}
+	}*/
+
+
+function firstFight() {	//this is the function that begins the first fight of the game. It gives a math.random function like rolling a 20-sided die and checks for perception. If you roll higher than a 13 you are prepared. if not you take 3 damage and begin the fight wounded.
+		alert ('When you leave the town the party is pretty quiet. Lonk looks around moving from tree to tree. Asili looks around at the surroundig area examining nature as they contineu. Naivara is careful and alert for incoming enemies when Asili stops moving. "Guys i think i hear something coming."')
+		roll20 
+		//alert (roll20)
+		if (roll20 >= 13) {
+		alert ('"Incoming!" you yell loudly and prepare to fight. A wolf dives at you but you dodge the attack. You group up as 4 wolves appear from the front of you') }
+		else if(roll20 < 13) {
+		alert ("Suddenly a giant wolf comes from the woods and jumps straight at you. You take 3 damage then push him off you when 4 wolves jump out of the woods and surround the party") 
+		HP -= 3
+		document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold
+		} 
+		alert ('Upon facing the pack of wolves the party pulls out their weapons. You step up weapon in hand ready to kick some butt. ') 
+		if (character == "Druid") {
+		alert ("You look at the wolf that tried to jump you and attack. You look at him and it confirms your suspicions. These arent normal wolves, nor dire wolves either.") }
+	
+}	
+// This function displays the inventory based on your class. If the character variable equals the class then it will display the corresponding inventory
+function classInventory() {
+		if (character == "Druid") {
+			
+		document.getElementById("character").innerHTML = asiliInventory;
+			}
+		 if (character == "Paladin") {			
+		document.getElementById("character").innerHTML = naivaraInventory;
+						}
+		 if (character == "Ranger") {
+			
+		document.getElementById("character").innerHTML = kryobanInventory;
+		}
+		else if (character == "Rogue") {
+			
+		document.getElementById("character").innerHTML = crimsonInventory;
+		}
+	else if (character == "Fighter") {
+			
+		document.getElementById("character").innerHTML = lonkInventory;
+		}
+	}
+
+
+function shOp(){  // Displays the items in the shop and makes it available to purchase items. and based on the input for the character the item will add to the corresponding inventory
+	toDisplay="";
+	for(i=0;i <shopItems.length-1;i++){
+		toDisplay += (i+1) + ". " + shopItems[i]+  " "+ shopPrices[i]+" "+ " " + "\n";
+	}
+			
+	var userInput= prompt ("Welcome to my shop!" + "\n" +toDisplay);
+	userInput--; 
+	if (character == "Druid") {
+		asiliInventory.push (shopItems[userInput]) 
+		document.getElementById("character").innerHTML = asiliInventory; + "gold" + gold}
+		else if (character == "Paladin") {
+		naivaraInventory.push (shopItems[userInput]) 
+		document.getElementById("character").innerHTML = naivaraInventory;}
+		else if (character == "Ranger") {
+		kryobanInventory.push (shopItems[userInput]) 
+		document.getElementById("character").innerHTML = kryobanInventory;}
+		else if (character == "Rogue") {
+		crimsonInventory.push (shopItems[userInput]) 
+		document.getElementById("character").innerHTML = crimsonInventory;}
+		else if (character == "Fighter") {
+		lonkInventory.push (shopItems[userInput]) 
+		document.getElementById("character").innerHTML = lonkInventory; }
+	if (gold >= shopPrices[userInput]){
+		gold -= (shopPrices[userInput]);
+		
+		alert ("Thank you for your purchase")
+		alert ("Your total gold is now" + " " + gold) 
+		document.getElementById("stats").innerHTML = "ATK = " + ATK + "\n" + "HP = " + HP + "\n " + "Luck = " + Luck + "\n" + "Gold = " + gold; 
+		
+ 	}
+	else {
+		alert ("Buy something or get out of my store "); 
+	}
+}
+function Quest() { 	//tells the player what the quest they will be going on is and for how much they get out of it
+	alert ("Our adventure starts in a shoddy town called GlennBrook placed in the middle of nowhere. With no government and a single road, few have heard of Glennbrook. You, however, have received word that the innkeeper has a job. A job to kill A LOT of wolves." )
+	alert ("You enter the town and notice that most of the town is consisting of homes. There is, however, one shop and an inn called the Diving Dovah. This is where the innkeeper who hired you, a kind man by the name of Durnham, works as the bartender and the closest thing the town has to a mayor. You enter the Dovah and notice that the place isn't particulary full despite the fact most of the town is in the bar.")
+	alert ('As you enter into the bar, Durnham notices you "Ah Come in friend! Let me lead you to the staff room where the others are. You enter the room and their is a group of 4 individuals and yourself. The calm and collected druid, Asili sits quietly in one corner. Opposite from him sits the noble and charming elf Paladin, Naivara. Also in the room is a short but deadly rogue Crimson, and the smart quick witted Archer Kryoban sitting across from him. Opposite to Durnham is a young, energetic boy by the name of Lonk. Now the question is: Which one are you?')
+}
+
+
+	//alert("bottom")
+
+</script>
+
+</body>
+<footer>
+<!--<a href= TheAdventure.html><br>Begin the Adventure</br></a>-->
+</footer>
+</html>

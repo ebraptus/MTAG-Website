@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>codePractice1</title>
+	</head>
+
+	<body>
+	<style>
+	body{
+		background-image: url("2893.jpg");
+		background-size: 1500px 850px;
+	}
+	p{
+		color: lightblue;
+	}
+	</style>
+<p><font size="6">Abandoned Moonbase 
+</font></p><br> 
+	Created by: Brooke Utsey<br>
+	<style>
+	body{
+		color: white;
+	}
+	</style>
+<p id="name"></p>
+<input type ="button" value ="Player Name" onClick="displayName()"/>
+<input type ="button" value ="Background Story" onClick="displayStory()"/>
+<input type ="button" value = "EXPLORE BASE" onClick="exploreBase()"/>
+<input type ="button" value = "My Money" onClick="displayMoney()"/>
+<input type ="button" value = "Store List" onClick="displayStore()"/>
+<input type ="button" value = "Purchase From Robot Vendor" onClick="buyItem()"/>
+<input type ="button" value = "Inventory" onClick="displayInventory()"/>
+<input type ="button" value = "Open Barrier" onClick="questFixDoor()"/>
+	<script type="text/javascript">
+// COMMENTS SECTION
+
+/* 
+Prices and items are connected.
+*/
+
+/* 
+// Part a:  
+Programmer:Brooke Utsey
+Date Last Modified:11/29/17
+Goal/Purpose: finish game
+Status:Game is fully functional.
+// Part b: Add comments with details/explanations throughout the code as needed
+// If you had to do some 'good thinking' or get help to solve something, it deserves a comment!
+*/
+   
+// Variables section
+var toDisplay ="";
+var whichItem;
+//var whichPart;
+var items = ["Gloves","Wrench","Bolt","Blue keycard","Glass","Wiring Kit","Welder","Moonstone","Gem","Fusebox"];
+var prices = [30,65,50,75,55,70,20,80,79,100];
+var inventory =["Screwdriver"];
+var userMoney = 0;
+var storyTime = ["You are a stranded ship Captain locked on an old Moonbase. You must break out of closed section buy opening the barrier lock."]
+var storyBegin =["To do this, you must fix the various broken pieces on the door. Try scavenging around the place to find silver coins to buy parts."]
+//make this be shown somewhere
+var playerName = "";
+
+var status = "";
+//keeps updating the position of the player
+
+// Functions section
+//===============================
+function displayStory(){
+	alert(storyTime)
+	alert(storyBegin)
+}
+//this displays the story for the game.
+function displayMoney(){
+	alert("You currently have " + userMoney + " silver coins left in your posession.")
+}
+//shows how much money you have currently.
+function displayName(){
+	playerName = prompt("A name for your adventurer?\nType it in here!","James T. Kirk");
+document.getElementById("name").innerHTML = playerName;
+//have to add an id name to make it write.
+//when creating a prompt, make sure you connect your variable to the prompt. And two parameters, 1# is what to do, and #2 is the default.
+}
+//shows the prompt for asking the player's name and displays it.
+function displayStore(){
+toDisplay = ""
+ for(i=0;i< items.length;i++){
+	toDisplay += (i+1)+". "+ items[i]+" - $" + prices[i] +"\n";
+	}
+	alert(toDisplay)
+	//alert(prices[whichItem-1])
+}
+//shows the store list.	
+function buyItem(){
+	whichItem = prompt(toDisplay);
+	//whichItem-- //would make it so i don't have to write -1 all the time.
+	if(userMoney >= prices[whichItem-1]){
+		var reallyBuy = confirm("Are you sure that you want to buy "+items[whichItem-1]+" for "+prices[whichItem-1]+"?")
+		//this is a confirm box so someone can know if they really want to buy something.
+		if(reallyBuy==true){
+			alert("You have purchased "+ items[whichItem-1])
+			inventory.push(items[whichItem-1])
+			if(inventory.length > 11){
+			inventory.shift();
+			}
+			//shifts if iventory has more than 5 items.
+			userMoney -= (prices[whichItem-1])
+			//make sure to always subtract money or anything before alert.
+			alert("You have " + userMoney + " silver coins left.")
+		}else{
+			alert("Order cancelled")
+		}	
+	}else{
+		alert("You didn't purchase anything.")
+	}
+}
+//allows the player to buy the item listed.
+function displayInventory(){
+	alert(inventory);
+}
+function exploreBase(){
+	//alert("eb")
+	//exploration started, is working, needs more options.
+		var searchRoom = Math.floor(Math.random() *20+1);
+	//alert(searchRoom);
+	if(searchRoom < 5){
+		alert("You rummage around and find a box with black gunk on top of it.")
+		var openThing = confirm("Open it?")
+		if(openThing == true){
+			alert("You have found 10 silver coins.")
+			userMoney += 10
+		}else{
+			alert("You avoid it with distaste.")
+		}
+	}
+	if((searchRoom > 5) && (searchRoom < 10)){
+		alert("You walk down a corridor and find a panel with red biohazardous sign on the outside of it.")
+		var openDoor = confirm("Look Inside?")
+		if(openDoor == true){
+			alert("You open the door and reach your hand inside and electrocuted by open wires.")
+			alert("You really didn't think that through did ya?")
+			alert("GAME OVER!")
+			location.reload();
+		}else{
+			alert("You don't even try your luck with that.")
+		}
+	}
+	if((searchRoom > 10) && (searchRoom < 15)){
+		alert("You spot an open ceiling panel above your head from where you are sitting.")
+		var climbUp = confirm("Go up there and take a look around?")
+		if(climbUp == true){
+			alert("You hang jump and pull yourself up into the small space of a room.")
+			alert("Upon shuffling around in the dust and grime, you find 5 silver coins.")
+			userMoney += 5
+		}
+		else{
+			alert("Nah, you're too lazy to do pull yourself up there. You put your head in your hand and ponder on other things.")
+		}
+	}
+	else if (searchRoom>15){
+		alert("You didn't find anything.")
+		alert("Keep searching.")
+	}
+}
+function questFixDoor(){
+	if(inventory.length >= 10){
+		alert("You start to repair the door with haste and eagerness.")
+		alert("You fixed the door, now its time to get the heck out of this place!")
+		alert("Exiting the barrier, you begin to run down the halls in order to find an exit, you find a place that dispenses maps of the place, but you have to pay for it.")
+		var buyMap = confirm("Do you have 30 coins for it?")
+		if((buyMap == true) && (userMoney >= 30)){
+			alert("You buy the map for your own personal benefit and decide to take the next left as it leads to the shortest route.")
+			alert("Your confidence level builds up.")
+			userMoney -= 30
+			status = "Got Map"
+			//status can change whenever you want.
+			quest2();
+		}
+		else{
+			alert("You don't have enough money left in order to buy the map.")
+			alert("You decide to try and read the map through the grimy window, but to no avail.")
+			alert("You head off to the right, in hopes that you will head in the right direction.")
+			quest2();
+		}
+	}
+	else{
+		alert("You don't have all the parts yet, keep buying them.")
+	}
+}
+function quest2() {
+	alert("Now beginning the second part of your journey.")
+	if(status == "Got Map" ){
+		alert("With the map held tightly in your clutch, you begin heading left and going up and down the hallways.")
+		alert("You come upon a fork in the road, one side barricaded but a small space is able for you crawl through, and the other, a narrow corridor.")
+		alert("However, this narrow corridor is completely void of all light, and you can't even see a good three feet ahead of you.")
+		alert("According to the map, if you take the narrow passageway, you will be placed in a better position going forward,and closer to an exit.")
+		alert("Luckily, directly next to you, there is a place to buy flashlights.")
+		var buyFlashlight = confirm("Do you have 20 coins for it?")
+		if((buyFlashlight == true) && (userMoney >= 20)){
+			alert("You have enough money to buy the flashlight, so you get it")
+			alert("You begin to trek into the darkness without hesatation, only focused on escape.")
+			userMoney -= 20
+			status = "Dark Path"
+			quest3();
+		}
+		else{
+			alert("You don't have enough for the flashlight unfortunately, so you squeeze yourself into the break in the lighted, barricaded hallway.")
+			alert("You continue on to make up time for the detour.")
+			quest3();
+		}
+	}
+	else{	
+		alert("You walk around the hallways aimlessly and in confusion, not having a true sense of direction.")
+		alert("Finally you find a half open barrier door, and you figure you can squeeze through it.")
+		alert("You move on, hoping to get at least to a point where you can determine how close you are the exit.")
+		quest3();
+	}
+}
+function quest3() {
+	alert("Now beginning the third part of your journey.")
+	if(status == "Dark Path"){
+		alert("You nagivate the dark narrow path with ease, and with no real true concern, since you were confident you were getting out of this place.")
+		alert("Seeing light up ahead, you turn off your flashlight and walk into the now wider, and brightly lit hallway.")
+		alert("On the other side of the hallway, there appears to be a laserfield of some kind, which blocks the pathway off from the building, and the exit you need to get to.")
+		alert("You also see a ladder that leads to an upper floor. Maybe you can take a quick shorcut to get over the laserfield? You seem unsure of how to tackle the problem of the laserfield.")
+		var goLaser = confirm("Do you want to try to turn off the laserfield?")
+		if(goLaser == true){
+			alert("You decide not to be so hasty and tackle the problem before you with deterimation.")
+			alert("After several minutes, you locate what seems to be a control box panel in the corner next to the laserfield.")
+			alert("You take your wrench and smash it into pieces, which seems to make the lasers go away.")
+			alert("You move on, with more confidence than ever before.")
+			status = "Laser Field"
+			quest4();
+		}
+		else{
+			alert("You take the shortcut up the ladder instead of dealing with the trouble of trying to get past the laserfield.")
+			quest4();
+		}	
+	}
+	else{
+		alert("You come across a laserfield in a large room after walking down the long expanses of hallways.")
+		alert("On the other side of the large room you see a dark hallway.")
+		alert("Ignoring it, you see a ladder on the side of the room and proceed to climb up to the next floor.")
+		quest4();
+	
+	}
+
+
+}
+function quest4(){
+	alert("Begin the fourth part of your journey.")
+	if(status == "Laser Field"){
+	alert("You have made it past the laserfield and proceed to the hangar bay, which you know will have your ship and a exit.")
+	alert("Unfortuately, as you walk to the hangar, you spy some robots up ahead, and they don't seem to be functioning properly.")
+	alert("They are starting to now approach you, and they have glowing red eyes. Are you going to hide or fight?")
+	var avoidRobots = confirm("Avoid the robots?")
+	if(avoidRobots == true){
+		alert("You decide to avoid the robots, for safety and out of slight fear.")
+		alert("Hiding behind a wall, you observe them as they glide past your hiding place, in confusion to where you went.")
+		alert("You then dart out as they leave the room completely, and continue your walk to the hangar with a smile. Too easy.")
+		status = "Avoid Bots"
+		quest5();
+	}
+	else{
+		alert("You decide to attack the robots, with a wrench, and take down three of them.")
+		alert("They start swarming you, however, and you proceed to run away.")
+		alert("They chase you down the hallway, but as you check back to see how far away they are from you, you trip...")
+		alert("... and fall into the laserfield, which leads to you getting electrocuted, and dying.")
+		alert("Game Over.")
+		location.reload();
+	}
+	
+	}
+	else{
+		alert("You find yourself in another hallway, and find a couple of robots.")
+		alert("You decide to approach them. Big mistake. They start chasing you, and after they do, you take a hasty left and continue sprinting.")
+		quest5();
+	}
+
+}
+function quest5(){
+	alert("Finally, the fifth part of your journey.")
+	if(status == "Avoid Bots"){
+		alert("Upon continuing, you finally make it to the hangar bay, and find several old, decrepit looking ships lying about.")
+		alert("You search through all the parts of hangar, trying to find your own ship that, you hope, will still be there.")
+		alert("And there it is! Your beloved ship, although it looks a bit broken. Should you fix it up before you leave?")
+		var fixShip = confirm("Do you want to fix your ship up a bit?")
+		if(fixShip == true){
+			alert("Yeah, fix the ship and keep it in tip top shape, can't have it breaking down on ya while flying.")
+			alert("Fixing the ship, you climb aboard, and into the cockpit. Yes, you are finally escaping!")
+			alert("As the hangar door opens, you start up the engine and take off.")
+			alert("YOU ESCAPED!")
+			location.reload();
+		}
+		else{
+			alert("You don't repair the ship and jump right on in the cockpit.")
+			alert("You take off without hesitation.")
+			alert("After taking off, you hear a rummbling coming from the ship, it sounded like it was, breaking down?")
+			alert("Your ship then begins to stop functioning completely, and all the lights shut off. Your ship has no power left.")
+			alert("Now you're really stranded! Game Over!")
+			location.reload();
+		}
+	}
+		
+	else{
+		alert("After reaching the hangar bay after being chased by those bots, you quickly climb into one of the ships lying around")
+		alert("You start the engine and take off as soon as the hangar bay door opens up, but you hear something rumbling.")
+		alert("Parts of the old, broken down ship begin to explode, and fires start blazing.")
+		alert("The ship loses all control, and then crashes into the face of the moon in a fiery explosion.")
+		alert("GAME OVER!")
+		location.reload();
+	}
+}
+
+// MAIN program execution
+  
+
+
+
+    </script>
+	</body>
+</html>

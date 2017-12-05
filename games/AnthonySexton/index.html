@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<body style="background-image: url('h:/Img/Valkenhiem.jpg');">
+
+<h3 style="color:Black;">Sulivans Journey</h3>
+<style>
+p.serif {
+    font-family: "Times New Roman", Times, serif;
+	}
+h3 {
+	font-size: 185%;
+}
+	</style>
+<button onclick="Story()" style= "color:Blue">Story</button>
+<button onclick="buyItem()" style= "color:DodgerBlue;">Mungers Shop</button>
+<button onclick="ValkVentory()" style= "color:Green;">ValkVentory</button>
+<button onclick="Coins()" style= "color:Red;">Coin Pouch</button>
+<button onclick="quests()" style= "color:Orange">Quest</button>
+
+<p id="demo"></p>
+
+<script>
+//Status = Final
+var Check = 0;
+var Jarlchecks = 2;
+var Totalmistakes = 3;
+var maxMistakes = 0;
+var Status;
+var Continue;
+var Path;
+var Word;
+var Inventory = [];
+var Valins = 50;
+var userChoice;
+var toDisplay = "";
+var whichItem;
+var gurdinShop = ["Hunting Bow",
+ "Hacking Axe", 
+ "Carving Dagger", 
+ "Circular Shield", 
+ "Extra Fur Coat", 
+ "Weapon Belt", 
+ "Wood", 
+ "Fur", 
+ "Stones",
+ "Steel"];
+var itemInfo = ["Hmm..Interesting Choice Viking! Lets See If Old Man Gurdin Has It In Stock"]
+ var WeapPrice = [34, 
+38, 
+21,
+33,
+19,
+18,
+23,
+21,
+29,
+57 
+];
+var Quests = [
+"Boar Pelt",
+"Goat hide",
+" Eagle Feathers"
+];
+var Enemies = [
+"Goat",
+"Eagles",
+"viking",
+"Grodus",
+]
+	alert("Welcome to Sulivans Journey")
+	alert("Sulivans Journey Is Basically A Viking Sided Tell Tale Story. You Play As Sulivan, A Viking Known To Be A Great Warrior.")
+	alert("Your Inventory Will Basically Be Looked At As Collectables, Collect Enough Items To Earn A Bonus.")
+	alert("As Sulivan Your Objective Is To Complete All Quests That Are Presented In Order To Please The Jarl For The Lose Of Food And Materials That Happened At The Feast. That Will Be Explained In The Story.")
+function Story() {
+alert("During The Cold Days At Valkenhiem, A Feast Was Held To Celebrate The Wars Won Byt The Vikings.")
+alert("During The Feast, There Was Munching, Drinking, And Talking. Everything Went Swell.")
+alert("But Later, All The Food And Materials Had Ran Out, Without Nothing To Feast On For Awhile, Later It Bothered The Jarl (Leader).")
+alert("Sulivan Was Set Out To Go Find The Materials, And Was Not Welcome Back If He Made 3 Mistakes And Did Not Bring Back Materials.")
+alert("His Adventure Began.")
+}
+//Tells What The Game Is About And How It Will Play
+function buyItem() {
+		alert("Gurdin: Yerrrr, Welcome To GurdinShop! I, My Friend, Am Gurdin! And This Is The Home Of The Finest Armory! HAHAAA! But err, we have only one thing of each in stock HAHAAA!");
+		alert("Mr.Vlork: courtesy Of Mr.Gurdin We The shop Do Not Accep Refunds Or Sold Items, Every purchase of viking material will be fial and responible for your own currency, Enjoy Your Shopping Weakling")
+		alert("Gurdin: Errr...Uhhh..Sorry about that HAHA! Pff D-Don't Listen To That Old Coot, Now What Can I Get Ya?")
+		toDisplay = "";
+		for(i=0; i<gurdinShop.length; i++) {
+		
+		toDisplay += (i+1)+". "+ gurdinShop[i]+"\n";
+		
+		
+		}
+	whichItem = (prompt(toDisplay));
+	
+	if (whichItem == null || whichItem == "") {
+		alert("Come Back Anytime Lad HAHAAA!")
+}
+	 /*else if (userChoice < gurdinShop || userChoice > gurdinShop) {
+		alert(Choose From What I Have In Stock Lad!)
+}*/
+	else {
+	whichItem--; 
+	if (Valins >= WeapPrice[whichItem]){
+		
+	//Valins-=WeapPrice[whichItem]
+
+alert(itemInfo)
+		alert("you Chose " +gurdinShop[whichItem]+ " which costs " +WeapPrice[whichItem]+ ".")
+		//userChoice = confirm("You Want To Buy This Item? You Have " +Valins+ " Valins To Use")
+	
+	
+		
+
+	
+		Valins -= WeapPrice[whichItem]
+		alert ("You Have Bought The " +gurdinShop[whichItem]+ ". ")
+		
+		alert(Valins + " Are Yer Current Valken Coins Now Mate, See Ya Around.")
+	//	Valins -= WeapPrice[whichItem]
+		
+		
+		Inventory.push(gurdinShop[whichItem]); 
+		gurdinShop.splice(whichItem, 1);
+		WeapPrice.splice(whichItem, 1);
+}
+		else {
+ if(Valins <= WeapPrice[whichItem]) {
+		whichItem--;
+	alert("Uh Lad. Check Your Coin Pouch.")
+}
+}	
+}						
+}
+//The Longest Coding, Takes Time But It basically sets-up the store in a row, you can choose to buy whichever one, but you need enough money   
+function ValkVentory() {
+	Word="";	
+		
+	
+	
+	 for(i = 0; i<Inventory.length; i++) {
+		
+	Word += (i+1)+ ". " +Inventory[i] + "\n";
+		//Displays Your Items In A Row That You Have Bought
+}		
+	alert("\n" + Word); 
+	 alert("I Don't Need To Use These Yet.")
+}
+//Your Inventory, When You Buy Something From The Shop It Will Add That Item, And It Will Just Basically Be Looked At As Collectables	
+
+function Coins() {
+alert("I Currently Have " +Valins+ " Left In My Pocket..Hmmm.")
+if (Valins < 1) {
+alert("Errr...Out Of Valins.")
+}	
+	else {
+	alert("I Have Some Coins To Put To Use HAHA!!")
+}
+}
+//Tells You How Much Valins You Have, If You Have Less Sulivan Will Answer With Something Around "I Need More"
+function quests() {
+	alert("Sulivan Has Been Requested To Go Find The Materials Needed For His Jarl")
+	alert("These Are The Items Requested By The Jarl: " +Quests+"\n")
+for(i=0; i<Quests.length; i++) {
+		
+		toDisplay += (i+1)+". "+ Quests[i]+"\n";		
+}
+	alert("You walk down the forest searching for boars in order to gather clothing for the jarl")
+	alert("You see a cave that has foot prints leading inside")
+	
+var Word;
+    var Path = confirm("Should Sulivan Enter The Cave?");
+    if (Path == true) {
+         
+		 Valins += 100
+		alert("Sulivan entered the cave and found a boar! And 100 Valins!")
+		alert("Sulivan Teared The Pelt Off Of The Boar And Collected The Boar Pelt For The jarl.")
+		alert("Sulivan Heads Back To The Jarl.")
+		alert("Jarl: Wonderful Sletch! You Have My Boar Pelt.")
+		alert("Jarl: Now Then, Go Find Me some More Materials For The Feast!")
+		alert("Sulivan Adventures Forward.")
+			
+}
+  else{
+		
+		alert ("Sulivan: I'll Keep Walking.")
+		alert("Sulivan Keeps Walking And Finds Nothing. And He Walks Empty Handed.")
+		alert("Jarl: Well You've Returned Empty Handed Sully.")
+		alert("Jarl: Go Out And Get Me Something Or Else Coming To My Feast Will Result In Your..")
+		alert("Jarl: Execution. Now Go!")
+		maxMistakes++;
+		Check++;
+		alert("You Have Made " +maxMistakes+ " Out Of 3 Mistakes. Don't Make Anymore.")
+}
+quest2();
+}
+function quest2() {
+	var Path;
+    var Path = confirm("Continue To Your 2nd Quest?");
+    if (Path == true) {
+         
+		alert("Your Next Quest Is To Find An Eagles Feather. Eagles Are Located At Usually High Places.")
+		alert("Sulivan: 'A Feather From An Eagle Eh? Mountains It Is Then.'")
+		alert("Sulivan Continues His Journey")
+
+		alert ("Sulivan Goes To Find An Eagles Feather, A Pretty Far Distance To Walk.")
+		alert ("He Sees 2 Paths He Can Take To The Mountain, A Green Path And A Black Path.")
+	
+}
+
+
+		
+	var Path = confirm("Go To Green Forest?");
+    if (Path == true) {   
+		Valins += 335
+	   alert ("Sulivan Chose To Walk The Green Path.")
+		alert("He Has Made It Through The Forest Without Any Trouble And Found The Mountain.")
+		alert("He Climbs The Mountain And Finds An Eagle Which Seems Dangerous.")
+		alert("Sulivan Grabs The Eagle And Slays It With Brute Strength.")
+		alert("He Has Recieved An Eagles Feather And Some Valins That Were In The Nest")
+		alert("Feather Has Been Collected And 335 Valins Were Collected")
+}      
+	else {
+		alert (" 'Well...I Can't Turn Back.' Sulivan Walks In The Black Forest.")
+		alert("Suddenly A Strange Creature Jumps Out From The Forest And Lunges At Sulivan")
+		alert("Going In The Dark Forest, Sulivan Took Some Injuries But Made It Through")
+		maxMistakes++;
+		Check++;
+		alert("Sulivan Has Made " +maxMistakes+ " Out Of 3 Mistakes.")
+		alert("Sulivan Found The Mountain Which Holds An Eagles Feather.")
+		alert("He Climbs The Mountain And Finds An Eagle Which Seems Dangerous.")
+		alert("Do To His Injuries From The Forest, He Is Not Well Enough To Get A Feather From The Eagle")
+		alert("Task 2 Is Failed")
+}     		
+        
+       
+	   
+quest3();	
+}	
+	
+function quest3() {	
+	var Word;
+		alert("Sulivans Next Task Is To Find A Goat And Take Its Hide")
+		alert("In Order To Find Where The Goats Are, Sulivan Walks to A Near By Village")
+		alert("He Goes Into The Animal Hunters Hutch And Talks To The Owner")
+		alert("Sulivan: 'Where Would I Find A Map That Takes Me To The White Fluffy Ones?'")
+		alert("Shop Owner: 'I Have A Map That Can Tell Ye Were Them Horrific Fluffed 4- Legged Bulls Are, But I'd Cost Ya'")
+		alert("Sulivan: 'How Much Exactly Will It Cost?'")
+		alert("Shop Owner: 'It'll Cost About 140 Valins. Take It Or Leave It.'")
+	
+    var Path = confirm("Buy The Map?");
+    if (Path == true) {
+			Valins-= 140
+		alert("Sulivan: 'Alright Here.'")
+		alert("Shop Owner: 'Heheh Thanks Mate, Good Travles..")
+		alert("Sulivan: What A Strange Viking, I Have " +Valins+ " Left Now.")
+		alert("Sulivan Looks At The Map And Heads Towards The Field Of The White Ones.")
+
+
+}
+		
+	else {
+	alert("Well Sulivan how Are You Going To Find The Goats If You Don't Have A Stinkin Map!")
+	maxMistakes++;
+	Check++;
+	alert("Sulivan Has Made " +maxMistakes+ " Out Of 3")
+	
+	if(maxMistakes = Totalmistakes)
+	alert("You Have Been Executed For To Many Mistakes.")
+
+}
+quest4();
+}
+
+function quest4() {
+var Word;
+	alert("Sulivan Heads Towards The Fields And Finds The Goats.")
+	alert("Sulivan Reads The Map Of The Specific Goat He Needs The Find And Finds It In The Field.")
+	alert("Sulivan: 'Goatlions.")
+	alert("He Proceeds Toward The Goatlion..")
+	alert("The Goatlion Charges At Sulivan With Full Force!")
+	alert("Sulivan Has To Quickly Think What To Do! 'OK' Is Dodge 'Cancel' Is Take Him Head On.")
+
+	var Path = confirm("What Should He Do? ");
+	
+   if (Path == true) {
+	alert("Sulivan Takes Him Head On And Tackles Him To The Ground!")
+	alert("Great! You Remembered That Sulivan Is A Brute Warrior And Is Ready When Not Taken By Surprise!")
+	alert("Sulivan Shaves The Hide Off Of The Goatlion. And Collected 250 Valins For Completing The Action!")
+	alert("Sulivan Returns With The Materials.")
+	alert("Jarl: Welcome Back Sully")
+
+	if(Check >= Jarlchecks) {
+	alert("But, It Seems You Have Made At Least 2 Mistakes And Did Not Collect My Other Materials.")
+	alert("Lad, You Can Feast With Us, But Your Day Are Over For Adventuring")
+	alert("Partial Completion Of Game! Not Bad.")
+}
+}
+else {
+	maxMistakes++;
+	Check++;
+	alert("Sulivan Dodges Out Of The Way But The Goatlion Did Not Stop And Got Away. Goatlion Hide Could Not Be Collected.")
+	alert("Sulivan, In Distress, Heads Back To The Jarl.")
+	alert("So Sulivan..Goat Hide Wasn't Collected And That Was An Easy Task. Lets See..")
+	alert("Jarl Checks His Check List.")
+	alert("You Have " +maxMistakes+ " Mistakes Made.")
+
+if(Check >= Jarlchecks) {
+	alert("But, It Seems You Have Made At Least 2 Mistakes And Did Not Collect My Other Materials.")
+	alert("Lad, You Can Feast With Us, But Your Day Are Over For Adventuring")
+	alert("Partial Completion Of Game! Not Bad.")
+}
+if(Check <= Jarlchecks)
+	alert("Congratulations Sulivan, You May Participate In The Feast And Keep Your Title!")
+	alert("Sulivan Walks In And Eats With The Others.")
+	alert("Sulivan Game Completed.")
+}
+	
+	
+}	
+
+
+//selectItem();
+</script>
+
+</body>
+</html>

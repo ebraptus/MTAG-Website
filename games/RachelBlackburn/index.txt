@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<h1> MTAG</h1>
+	<br>
+	<style>
+		
+		html { 
+			background: url(maxresdefault.jpg) no-repeat center fixed; 
+			background-size: cover;
+		}
+		
+		h1 {
+			font-size: 30px;
+			color: white;
+		}
+		outline {
+			border: 1px solid black;
+			outline-style: solid;
+			outline-color: red;
+			outline-width: medium;
+		}
+	</style>
+	</head>
+
+	<body>
+	
+	<button onclick="personThings()">Inventory</button> 
+	<button onclick="theStore()">Store</button>
+	<button onclick="showMoney()">Money</button>
+	<button onclick="storyTime()">Story Info</button>
+	<button onclick="choiceOne()">Start Story Here</button>
+
+	<script type="text/javascript">
+// COMMENTS SECTION
+//						Testing by: (put your name here) 
+
+/* 
+ 
+Programmer:Rachael Blackburn
+Date Last Modified: 12 / 1
+Goal/Purpose: Story continuation
+Status: WIP
+
+*/
+   
+// Variables section
+	var youPer = prompt ("Name yourself |Please put a real name, not letters|"); //You
+	var inventory = ["Medicine"," Dull Knife", " Pistol", " Ammo", " Notebook", " Comunicator", " Worn Vest", " Worn Belt", " Water Pouch", " Smoke Bombs"]; //Things you start with
+	
+	var stock = ["Nice Vest", "Nice Belt", "Semi Dull Knife", "Lazer Pistol", "Ammo", "Grapling Hook", "Grenades", "Explosive Ammo", "Ammo Pouch", "Bomb Pouch", "Smoke Bombs"]; //Things in the store
+	
+	var prices = [10, 12, 10, 30, 5, 25, 35, 15, 15, 15, 5]; //Prices in the store
+	var displayMe = " ";
+	var money = 100;
+	var ammo = 10;
+	var smokeBomb = 5;
+	var ItemGrabed;
+	var health = 20;
+	var choice;
+	var action;
+// Functions section
+	
+	
+	function personThings () {
+		alert (youPer +" has: \n" +inventory + "\n\nYou have " + smokeBomb+ " Smoke Bombs" + "\n\nYou have "+ ammo+ " Ammo");
+	}
+	//^ Shows inventory
+	
+	function theStore (){
+		displayMe="";
+		for (i=0; i<stock.length; i++){
+			displayMe += (i+1) + ". " + stock[i] + " " +"("+ prices[i] + ")"+ "\n";
+		}
+		
+		ItemGrabed = (prompt(displayMe)-1);	
+		if (money >= prices[ItemGrabed]) {
+			alert (stock[ItemGrabed] + " has been added to " + youPer +"'s inventory");
+			inventory.push( " " + stock[ItemGrabed]); // Adds item to inventory
+			money-= prices[ItemGrabed]; // Money is take due to purchase
+			alert ("You now have "+ money+ " Star Dust"); //Tells you how much money you have after a purchase
+		} else if (ItemGrabed == stock[4]){
+			ammo+=5;
+		} else if (ItemGrabed == stock[10]){
+			smokeBomb+=2;
+		}else {
+			alert ("You don't have the required funds to make a purchase"); //Tells you that you can't buy the item selected
+		}
+		
+	}
+	function showMoney (){
+		alert (youPer +" has " + money +" Star Dust"); //Tells you how much money |Star Dust| have
+	}
+	
+	function deathScreen(){
+		if (confirm ("Game Over, want to play again?") == true) {
+			location.reload();
+		} else{
+			window.close();
+		}
+	}
+	function ammoCountdown(){
+		ammo--;
+	}
+	
+	function smokeBombCount(){
+		smokeBomb--;
+	}
+	function storyTime(){
+		alert ( "Background: \n" + youPer + " is running away from an unknown group of people, you have no idea why they are chasing you. \nYou are in space and going to different planets. \n \nHistory: \nJedi: In this universe they were a group of monks that died out millions of years ago, the ruins of their temples are just being found and more knowlage of this old group is coming into light. They were a passive group that helped people who were being chased by different groups during their time. \nGreat War: Happened while you were a child, many sectors were at war. It lasted 15 years, it finished when you were 5. What started the war was the mass murder of a whole planet by one of the groups, where you grew up your goverenment was neutral. \nThe Kyūseishu Society (Saviour in English): A group formed ariund 4.5 million years ago after the fall of the Jedi, many have been in the Society for many generations from Allys to the Jedi to founding member or survivors of being tracked by the Changelings. \n \nAllies: \nCorvis: Your first contact into the Society, he is also the shop keeper."); //Story information
+		
+		
+	}
+	
+	function choiceOne(){
+		choice = ["Walk away pretending you didn't see him", " Look at the wares and walk away", " Approach him "];
+		alert ("You start in a black market looking around at the different stalls, you catch the eye of one of the stall owners");
+		
+		
+		action = (prompt ("The Owner- Want some of my wares? \nYour options (Put a 1, 2, or 3 to pick) " +choice)-1);
+		
+		if (action == 0){
+			alert ("You someone spying on you and you run away");
+		} else {
+			if (action == 1){
+				alert ("You walk away, the people hunting you down find you and they kill you");
+				deathScreen();
+			} else {
+			alert ("You walk to the stall");
+			choiceTwo();
+			}
+		}
+		
+	}
+	function choiceTwo(){
+		choice = ["What are you selling sir?", " Say Jedi", " Ask for some items to diguise yourself"];
+		
+		action = (prompt ("You can say these statements: \n" +choice)-1);
+		
+		if (action == 0){
+			alert ("Owner- Hello, my name is Corvis. This is what I have to sell");
+			theStore();
+		} else {
+			if (action == 1){
+				alert ("Man- My, my, another one. So how long have the Changelings been chasing you?");
+				choiceThree();
+			} else {
+			alert ("Not writen yet. Coming soon.");
+			}
+		}
+		
+	}
+	
+	function choiceThree(){
+		choice = ["What are you talking about?", " Yes", " Changelings are a myth!"];
+		
+		action = (prompt ("You can reply these statements \n" +choice)-1);
+		
+		if (action == 0){
+			alert ("Man- Changelings, they hunt people that they select to kill them and become them to use to their advantage. How do you think the Great War happened, they live off of violence and use the persona of the person they killed to start the wars.");
+			optionOne();
+		} else {
+			if (action == 1){
+				alert ("Man- Welcome, my name is Corvis");
+				optionTwo();
+			} else {
+			alert ("Man- They never have been, they have existed all this time. You are not the first one that they have pursued.");
+			optionThree();
+			}
+		}
+	}
+	function optionOne(){
+		choice = ["What is so important about me?", " Why are they doing this?", " You are crazy."];
+		
+		action = (prompt ("You can reply these statements \n" +choice)-1);
+		
+		if (action == 0){
+			alert ("It's how they live and survive, they take your image and they use it to start conflicts, that's how the Great War started, the leader of the Teikoku Empire was killed 30 years ago by a changeling, the man came here to me however he left after our meeting, he was killed 3 weeks later by them.");
+		} else {
+			if (action == 1){
+				alert ("No one knows, it connects with our code work of Jedi, we think one of the groups they helped people escape was the changelings.");
+			} else {
+			alert ("Then why did you come here then? \n"+ youPer +": Good point.");
+			}
+		}
+	}
+	function optionTwo(){ //Quest 5 minimum for class is here, just different name as of options
+		choice = ["Well, thank you for acepting me and my problems", " What can I do to stop them?", " What is the name of the society?"];
+		
+		action = (prompt ("You can reply these statements \n" +choice)-1);
+		
+		if (action == 0){
+			alert ("Corvis- No problem, that is our job as The Kyūseishu Society.");
+		} else {
+			if (action == 1){
+				alert ("Corvis- Right now we need to get you to safety, I saw some of their mercinaries just before you got here.");
+				battleOne();
+			} else {
+			alert ("Corvis- It is called The Kyūseishu Society. We were formed in the ashes of the Jedi years after their fall, we have a main ship however no homebase on a planet.");
+			}
+		}
+	}
+	
+	function optionThree(){
+		choice = ["Then why are they just spoken of as a myth to scare children?", " Why should I belive you?", " Alright, I'll trust you."];
+		
+		action = (prompt ("You can reply these statements \n" +choice)-1);
+		
+		if (action == 0){
+			alert ("Man- They take over the identy of the people they go after, they twist what people who have escaped their reach and returned to tell others of what happened to them");
+		} else {
+			if (action == 1){
+				alert ("Man- I won't fight you, if you don't belive me however the threat against you is still very real.");
+				battleOne();
+			} else {
+			alert ("Man- Good, well my name is Corvis. Nice to meet you what is your name?");
+				if (confirm ("Do you want to tell Corvis your name?") == true) {
+					alert ("You- My name is " + youPer + "\nCorvis- Well nice to meet you " + youPer);
+				} else{
+					alert ("Corvis- It's fine, they could be listening so well talk more later.");
+				} 
+			}
+		}
+	}
+	
+	function battleOne(){
+		
+		alert ("Two masked men are coming at you and Corvis with guns pointed at you two, what are you going to do?");
+		
+		choice = ["Shoot at them", " Throw a smoke bomb to run while draging Corvis with you", " Hide"];
+		
+		action = (prompt ("You can \n" +choice)-1);
+		
+		if (action == 0){
+			ammoCountdown();
+			alert ("You shot your pistol. You now have" +ammo + " Ammo");
+		} else {
+			if (action == 1){
+				smokeBombCount();
+				alert ("You throw a smoke bomb and you run past one however the other grabs a hold of Corvis's sleave. You now have" + smokeBomb + " Smoke Bombs");
+			} else {
+			alert ("Corvis pulls to a trap door.");
+			}
+		}
+	}
+
+// MAIN program execution
+	
+    </script>
+	</body>
+</html>

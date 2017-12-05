@@ -1,0 +1,8 @@
+body{font-family: Arial, Verdana, sans-serif;}
+h1{line-height:200%; text-align:center;}
+footer{font-size: .80em; text-align:center; font-style: italic;}
+#wrapper{margin-left: auto;
+	   margin-right:auto;
+	   width: 80%;}
+	   p{font-size: 1.80em; text-align:center;
+	   }

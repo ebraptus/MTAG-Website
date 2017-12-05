@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Text Adventure</title>
+		<meta charset="utf-8">
+		<link rel= "stylesheet" href="MTAGformating.css">
+		<style>
+		body {
+		background-image: url('https://media1.fdncms.com/metrotimes/imager/u/original/2458832/shutterstock_137058641.jpg');
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center; 
+		background-size: 1500px 850px;
+		color: red;
+	}
+		</style>
+	</head>
+	<body>
+	<div id="wrapper">
+		<header>
+			<h1>The Invasion You Could Never See Coming</h1>
+		</header>
+	<main>
+	<p><b>As you walk into Pleasant Hill High you feel an odd chill run down your spine, wierd. Anyway, the high school looks like your tipical school, big open lobby and long corridor like hallways. You look at the nearby clock and see you have 10 minutes until class starts. You decide you should try to find your class so you are not wondering through the halls after the bell goes off. You wonder how your teachers will *BAM*!! Someone runs into you and you both go crashing to the ground. "Ohh, my head, hey watch your going pun...wow." As you look upon to see who ran into you, you see a beautiful blonde girl standing in front of you rubbing her head. "Ouch, that really hurt, oh I am so sorry!! I didn't see you there and I was in a rush to get to my class."Exlaims the girl. "Wait, who are you? I thought I knew everyone in this school, are you new here?" The girl asks. "Uhm, uhm, yeah this is my first day here. I'm Adam by the way." You shyly say back. "Nice to meet you Adam, I'm Elizabeth. Hey, to apoligize for running into you, we should hang out later. Could you meet me at my house around 3?" Elizabeth asks. "Uh, yeah" you quickly say back. "Great see you then!" Elizabeth states as she runs off again. Nice! First day of school and you have already made a friend. Maybe this school won't be so bad.<HR WIDTH="100%">As soon as you finish your thought, you are grabbed by your shoulder and pulled around the coner. "Hey, your the new kid Adam right? I saw you talking to Elizabeth just a second ago. How'd you manage that? She is one of the most popular people in this school. Anyway did she ask you to hang out at all?" Asks the guy in a rushed voice. "Uhm, yeah she did. Wait who are you and why do you need to know?" You ask back. "Don't worry about it, here just take these when you go hang out with Elizabeth, and if she does anything odd, put them on." He says as he hands you a pair of red tinted glasses. As you take them he runs away and darts around a corner. Well, that was wierd.</b></p>
+	Programmer: Chandler Shettleroe
+	</main>
+	
+	<script type="text/javascript">
+	//<input id="checkInventory" type="text" value="Check Inventory"> maybe not use a text input, just use buttons...
+	// COMMENTS SECTION
+
+/* 
+// Part a:  
+Need any help go to https://www.youtube.com/watch?v=Sw4bN9t4Co4&feature=youtu.be
+Need any help for random number: http://www.screencast.com/users/Johnvader1/folders/Jing/media/0afef2cd-b3d3-4859-a38b-3de007624313
+Programmer: Chandler Shettleroe
+Date Last Modified:11-28-17
+Goal/Purpose:Make a text adventure.
+*/
+   
+// Variables section
+var health = 10;
+var money=3.00;
+var userInput = 1;
+var toDisplay="";
+var alive = true;//states that the player has health points left
+//var check;
+var inventory = ["Pencils","English text book","Scraps of paper","Raspberry Pi (the coding tool)","Notebooks", "Weird Glasses"];
+
+var shop = ["Excalibur","Reinforced shield","Enchanted wand","Potion of minor healing","Potion of major healing","Splash potion of minor healing","Splash potion of major healing","Scroll of revival","The book of the great Forrest Le Torneau","Reinforced bow" ];
+var shopPrices = [1.50, 1.00, 1.50, 0.50, 0.75, 0.75, 1.00, 1.50, 1.50, 1.00];
+//function section
+function checkBackpack(){
+	var toDisplay="";
+	alert("You look in your backpack")
+	for(i=0; i<inventory.length; i++){
+		toDisplay+=(i+1)+". " + inventory[i]+"\n"; //shows the player their inventory
+	}
+	alert (toDisplay);
+}
+function visitStore(){
+	var toDisplay="";
+	
+	for(i=0; i<shop.length; i++){
+		toDisplay+=(i+1)+". " + "$" + shopPrices[i]+ " " + shop[i]+"\n"; //shows all the items in the shop
+	}
+	
+	var userInput = prompt("Choose what you would like to buy from the list?\n\n"+toDisplay);
+	userInput--;
+	if (money >= shopPrices[userInput]){
+		var reallyBuy = confirm ("Are you sure you want to buy " + shop[userInput]+ "?")
+		if (reallyBuy == true){
+			inventory.push(shop[userInput])//puts the item into the players inventory
+			alert("You have bought" + " "+ shop[userInput])//tells the player what item they bought
+			money-=shopPrices[userInput]//takes the player's money away for the item purchased.
+			alert("You have" + " $" +money +" "+"left in your bag.")//shows the player how much money they have left
+		}
+		else {
+			alert("Ok, be like that, I don't need your money anyway.")
+		}
+	}
+	else{
+	alert("You don't have enough money.") 
+	} 
+}
+function checkMoney(){ //function for the player to see how much money they have
+	var toDisplay="";
+	alert ("You check the front pocket of your bag, checking how much money you have.")
+	alert ("You have " + "$" + money)
+}
+// MAIN program execution
+   //checkBackpack();
+   
+	
+
+	
+    </script>
+</body>
+	<footer>
+	<h2>What will you do?</h2>
+	<input type= "button" value = "Check Inventory" onClick="checkBackpack()">
+	<a href="itBegins.html">Head to your class</a>
+	<input type= "button" value = "Check how much money you have" onClick="checkMoney()">
+	
+	</footer>
+</html>

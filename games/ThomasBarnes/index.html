@@ -1,0 +1,398 @@
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>"College Trip!"</title>
+</head>
+
+<body>
+	<style>
+    body{
+	background: url(http://farm4.static.flickr.com/3420/3864109779_2749853fdf_b.jpg) no-repeat center fixed; 
+    background-size: cover;
+    }
+    .center {
+	padding: 70px 0;
+	text-align: center;
+}
+    </style>
+    
+    <div class="center">
+   	 <h1 style="background-color:White ""font-family:bookman old style;"> "College Fun Time!": Max Edition </h1>
+   	 <p style="background-color:White ""font-family:bookman old style;"> Created By: Thomas Barnes </br>
+   	 How to play: Play through an interactive story where you are involved in making decisions that may affect how the game will be played out. </p>
+   	 <p style="font-family:bookman old style;" id= "currency"></p>
+   	 <button onClick="maxQuest1()">Begin</button>
+	 <button onClick="maxQuest4()">Continue</button>
+	 <button onClick="selectSibling()">Sibling Info</button>
+	 <button onClick="displayInventory()">Inventory</button>
+   	 <button onClick="showStore()">Store</button>
+    </div>
+
+
+Testing by: Thomas Barnes
+<p id="currency"></p>
+
+<script>
+/*Programmer: Thomas Barnes
+Date Last Modified: 12/4/17
+Goal/Purpose: Finalize MTAG game.
+Status: WIP*/
+
+var whichCharacter = "";
+var whichTriplet= "";
+var openInventory = "";
+var shelves = "";
+var whichItem;
+var triplets = ["Michael", "Maximilian", "Macy"];
+var money = 10.00;
+var shopItems = ["Candy Bar", "Cookie", "Orange Juice", "Hot Dog", "French Fries", "Souvenir", "Pizza", "Oklahoma Hoodie", "Ticket", "Coffee"]; // 10 items parallel to the prices.
+var price = [1.25, 1.50, 1.75, 3.00, 2.00, 3.00, 7.50, 2.50, 2.00, 1.50];
+var inventory = ["Binder"];
+var infoCharacter = ["Athletic, plays basketball and football, two time MVP, secretly a math genius, in football WR, PG in basketball. Mic is 6’5 230 lbs., Muscular", 
+"A very intelligent person who prefers to be independent. Although he has a few friends, he generally isn’t fond of people, but approaches them in a light-hearted demeanor. Max is 5’7, 178 lbs., Gaunt", 
+"On the surface pretty, all the girls wanna be her. Everyone asks for her help and she has her own fan club to do her bidding. But she also has many hidden talents. MC is 5'5, 160 lbs."]
+
+function character() { //A confirm box for if you are certain you want the character you chose,
+    displayCharacter="";
+	for (i = 0; i < 3; i++){
+    	displayCharacter += (i+1) + ". " + triplets[i] + "\n";
+	}
+    whichCharacter = (prompt(displayCharacter)-1);
+    alert("Character Description:\n" + infoCharacter[whichCharacter]);
+}
+
+function displayInventory() {
+	openInventory = "";
+	for (i = 0; i < inventory.length; i++) {
+		openInventory += (i+1) + ". " + inventory[i] + "\n";
+	}
+	alert(openInventory)
+}
+
+function showStore() {
+	alert("Hello! What can I get for you?")
+	randomStoreItems();
+	shelves = "";
+	for (i = 0; i < shopItems.length; i++) {
+		shelves += (i+1) + ". " + shopItems[i] + "\n";
+	}
+	whichItem = prompt(shelves);
+	alert("The price is $" + price[whichItem-1] + ".")
+	buyItem();
+}
+
+function buyItem() {
+	if (money >= price[whichItem-1]) {
+		confirmPurchase();
+	}
+	else {
+	alert("Sorry! You don't have enough to purchase this!")
+	}
+}
+
+function confirmPurchase() {
+	if (confirm("Would you like to buy this?") == true) {
+		money -= price[whichItem-1];		
+		inventory.push(shopItems[whichItem-1]);
+		document.getElementById("currency").innerHTML = money;	
+		alert("Max: Here's our food. Ready to go to the game?")
+		alert("MC: Yeah.")
+		alert("Both of you head into the stadium and wait for Mic's game to start.")
+		maxQuest4();
+	}
+}
+
+function selectSibling() { //An option to select between the three playable siblings.
+	whichTriplet = "";
+	displayCharacter="";
+	for (i = 0; i < 3; i++){
+    	displayCharacter += (i+1) + ". " + triplets[i] + "\n";
+	}
+    whichCharacter = (prompt(displayCharacter)-1);
+    alert("Character Description:\n" + infoCharacter[whichCharacter]);
+}
+
+/*
+function mainMenu() {
+	<button>Default Button</button>
+}
+*/
+
+function maxQuest1() { //Making preparations for the visit to Oklahoma City University.
+	if (confirm("Are you ready to start a new run?") == true) {
+		document.body.style.backgroundImage = "url('http://www.hallmarkhomebuyers.com/wp-content/uploads/2014/07/brick-house-299766_640.jpg')";
+		alert("You are currently sleeping in your bedroom until your alarm wakes you up. Upon getting up and shutting it off, your mom offers you breakfast.")
+		alert("Mrs. Greyser: Morning! I cooked you pancakes and bacon today! You're other siblings are almost ready to head outside.")
+		alert("It's going to be a big day ahead of you three lot, visiting Oklahoma City University.")
+		alert("Max: *yawn* Thanks, Mom. I'll be heading out for the visit soon...")
+		alert("Mom: Well, have fun and make the most out of it!")
+		alert("Max: Will do.")
+		alert("Finishing breakfast, you gather your belongings for the trip to OCU as your siblings await you. Afterwards, before you leave the house, your mother tells you goodbye.")
+		alert("Mom: You made sure you got everything?")
+		alert("Max: Yeah. You be safe while I'm gone.")
+		alert("Mom: Okay, byyye!")
+		alert("After she kisses your cheek goodbye, you leave the house and head towards the car, where Mic and MC are patiently waiting.")
+		alert("Mic: Rise and shine, you up to drive?")
+		alert("MC: If neither of you want to, then I can take the wheel.")
+		if (confirm("Would you like to take the wheel?") == true) {
+		alert("Max: I can drive us up there. I know the fastest route to OCU.")
+		inventory.push("Car keys");
+		maxQuest2A();
+		}
+		else {
+		alert("Max: I'm good.")
+		maxQuest2B();
+		}
+		if (confirm("Would you want MC to drive, instead?" == true)) {
+		maxQuest2B();
+		}
+		else {
+		alert("You can take us up there, bro.")
+		maxQuest2B();
+		}
+	}
+	else {
+	alert("Make sure to start the game whenever you're ready!")
+	}
+}
+
+function maxQuest2A() { //The ride to OCU (if Max was chosen to drive). Flat tire bound to happen; prompts a choice of who gets to take care of it.
+	document.body.style.backgroundImage = "url('https://www.aaroads.com/texas/texas080/us-082_wb_287_nb_exit_433_01.jpg')";
+	inventory.push("Spare tire", " Tire jax and tire iron", "Fix-a-Flat", "WD-40", "Jumper cables");
+	alert("On your way, you take the fastest route to OCU down the highway.")
+	alert("As you spot the exit you have to take, the car suddenly stumbles and lays uneven.")
+	alert("Mic: Sounded like something hit the tire.")
+	alert("MC: Pull over so we can see what happened.")
+	alert("You move aside the oncoming traffic to the wall to examine the car.")
+	alert("You and Mic step outside to get check the tires.")
+	alert("Max: Flat tire. Doesn't seem good.")
+	alert("Mic: Right when I have an important game today, too. We need to get this taken care of immediately.")
+	alert("You open the trunk to find some tools in order to fix this.")
+	fixCar();
+}
+
+function fixCar() {
+	var whichTool;
+	openInventory = "";
+	for (i = 0; i < inventory.length; i++) {
+		openInventory += (i+1) + ". " + inventory[i] + "\n";
+	}
+	whichTool = prompt(openInventory);
+	switch(whichTool) {
+		case "Binder":
+			alert("Come on, you may be the geek out of the three, but fixing a flat tire with just a binder is ridiculous, even for you.")
+			fixCar();
+			break;
+		case "Car keys":
+			alert("Why yes, just stick the car key into the wheel and rev it back up again.")
+			fixCar();
+			break;
+		case "Spare tire":
+			alert("Not just yet.")
+			break;
+		case "Tire jax and tire iron":
+			alert("You lift up the car with the tire iron.")
+			fixCarFinish();
+			break;
+		case "Fix-a-Flat":
+			alert("Helps fortify the flat tire a bit.")
+			break;
+		case "WD-40":
+			alert("The creator doesn't know what this is, so he's just going to assume that it's not the right item to use in this situation because he can do that.")
+			fixCar();
+			break;
+		case "Jumper cables":
+			alert("You won't get any use out of these items.")
+			fixCar();
+			break;
+		default:
+			alert("That's not in the trunk!")
+			fixCar();
+			break;
+	}	
+}
+function fixCarFinish() {
+	var whichTool;
+	openInventory = "";
+	inventory.splice(3, 0);
+	for (i = 0; i < inventory.length; i++) {
+		openInventory += (i+1) + ". " + inventory[i] + "\n";
+	}
+	whichTool = prompt(openInventory);
+	switch(whichTool) {
+		case "Binder":
+			alert("Come on, you may be the geek out of the three, but fixing a flat tire with just a binder is ridiculous, even for you.")
+			fixCar();
+			break;
+		case "Car keys":
+			alert("SUDDENLY the car keys magically solved the issue.")
+			fixCarFinish();
+			break;
+		case "Spare tire":
+			alert("You then replace the flat tire with the spare.")
+			alert("You and mic get back in the car and start driving again to OCU.")
+			maxQuest3();
+			break;
+		case "Tire jax and tire iron":
+			alert("They're already in use.")
+			fixCarFinish();
+			break;
+		case "Fix-a-Flat":
+			alert("Helps fortify the flat tire a bit.")
+			fixCarFinish();
+			break;
+		case "WD-40":
+			alert("The creator has now found what a WD-40 is used for through a quick Google search. Here is the list of its practical uses:")
+			alert("Protecting bird feeders, killing thistle plants, exterminating cockroches, cleaning toilet bowls, seperating stuck glassware, getting stuck rings off of your finger(s), wiping dog poop off of your shoe, removing tough scuff marks, removing chewing gum from hair, removing tea stains SPECIFICALLY off of your carpet, cleaning license plates, protecting winter boots, ruining wasps' lives, removing strong glue, cleaning dried glue, preventing snow from falling through your roof (I think?), loosening zippers, cleaning guitar strings, strengthening the leather of baseball gloves, degreasing your hands, removing decals, cleaning carpet stains, removing stickers from glass, removing tomato stains, off your clothes.")
+			alert("So basically nothing for fixing a flat tire...")
+			fixCarFinish();
+			break;
+		case "Jumper cables":
+			alert("I don't think you will get any use out of these items.")
+			fixCarFinish();
+			break;
+		default:
+			alert("That's not in the trunk!")
+			fixCarFinish();
+			break;
+	}	
+}
+
+function maxQuest2B() { //The ride to OCU (if MC/Mic was chosen to drive). Flat tire bound to happen; prompts a choice of five tools to choose from.
+	alert("You can drive us there, MC.")
+	alert("MC: Ok.")
+	alert("As MC gets in the driver seat, you all set off on a trip to OCU to watch Mic's game.")
+	document.body.style.backgroundImage = "url('https://i.ytimg.com/vi/WhEwWfrzEwQ/maxresdefault.jpg')";
+	inventory.push("Spare tire", " Tire jax and tire iron", "Fix-a-Flat", "WD-40", "Jumper cables");
+	alert("On the way to OCU, you pull out your binder and look over some of your scholarships.")
+	alert("OCU is one of the schools you plan on visiting, althought you're tagging along with Mic to cheer him on during his game.")
+	alert("Max: You feel like you're ready for the game, Mic?")
+	alert("Mic: Going up against the Lakers... Can't help but feel a little shook.")
+	alert("MC: Don't worry too much. Just stay focused on winning, no matter who your opponent is.")
+	alert("Thanks, you guys. Appreciate it.")
+	alert("Suddenly, the car rumbles and lops on its side.")
+	alert("Mic: Sounded like something hit the tire.")
+	alert("MC: Pull over so we can see what happened.")
+	alert("You move aside the oncoming traffic to the wall to examine the car.")
+	alert("You and Mic step outside to get check the tires.")
+	alert("Max: Flat tire. Doesn't seem good.")
+	alert("Mic: Right when I have an important game today, too. We need to get this taken care of immediately.")
+	alert("You open the trunk to find some tools in order to fix this.")
+	fixCar();
+}
+
+function maxQuest3() { //The siblings' arrival at OCU. Store is available.
+	document.body.style.backgroundImage = "url('https://ocucareers.silkroad.com/eprise/main/SiteGen/okcufacu/Content/Uploads/Images/9513-945.jpg')";
+	inventory.pop("Spare tire", " Tire jax and tire iron", "Fix-a-Flat", "WD-40", "Jumper cables");
+	alert("At last, the three of you arrive at OCU. You all get out of the car after parking it.")
+	alert("You enter through the front door into the spacious hallway. To the left of you is a store of food and drinks to satisfy your stomach.")
+	alert("Mic: I gotta go get ready for the game in a few hours. You two can chill here and take your time.")
+	alert("Mic heads off to make his preparations. Your sister turns to you and suggests getting some food to eat at the game.")
+	alert("MC: Could you try and get me a cookie while you're at the store?")
+	alert("Max: Sure, I'll get us some snacks for the game.")
+}
+
+function randomStoreItems() { //Randomly replaces one of the items with a "ghetto" counterpart.
+	var randomItem = Math.floor(Math.random() * 10) + 1;
+   //  alert(randomItem); // To see the random number
+    if (randomItem == 1) {
+		shopItems.splice(0, 1, "GudGud Bar");
+	}
+	else if (randomItem == 2) {
+		shopItems.splice(1, 1, "bookies");
+	}
+	else if (randomItem == 3) {
+		shopItems.splice(2, 1, "Orange JUICC");
+	}
+	else if (randomItem == 4) {
+		shopItems.splice(3, 1, "Grilled Chess");
+	}
+	else if (randomItem == 5) {
+		shopItems.splice(4, 1, "Chicken Nugs");
+	}
+	else if (randomItem == 6) {
+		shopItems.splice(5, 1, "Bizza");
+	}
+	else if (randomItem == 7) {
+		shopItems.splice(6, 1, "Slim Sticks");
+	}
+	else if (randomItem == 8) {
+		shopItems.splice(7, 1, "Sweat Shirt");
+	}
+	else if (randomItem == 9) {
+		shopItems.splice(8, 1, "Hoodie");
+	}
+	else if (randomItem == 10) {
+		shopItems.splice(9, 1, "Sweat Pants");
+	}
+}
+
+function maxQuest4() { //Mic's game. Gets into a conflict where MC/Max decides whether to get involved or not.
+	document.body.style.backgroundImage = "url('http://image.cdnllnwnl.xosnetwork.com/pics33/0/EY/EYIKBRFLNKIIENR.20140225204338.jpg')";
+	alert("It's almost time for Mic's big game to start. You and MC have already found a seat.")
+	alert("Before he gets ready, Mic quickly waves at the two of you.")
+	alert("MC: Good luck!")
+	alert("Max: You got this, bro!")
+	alert("The game begins now as the Oklahoma Thunder tackle the Golden State Warriors.")
+	alert("In the first quarter, Mic's team has been going toe-to-toe with the Lakers, and Mic himself is doing pretty well.")
+	alert("The next quarter was when the Lakers seemd to have a convincing lead ahead of the other team.")
+	alert("As the game carried into the fourth quarter, both teams were tied with scores of 104. And there was only 15 seconds left on the timer.")
+	randomOutcome();
+	//maxQuest5();
+}
+
+function randomOutcome() { //Determines the outcome of Mic's game.
+	var randomScore = Math.floor(Math.random() * 2) + 1;
+	if (randomScore == 1) {
+		alert("Miraculously, Mic secures the three-pointer and wins the game in a close second!")
+		alert("Mic pops off with passionate excitement as you and your sister cheer and congratulate him.")
+		alert("Max: You did great, bro!")
+		alert("MC: That's what I'm talking about!")
+		alert("Mic looks at both of you from below to throw two victorious thumbs ups as his teammates are swarming around him.")
+		maxQuest5W();
+		}
+	else if (randomScore == 2) {
+		alert("As Mic has the ball and heads towards the basket, an opposing player snags it from his grasp and quickly tosses it from afar, scoring enough to win the game.")
+		alert("Mic furiously paces himself as you and MC watch in sympathy from above.")
+		alert("MC: Well this isn't going to be a smooth trip back home...")
+		alert("Max: Yeah...But he did really well, though.")
+		maxQuest5L();
+		}
+}
+
+function maxQuest5W() { //The ride back home if Mic won the game.
+	alert("On your way back home, the three of you discuss Mic's victory today.")
+	alert("Max: We're both pretty proud of you, bro. I'm sure Mom is glad to know you won, too.")
+	alert("Mic: Thank you. I felt very good about that win.")
+	alert("And thus, the three siblings drive back home on a positive high note that day...")
+	maxQuestComplete();
+}
+
+function maxQuest5L() { //The ride back home if Mic lost the game.
+	document.body.style.backgroundImage = "url('http://files.artlung.com.s3.amazonaws.com/leahpeah.com/wordpress/wp-content/uploads/2011/03/IMG_5219.jpg')";
+	alert("You drive your two siblings back home, as Mic is very upset about his loss, while MC tries to reassure him.")
+	alert("MC: Mic, we know that you-re unhappy about that game, but you did your best...")
+	alert("Max: We still enjoyed the game, regardless. Especially some of your best plays back there.")
+	alert("Mic: I know you two had fun watching me go up against Golden State, but this was a really important game to me...")
+	alert("Max: Don't dwell on it so much. Take it as a learning experience. To get better the next time you play against them.")
+	alert("Mic nods his head in understanding.")
+	maxQuestComplete();
+}
+
+function maxQuestComplete() { //The ending of Max's quest.
+	alert("The end.")
+	if (confirm("Would you like to play again?") == true) {
+	location.reload();
+	}
+}
+function doit() { //To see if the everything works fine.
+	alert("THIS GAME IS STILL WORKING")
+}
+doit()
+
+document.getElementById("currency").innerHTML = money;
+
+</script>
+
+</body>
+</html>

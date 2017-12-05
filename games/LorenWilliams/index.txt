@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MTAG</title>
+		
+	</head>
+
+		<body>
+			
+			<button onClick="itemSelect()">Store</button>
+			<button onClick="showInven()">Inventory</button>
+			<button onClick="showCur()">Wallet</button>
+	        <button onClick="startMenu()">Start</button>
+			<button onClick="nextQuest()">Next Quest</button>
+			
+		<p id="currency"></p>
+
+	<script type="text/javascript">
+// COMMENTS SECTION
+//============================
+
+/*
+UPDATES
+----------------------------------------------------------------------------------
+
+
+Inventory repeats 
+Problem with inventory fixed
+
+11/17/17 
+The ability to buy items was created.
+can only buy though.
+
+11/20/17 
+Added on to buying.
+It now checks if you have enough money if not it tells you.
+Added some qaulity of life, like after a purchase it gives the option of returning to the store.
+
+11/27/17
+Starting to add quest not sure what to do in the quest but I'm going for structure.
+
+12/4/17
+Going to try to Finish up as many quest as possible.
+
+-----------------------------------------------------------------------------------
+*/
+
+
+/* 
+// Part a:  
+Programmer: Loren Williams
+Date Last Modified: 11/29/17
+Goal/Purpose: create a miny text adventure game.
+Status:
+
+
+
+// Part b: Add comments with details/explanations throughout the code as needed
+// If you had to do some 'good thinking' or get help to solve something, it deserves a comment!
+*/
+   
+// Variables section
+//================================
+
+var toDisplayStore = "";
+var toDisplayInv = "";
+var pickItem;
+var currency = 0;
+var toDisplay = "";// *MIGHT USE LATER*
+var action;// *MIGHT USE LATER*
+var stick = true
+
+var completion1 = false;
+var completion2 = false;
+var completion3 = false;
+var completion4 = false;
+var completion5 = false;
+
+
+var items = [// FOR THE STORE
+
+	"Axe",
+	"Crummy Sword",
+	"Wooden Shield",
+	"Magic Wand",
+	"Health Pot",
+	"Chicken Leg",
+	"Book",
+	"Rock"
+	
+];
+
+var prices = [//OF THE ITEMS
+
+	50,
+	20,
+	75,
+	200,
+	75,
+	25,
+	15,
+	2
+
+];
+
+var inventory = [];// PLAYERS INVENTORY *MAY CHANGE*
+
+
+
+
+// Functions section
+//==============================
+
+function itemSelect(){//FUNCTION FOR THE STORE
+	
+	toDisplayStore = "";
+	
+	for(i=0; i < items.length; i++){
+	
+		toDisplayStore += (i+1) + ". " + items[i] + "\n";
+	
+	}
+	
+		pickItem = (prompt(toDisplayStore)-1);
+		
+	
+	if(currency >= prices[pickItem] && confirm(items[pickItem] + "\nPrice: " + prices[pickItem] + " Bangles") == true){//CONFIRMS PURCHASE
+	
+		currency -= prices[pickItem];
+		inventory.push(items[pickItem]);
+		alert("Thank you for the purchase!");
+		 
+			if(confirm("Return to store?") == true){
+			
+				itemSelect();
+			
+			
+			}else {
+			
+				alert("Come again.");
+			
+			}
+	
+	}else if(currency <= prices[pickItem] && confirm(items[pickItem] + "\nPrice: " + prices[pickItem] + " Bangles") == true){
+	
+		alert("Insufficient funds.");
+		itemSelect();
+	
+	}else {
+	
+		alert("Come again.");
+	
+	}
+	
+
+	
+}
+
+function showCur(){// DISPLAYS PLAYERS MONEY
+
+	alert("Money: " + currency + " Bangles");
+	
+}
+
+function showInven(){// DISPLAYS CHARACTER INVENTORY
+	
+	toDisplayInv = "";
+	
+	for (i=0; i < inventory.length; i++){// 
+
+		toDisplayInv += inventory[i] + "\n";
+	
+	}
+	
+	alert(toDisplayInv);
+	
+}
+
+/*
+function addMoney(){//FOR TESTING
+
+	currency += 1000;
+
+}
+
+function removeMoney(){//FOR TESTING
+
+	currency -= currency;
+
+}
+*/
+
+function death(){
+
+	location.reload(forceGet);
+
+}
+
+
+function startMenu(){//JUST TO BE A START MENU 
+
+	if(confirm("START?") == true){
+	
+		alert("Enjoy!");
+		quest1();
+	
+	}else{
+	
+		alert("Okay.");
+		
+		
+	
+	}
+}
+
+
+function nextQuest(){
+
+	if(completion1 == true){
+	
+		quest2();
+	
+	
+	}else if(completion2 == true && stick == true){
+	
+		quest3();
+	
+	}else if(completion2 == true && stick == false){
+	
+		diffQuest();
+	
+	}else if(completion3 == true && completion4 == true){
+	
+		quest5();	
+	
+	}else{
+	
+		alert("Complete previous quest.");
+	
+	}
+
+}
+
+function quest1(){
+	
+	
+
+		alert("You: What.....where am I.");
+		alert("You: H-H-H..How did I get here?");
+		alert("You: I.....I need to get up.");
+		
+			if(confirm("Notice:\nPress OK to get up\nPress CANCEL to give up") == true){
+				
+				alert("You find a stick and pick it up just in case.");
+				inventory.push("Stick")
+				alert(" You: Got to find a road.")
+				alert("You come up to a road and find a bag.");
+				
+			}else{
+			
+				alert("YOU DIED OF STARVATION!!!");
+				death();
+				
+			
+			}
+			
+			
+		
+			
+			if(confirm("Pick it up?\n\n Press OK to pick up") == true){
+			
+				alert("You found 200 Bangles");
+				currency += 200;
+				alert("You: Where to head?");
+				alert("Notice:\nHit Next Quest to continue.");
+				completion1 = true;
+			
+			
+			}else{
+			
+				alert("You: Where to head?");
+				alert("Notice:\nHit Next Quest to continue.");
+				completion1 = true;
+			
+	}
+	/*		
+	if(completion1 == true){
+		
+		alert("You: Where to head?");
+		quest2();
+	
+	}else{
+	}
+	
+	*/
+	
+	
+}
+
+
+function quest2(){
+	
+	alert("You walk aimlessly down the road.");
+	alert("Then you get jumped");
+	
+		if(confirm("Lucky you picked up the stick\n\n OK to Hit him with the stick\n CANCEL to dodge") == true){
+		
+			alert("He rocked yo junk be fore you could finish the swing");
+			alert("Your pockets got ran.");
+			inventory.pop();
+			currency -= currency;
+			alert("All items were taken");
+			stick = false;
+			completion2 = true;  
+			
+		}else{
+		
+			alert("He falls....\nYou Beat the goofy out of him.\nAnd continue on your way.");
+			currency += 150;
+			alert("You got money off him.");
+			completion2 = true;  
+		
+		}
+	  
+	
+}
+function quest3(){
+
+	
+		
+		alert("You make it to a town.");
+	
+	completion3 = true;
+	
+}
+
+function diffQuest(){
+
+	alert("You fall sleep on the road.....");
+	alert("And get trampled in your sleep.\n GAME OVER!!!");
+	death();
+
+}
+
+
+function quest4(){
+
+	
+		
+		alert("4");
+	
+	if(completion4 == true){
+				
+		quest5();
+	
+	}else{
+	}
+}
+function quest5(){
+	
+	
+		
+		alert("5");
+		
+	
+
+}
+
+
+
+
+// MAIN program execution
+//===================================
+
+	
+    </script>
+	</body>
+</html>

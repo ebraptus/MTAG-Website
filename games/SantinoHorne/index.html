@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {
+    text-align: center;
+background-size cover: no-repeat; 
+background-repeat: no-repeat;
+no-repeat center center fixed; 
+}
+html {
+	background-image: url("https://s-media-cache-ak0.pinimg.com/originals/78/ee/3b/78ee3b80dbfdf46f67fcc319546c2aff.jpg");
+}
+h2{
+	color: MintCream;
+}
+
+</style>
+<body>
+
+<h2>Dungeon Crawler</h2>
+
+
+<p id="demo"></p>
+
+<button onclick="startButton()">Start Adventure!</button>
+
+<p id="message"></p>
+
+<button onclick="displayInventory()">Bag</button>
+
+<p id="message"></p>
+
+<button onclick="showStore()">Store</button>
+
+<p id="message"></p>
+
+<button onclick="firstQuest()">Quests</button>
+
+<p id ="message"></p>
+
+<p id="currency"></p>
+
+<script>
+//Santino Horne
+//Date modified: 11/21/2017 
+// Status: Somewhat working
+
+// History of features
+// Chronicle of new things added
+
+//-------------------------\\
+// Variables
+var toDisplay =""; // initialize variable
+var whichCharacter =0;
+var openBag = "";
+var Items = "";
+var buyItem;
+var whichItem;
+var money = 10;
+var shopItems = ["Stick (common)", "Dagger (common)", "Health potion", "Shortbow (common)", "Toasted Bread", "Arrows"];
+var price = [1,4,3,9,6,6];
+var inventory = ["Map", "Retractable Sword (super rare)", "Spell scroll (legendary)"];
+//-------------------------\\
+// Functions
+function startButton() { // starting portion for the game
+	alert("Start of the first quest")
+	alert("You wake up in bed in the inn you moved too yesterday. You are new in town and traveled far from your neighboring kingdom to your current one. You decide to be productive early this money so you go out onto the town to find work.")
+	alert("Click on the Quests button whn you are ready to start your adventure")
+	
+	}
+	function displayInventory() {
+				openInventory = "";
+				//alert("test")
+			for (i = 0; i < inventory.length; i++) {
+				openInventory += (i+1) + ". " + inventory[i] + "\n";
+				//inventory.push(shopItems[whichItem])
+			}
+			alert(openInventory) // inventory popup
+	}
+
+	function showStore() {
+				alert("you have "+ money +" coins left") // tells you your total money amount
+				alert("Anything you touch, You buy.");
+				Items = "";
+				
+		for (i = 0; i < shopItems.length; i++) {
+			Items += (i+1) + ". " + shopItems[i] + "\n";
+		}
+			whichItem = prompt(Items);
+			whichItem--; // which item is the user input -- subtracts the userinputs number by 1
+			alert("it costs " + price[whichItem] +" coin/coins")
+			buyItem();
+			
+	}			
+	
+			function buyItem () {
+				if (money >= price[whichItem]) { // if the variable "money" is greater than or equal to the price of the userinput
+					confirmPurchase();
+					//alert(Items)
+					//inventory.push(shopItems[whichItem]) // put userinput item into inventory
+					alert("Alr dude. You bought "+ shopItems[whichItem] +" No refunds") // alert that the transaction is complete
+					//alert ("You have")
+				}
+					else{
+						alert( "You dont have the cash so Dash")
+					}
+		
+			}
+	
+
+		
+			function confirmPurchase() {
+				if (confirm("You sure? No refunds!") == true) {
+					money -= (price[whichItem]);		
+					inventory.push(shopItems[whichItem])
+					//document.getElementById("money").innerHTML = money;	
+				}
+				alert ("You have " + money + " coins left" )
+				//alert(money)
+			}
+			
+			
+			
+			
+			
+	function firstQuest(){
+		alert("You go outside and you look to your left. You see an establishment with a big sign that says Adventurers guild.")
+		alert ("You push open the doors and walk inside. Inside there are people of different races and sizes laughing and conversing. You see the front desk and walk up to it. There is a beautiful woman sitting there")
+		alert("You are here to register as an adventurer right?")
+		alert("You nod your head in agreement to her question")
+	
+		var person = prompt("For your registration, i will need your name");
+		
+		if (person == null || person == "") {
+		
+			alert("No? ok. ill just leave it blank. Now you are a registered adventurer. You can know take quests from the quest board")
+			alert("You see a quest about forming a party that catches your eye")
+		} 
+		else {
+			alert("Ok, " + person + " you are now a registered adventurer")
+			alert("Now that you are a registered adventurer, you can take quests at the quest board")
+			alert("As you walk over to the board, you see a quest that catches your eye. its a quest to form a party with 3 different other people")
+	
+			}		
+			secondQuest()
+	}	
+	
+	function secondQuest(){
+		alert("Start of second quest")
+		alert("As you look at the quest to read the details, a Huge burly dude comes up behind you and takes the quest right off of the board.")
+		alert("Clearly people saw you reading the quest. So why did this man so rudely snatch it from infront of you? Irritated, you turn around to see the man who has stolen your quest.")
+		alert("As you turn around, you glare at this giant. He looks down to you and laughs. Everyone has noticed the scene you are causing, and from the way you have been giving this man the death glare, he takes off his armor and squares up with you")
+		alert("So bloke, what are you gonna do? He yells at you")
+		
+		var fight = prompt("Do you fight?")
+		if (fight ==  null || fight == ""){
+			alert("You chose not to advocate violence. You turn around and walk away from the man who is yelling and walk outside.")
+			alert("WUSSY!! -God")
+			alert("You mustve lost track of time because it is dark when you leave the tavern. As you are walking past home, you get pulled into an alley way where three men proceed to stomp you out. You think about fighting, but just as in the bar, you chose to not be violent and let the mugging proceed")		
+			alert("The men then take your wallet and items. Before they leave you to deal with your wounds, one of the men pulls out a dagger and stabs you. After a few  minutes you start to feel cold then you black out.")
+			alert("You suddenly wake up not feeling your body and you see a man sitting across from you. He keeps saying one line that gets louder as time goes on")
+			alert("You died. time to start over -Tino. p.s i made the game so basically im god. Dont worry. Ill send you back and make the right choice for you because god knows you wont. HarHar")			
+		}
+			else {
+				alert("You look around you and make sure he doesnt have accomplices. While you are new in town and dont want any trouble you wont let anyone come in and walk all over you. You back up and get ready to tussle")
+				alert("With a smile on his face, he opens up his right side and throws a haymaker right at your face")
+			}
+		var duck = prompt("You blink and realize you are about to absolutely kick ass. You see his punch coming towards you due to your extreme reflexes. do you duck?")
+		if  (duck == true || duck == "") {//if they dont type anything 	in the prompt
+			alert("You chose not to duck. My jaw isnt that weak that a random uncoordinated hook will stagger me, you think to yourself")
+			alert("You take the hit like the man you are, then quickly counter with a strong uppercut. The uppercut was so powerful that it sent the man back into a table. On impact, he breaks the table.")
+			alert("Laughing, he tells you that was a good hit. He then takes two steps forward and staggers. The uppercut hit him hader than he expected. As he sits down to regain balance, you walk towards him.")
+			alert("Before you get infront of him, other people intervene, you decide to cool off, take back your stolen quest, and go back to your inn.")	
+		}
+		
+		else {//if they type something into the prompt for duck
+			alert("You roll under the haymaker. You look at the mans face and he is suprised that you moved so quickly. He was left dazed for a half a second.")
+			alert("In the half a second, you launched off of one leg and hit the man with a spinning back heel square to his jaw.")
+			alert("When you touched the ground, you see the man on the floor knocked out. In a fit of rage you ran towards his body to lay a final blow but other adventurers intervened. You decide to cool off, take back your stolen quest, and go back to your inn.")
+			
+		}
+		
+		thirdQuest()
+	
+	}
+	
+	function thirdQuest(){
+		alert("Start of the third quest")
+		alert("You get back to your room in the inn before it gets too dark. You decide to hop in the shower and rest your sore limbs.")
+		
+		var phone = prompt("Before you get in the shower, your phone in the room rings. Do you pick it up?")
+		if (phone == true || phone == "") {
+			alert("You decide your rest is better than a phone call. You get in the shower and decide to take a long one while you remenisce on that awesome fight.")
+			alert("After your extremely long shower, you see your phone is still ringing. Trying not to be rude, you answer.")
+			alert("The back of the tavern. Tomorrow. Noon. Meet me in the very back sitting by the table. *Click*")
+			alert("You stand confused by the phone as to who the person was that called you and hung up without any introduction. After a while of thinking you decide to just go to sleep.")		
+		}
+		
+		else {
+			alert("You pick up the phone and hear a unfamiliar voice.")
+			alert("I seen your fight and im interested in your skill. Meet me at the back table of the tavern tomorrow at noon. I have an interesting proposition for you.")
+			alert("You are confused on who this voice belonged too. You shrug the idea off as something bad and decide to hit the hay")		
+		}
+		fourthQuest()
+	
+	}
+	
+	function fourthQuest(){
+		alert("Start of the fouth quest")
+		alert("You are sitting in the back of the tavern waiting for noon to come. you woke up anxious and somewhat exited because you think you will be going on a party adventure.")
+		alert("Who knew youd be so early. You hear the voice from the phone talking infront of you")
+		alert("Its a woman. A beautiful one at that and she is wearing a robe that you assume she has on because she is a magician. You ask her why she called you out here.")
+		alert("She says that she has seen your fighting skills and thinks youll be an amazing addition to her party. You become very exited because  you have been itching for adventure since youve gotten settled down.")
+		alert("She tells you about a hidden base that her party converges at because of bandits and thieves. Your exitement drowns out the sketchyness of her story because you want to start adventuring. So you decide to follow her.")
+		alert("After about 15 minutes into you following her, you snap out of adventure mode and realize shes led you into a very wide alleyway")
+		alert("Sorry, but after you took out our boss, we cant let you live anymore")
+		alert("As you are putting the pieces together, it finally hits you. As you realize whats about to happen, you notice 4 people emerge from the shadows by your ambusher. They bring out weapons that brum with light and you tell yourself not to get hit by it.")
+		alert("The other three individuals where men. And by the look of them they look really strong. Plus, she is in the back chanting some spell that you can tell is at least 100 years old, which means it might hurt.")
+		alert("As the 4 people converge on you, you get into your battle stance. You know you are at a disadvantage so you go on the defensive. Suddenly, they all rush you.")
+		fifthQuest()
+	
+	}
+	
+	function fifthQuest(){
+		alert("Final Quest")
+		alert("You stay in a defensive stance ready for anything while all your ambushers circle around you. When they get closer you see one of them has a shortsword, another has dual swords, and one is cracking his knuckles.")
+		alert("You know that physically you can win. You just need to worry about the seductive mage and her aincent destructive spell. When you are done with your mental planning you see the knuckle guy take a half a step forward.")
+		alert("From where his eyes are positioned, he is looking at the person behind you. Suddenly, all of them decide to rush you.")
+		var avoid = prompt("Your being rushed from all sides! Jump to avoid the hit?")
+		if (avoid == true || avoid == ""){
+			alert("If your going to teach these guys a lesson, you need to do it aggressively.")
+			alert("You drop onto the foor and sweep everyone off their feet by kicking their legs. Knucke guy is the first to get up while dual swords guy and shortsword guy are still on the ground.")
+			alert("The knucke guy is coming toward you. You are confident in your hand to hand combat skills so you dash past him and quckly take out his two other partners.")
+			alert("the mage is still busy casting the spell  so you make work of the knuckle guy while you are waiting.")
+			alert("Whith all the main fighters down, you wait for the mage to finish casting her spell so you can take her out.")
+			alert("As you walk toward her, she casts the spell, but it wasnt a comat spell.")
+			alert("When you stop to think about what happened, you look up and her reinforcements have arrived. The spell was a call for back up")
+			alert("As you mentally count all her reinforcments, it easily comes up to around 50 people. As they all rush you at one time, you snap. You get so mad you blackout.")
+		}
+		else {
+			alert("After they get close enough, you jump high enough to clear all of them. When you get into the air you see the mage cast the spell directly at you")
+			alert("You somehow find a way to dodge the spell in air and come down with a grand slam and take out the three fghters. Then you realize that the spell wasnt a combat spell. It was to call reinforcments.")
+			alert("When you look up again, the alley is crowded with people that look like they really want your head.")
+			alert("Bring it, I love a challenge, you yell. As you beat up goon after goon eventually you reach your limit.")
+			alert("One goon that runs up on you hits you in the back of the head and it makes you so angry you blackout.")
+			endingScene()
+		}
+		
+	}
+	
+	function endingScene(){
+		alert("Ending")
+		alert("When you wake up from your blackout, you are standing in the alley with blood and clothes everywere. You dont remember what happened but you know that this adventure danger thing just isnt for you.")
+		alert("Fortunatley for you, they were unregistered adventurers so no one knew they existed but you still felt bad.")
+		var comemorate = prompt ("Mourn the dead?")
+		if (comemorate == true || comemorate == ""){
+			alert("Nah. They tried to kill you so youd rather not.")
+			alert ("You decide to retire from being an adventurer and decide to make your hobby your new found job.")
+			alert("After your retirement, you moved and bought farmland with the money you took from all those dead peoples clothes. You are now a farmer.")
+		
+		
+		}
+		else {
+			alert("Nah. They tried to kill you so youd rather not.")
+			alert ("You decide to retire from being an adventurer and decide to make your hobby your new found job.")
+			alert("After your retirement, you moved and bought farmland with the money you took from all those dead peoples clothes. You are now a farmer.")
+		
+		
+		}
+		
+	
+		alert("The end. Thank you for playing my game")
+	
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+//document.getElementById("currency").innerHTML = money;
+
+</script>
+</body>
+</html>

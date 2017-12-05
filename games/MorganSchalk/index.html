@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<body background ="ecclesall-woods.jpg">
+<center>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<button onclick="displayInventory()">Open your inventory</button>
+<button onclick="displayStore()">Open The Store</button>
+<button onclick="nextQuest()">Quest!!!</button>
+
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</center>
+<p id="name"></p>
+
+<script>
+/*==================================================
+Programmer: morgan schalk 
+Date Last Modified: 11/27/17
+Goal/Purpose: Beginning of my mtag game 
+Status: WIP
+===============================================
+
+store buying works as of 11/20
+prices next to the store items works as of 11/27
+quest skeleton done on 11/28
+quest 1-3 done anc functional 11/28
+
+=================================================*/
+
+
+
+
+
+//====================================================
+var toDisplay = "";
+var toOpen = "";
+var store;
+var choice;
+var pay = 1000;
+var name = "scarlett";
+//====================================================
+
+//For quests
+var questCount = 0;
+var whichPath = "";
+var minVal=1;
+var maxVal=3;
+var thePoss = Math.floor(Math.random()* maxVal + minVal);
+//====================================================
+
+
+
+
+
+
+var inPrices = [2,
+3,
+2,
+4,
+2,
+5,
+10,
+20,
+20,
+20,
+30,
+30,
+30,
+30,
+30,
+30,
+30,
+10,
+10,
+10,
+10,
+30,
+5]
+//all the prices for my objects
+
+
+
+var objects = ["Pinecone",
+" Tree sap",
+" Apple",
+" Mushroom",
+" Feather",
+" Rock",
+" Wood",
+" STONE Ax",
+" STONE Sword",
+" STONE Shovel",
+" IRON Ax",
+" IRON Sword",
+" IRON Shovel",
+" IRON chestplate",
+" IRON Pants",
+" IRON Boots",
+" IRON Helmet",
+" Leather chestplate",
+" Leather pants", 
+" Leather boots",
+" Leather Helmet",
+" Backpack",
+" Batteries"]
+//objects in my store 
+
+
+
+var inven = ["STONE sword",
+"Matches",
+"Flashlight",
+"Backpack"]
+//what a player starts with
+
+//==============================================
+//alert (You are located in the city of Gluk! )
+var name = prompt ('What is your name?')
+alert ("Welcome " + name)
+ document.getElementById("name").innerHTML =
+//======================================
+function displayInventory() {
+//======================================
+	toOpen="";
+	//the var to open my inventory 
+	
+	for (i=0;i<inven.length;i++) {
+		toOpen += (i+1)+". "+inven[i]+"\n";
+//this is what has it have a non array form and starts at 1 instead of 0
+	}
+
+	alert("Your inventory : " + "\n " + toOpen);
+
+}
+
+
+
+//displayInventory();
+
+//======================================
+function displayStore() {
+//======================================
+	toDisplay="";
+
+	for (i=0;i<objects.length;i++) {
+
+		toDisplay += (i+1)+". "+ objects[i] + "    " + "=   " + inPrices[i] + "\n";
+	//this is what has it have a non array form and starts at 1 instead of 0
+	}
+
+	choice = prompt ("Store: "+ "\n " + toDisplay);
+	// this is the prompt to enter in something for your choice
+	
+	choice -=1 //choice--
+	
+	//this then takes it and makes it back into an array # form
+	
+	alert ("You are buying: "+ "   " + objects[choice]);
+
+	if (pay >= inPrices[choice]) {
+		pay -= inPrices[choice]
+		alert ("You have bought: "+ "   " + objects[choice]);
+		inven.push(objects[choice])
+		alert (inven)
+		alert("you have "+pay +" dubloons")
+	}
+	//this is where it takes your pay for the object and gives you the object to your inventory
+	
+	else{
+		alert ("You have insufficent funds!")
+	//this is if you dont have enough gold for it 
+	}
+
+}
+
+//displayStore();
+
+//======================================================
+function nextQuest(){
+	questCount++;
+	if (questCount==1){
+	quest1();
+	}
+	else if (questCount==2){
+	quest2();
+	}
+	else if (questCount==3){
+	quest3();
+	}
+	else if (questCount==4){
+	quest4();
+	}
+	else {
+	questCount==5
+	quest5();
+	}
+}
+//======================================================
+
+
+
+
+//======================================================
+function quest1(){
+//=====================================================
+//Hardcoded #1
+//======================================================
+	alert (name + ", Pack up your bags!!! You let your dog out of the house when you opened the door!")
+
+	whichPath = prompt ("What do you want to do, " + name + "? \n 1.  Take the garden path \n 2.  Take the forest path \n 3. Use the town path  \n " );
+//======================================================
+
+if (whichPath == 1){
+	alert (name + ", You fell down a well! Silly! Restart the game!");
+	location.reload();
+}
+else if(whichPath == 2){
+	alert (name + ", You ran into a bear!! and broke your leg! Restart the game!");
+	location.reload();
+}
+else if(whichPath == 3){
+	alert (name + ", You made it home in time to pack your bags and get on your way!");
+}
+}
+
+//======================================================
+function quest2(){
+//=====================================================
+//Non Hardcoded #2
+//if (whichPath == rightAnswer) {// good things} // rightAnswer = random... 
+// else if {}
+// else {}
+//======================================================
+
+	alert (name + ", Collect Wood for a fire, Your going to camp out in the woods.")
+	whichPath = prompt ("What do you want to do, " + name + "? \n 1. Collect sticks off the ground \n 2. Chop down a tree \n 3.  Collect drift wood from the lake  \n " );
+	
+//========================================================================
+
+if (whichPath == 1){
+	alert (name + ", You found enough wood to make your fire for the night!");
+}
+else if(whichPath == 2){
+	alert (name + ", Crushed by a tree!!! OW!!! restart the game!");
+	location.reload();
+}
+else if (whichPath == 3){
+	alert (name + ", you fell into the lake!! restart the game!");
+	location.reload();
+}
+}
+
+//======================================================
+function quest3(){
+//=====================================================
+//Hardcoded #3
+//======================================================
+	alert (name + ", OH NO!! Bear ate your food rations and you need to find more food to survive")
+	whichPath = prompt ("What do you want to do, " + name + "? \n 1.  Pick berries \n 2. Hunt down some animals \n 3. use mushrooms found on trees \n " );
+//========================================================================
+
+if (whichPath == 1){
+	alert (name + ", You get the rashions under control and continue on your way!!")
+}
+else if(whichPath == 2){
+	alert(name + ", Bear mauls you while hunting. Restart the game!!")
+	location.reload();
+}
+else if (whichPath == 3){
+	alert (name + ", POISONED BY THE MUSHROOMS!!! restart game")
+	location.reload();
+}
+}
+
+
+//======================================================
+function quest4(){
+//=====================================================
+//Non Hardcoded #4
+//if (whichPath == rightAnswer) {// good things} // rightAnswer = random... 
+// else if {}
+// else {}
+//======================================================
+	alert (name + ", Save your dog from the wolf pack!!!")
+	whichPath = prompt ("What do you want to do, " + name + "? \n 1.  Attack the wolves \n 2. Distract the wolves  \n 3.  call your dog  \n " );
+//========================================================================
+	
+if (whichPath == 1){
+	alert (name + ", Killed by the wolves!! try again!!")
+	location.reload();
+
+}
+
+else if (whichPath == 2){
+	alert (name + ", Killed!! try again")
+	location.reload();
+}
+
+else if (whichPath == 3){   
+	alert (name + ", The call works and you move on!!")
+	
+
+}
+
+
+}
+//======================================================
+//======================================================
+function quest5(){
+//=====================================================
+//Hardcoded #3
+//======================================================
+
+	alert (name + ", Return home with your dog home")
+	whichPath = prompt ("What do you want to do, " + name + "? \n 1.  Spend one more night then head home \n 2. Run home  \n 3.  Walk and get home  \n " );
+	
+if (whichPath == 1){
+	alert (name + ", The wolves rebel and kill you in your sleep!!")
+	location.reload();
+
+}
+
+else if(whichPath == 2){
+	alert (name + ", Startled a bear and get killed!! start again")
+	location.reload();
+
+
+}
+
+else if (whichPath == 3){
+	alert (name + ", You made it home safely and hug your dog!!")
+	alert(name + ", there is More to come soon!!!! stay tune!!")
+
+}
+
+
+}
+//======================================================
+
+
+
+
+/*======================================================
+function prices(){
+//======================================================
+
+I ended up figuring out a way to alert the prices with my store 
+items and had no use for this function. 
+but i still kept this to show my progress
+
+=============================================
+	toPrice = "";
+	
+<button onclick="prices()">Prices for the store</button>
+
+	for (i=0;i<inPrices.length;i++) {
+
+	toPrice += (i+1)+". "+ inPrices[i]+"\n";
+
+}
+alert ("Theses are the store prices: \n"+ toPrice)
+}
+//prices();
+//======================================================*/
+
+
+
+
+
+
+</script>
+</body>
+</html> 

@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html>
+
+<body>
+	<style>
+    body{
+    background-image: url("https://www.olentangy.k12.oh.us/cms/lib/OH01914664/Centricity/Template/GlobalAssets/images//Background%20Images/OLHSnew.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    }
+    .center {
+	padding: 70px 0;
+	text-align: center;
+}
+	h1 {
+		 color: black;
+		 
+	}
+	p {
+		color: black;
+		
+	}
+	
+	
+
+
+    </style>
+   
+    <div class="center">
+   	 <h1 style="font-family:bookman old style;"> The Little Squeeze </h1>
+   	 <p style="font-family:bookman old style;"> Created By: Justin Hood </br>
+   	 How to play: First choose a character then you will have access to the store and inventory. </p>
+	 <p style="font-family:bookman old style;" id= "currency"></p>
+   	 <button onClick="character()"> Choose Character </button> 
+	 <button onClick="gameStart()"> Start </button>
+   	 <button onClick="displaygameInventory()"> Inventory </button>
+   	 <button onClick="showStore()"> Store </button>
+	
+   </div>
+  
+	
+
+
+<p id="demo"></p>
+
+<p id="currency"></p>
+
+<script>
+/*
+Programmer:Justin Hood
+Date Last Modified:11/28/17
+Goal/Purpose: Add in Story & Choices
+Status: Work In Progress
+*/
+//Variable Section
+
+var toDisplay =""; // initialize variable
+var whichCharacter ="";
+var selectCharacter = ["Shawn Winchester (Squeeze)"]
+var description = ["A 14 year old High School Freshman, pretty lame, but incredibly smart. Completely infatuated with his bestfriends sister. Secretly has a jumpshot like Steph Curry. but otherwise a complete spaz"];
+var inventory = ["Schedule, Notebook, iPhone 7S"];
+var openInventory = "";
+var shelves = "";
+var whichItem;
+var currency = 50;
+var shopItems = ["Notebook", "Pencil", "Marker", "Paper", "School Spirit shirt", "Gym Keys (DANGEROUS)", "Love Letter"];
+var price = [1.25, 1.00, 1.75, 2.00, 7.00, 5.00, 10.00];
+var gameInventory = ["Schedule", "Notebook", "iPhone 7S"];
+var gameStart; 
+//var quest1 = 0; 
+var userChoice1 = "";
+var userChoice2 = "";
+var userChoice3 = "";
+var userChoice4 = "";
+var userChoice5 = "";
+
+
+//Function Section
+function character(){
+	whichCharacter = "";
+	for(i=0; i<selectCharacter.length; i++){
+		toDisplay += (i+1)+". "+ selectCharacter[i]+"\n";
+	
+	}
+	whichCharacter = prompt(toDisplay);
+	whichCharacter--; //
+	   alert("description:\n" + description[whichCharacter]);
+	   alert("inventory:\n" + inventory[whichCharacter]);
+	location.reload();
+}
+
+function displaygameInventory() {
+	openInventory = "";
+	for (i = 0; i <= gameInventory.length-1; i++) {
+		openInventory += (i+1) + ". " + gameInventory[i] + "\n";
+	}
+	alert(openInventory)
+	alert(currency + " dollars")
+}
+
+function showStore() {
+	alert("Hello! What can I get for you?");
+	shelves = "";
+	for (i = 0; i <= shopItems.length-1; i++) {
+		shelves += (i+1) + ". " + shopItems[i] + "\n";	
+	}
+	whichItem = prompt(shelves);
+	alert(price[whichItem-1]); // making the items equal the right item
+	buyItem();
+	       
+}
+function buyItem() {
+	if (currency >= price[whichItem-1]) {
+		confirmPurchase();
+		}
+		
+	else {
+	alert("Sorry! You don't have enough to purchase this!")
+	}
+}
+
+function confirmPurchase() {
+	if (confirm("Would you like to buy this?") == true) {
+		currency -= price[whichItem-1];		
+		alert ("You have " + currency + " dollars left" )
+		gameInventory.push(shopItems[whichItem-1])
+		}
+	
+}
+
+function gameStart(){
+	alert("Starting game");
+	quest1();
+	
+}
+
+
+
+function quest1() {
+
+	//------------------------ QUEST 1: Survive the Robots---------------------
+	userChoice1 = prompt("Your running on the top a skyscraper, an army of robots firing their laser blasters behind you, as you are running you see a building you think you can jump to. Do you Jump to the next building or turn around and fight?\n\n1: Turn and fight \n2: Jump off the bulding and hope for the best");
+	
+	 
+	if (userChoice1 == 1) {
+		alert("You turn around and see a small army of robots headed your way.");
+		alert("You know its a bad idea but you pull out your pistol and your sword and run in guns blazing");
+		alert("You run straight into the middle of the robots duck and dodging shots from their blasters as you hack, slash, and shoot your way through dozens of robots")
+		alert("You feel like you're winning until you turn around and see a blaster right at your temple. BLAST!!!!");
+		alert("...");
+		alert("...");
+		alert("...");
+		alert("BEEP");
+		alert("BEEP BEEP");
+		alert("BEEP BEEP BEEP, Shawn");
+		alert("Shawn, Shawn, SHAWN!!");
+		alert("You wake up, open your eyes and see your mom standing at the foot of your bed")
+		userChoice2 = prompt("Good Morning sweetie, are you excited for your first day of High School?\n\n1: Yes, I can not wait to finally start High School\n2: No, School hasnt even started yet and I already wanna go home")
+}
+
+
+	
+	 if	(userChoice1 == 2) {
+		alert("You reach the edge of the building look behind you and see a small army of robots headed your way")
+		alert("You take a few steps backwards giving yourself room to gain speed before jumping")
+		alert("You run as fast as you can and take a leap with all your force towards the building")
+		alert("Dun Dun... Dun Dun... You can feel your heart beating as you soar through the air, blaster shots wizzing right by you")
+		alert("You're almost to the next roof, when a shot hits you right in your leg, you reach out to grab the ledge on the edge")
+		alert("You miss and fall to what seems like impending death")
+		alert("...");
+		alert("...");
+		alert("...");
+		alert("BEEP");
+		alert("BEEP BEEP");
+		alert("BEEP BEEP BEEP, Shawn");
+		alert("Shawn, Shawn, SHAWN!!");
+		alert("You wake up, open your eyes and see your mom standing at the foot of your bed")
+		userChoice2 = prompt("Good Morning sweetie, are you excited for your first day of High School?\n\n1: Yes, I can't wait to finally start High School\n2: No, School hasnt even started yet and I already wanna go home")
+		}
+		
+	// -----------------   Quest 2: Get to the Bus  ----------------------	
+	if (userChoice2 == 1) {
+		alert("Squeeze: Yes, I can't wait to finally start High School.")
+		alert("Mom: Thats great honey, go hop in the shower and get dressed, I'm making breakfast.")
+		alert("Squeeze: Ok!")
+		alert("You roll out of bed, turn your alarm clock off and walk to the bathroom")
+		alert("You grab your toothbrush and the toothpaste put the toothpaste on the toothbrush and commence to brushing your team")
+		alert("You grab your rag and wash you face, once you finish, you walk back to your room and close the door")
+		alert("Squeeze: Good Morning !")
+		alert("Pet Gecko: Mornin' Squeeze, Big day for you, First day of high school, I remember my first day of high school.")
+		alert("Squeeze: Sayguh you're a gecko you've never been to high school and stop calling me Squeeze") 
+		alert("Sayguh: Oh yeah, I forgot and shut up kid, your mom is literally the only person that calls you Shawn")
+		alert("You open up your drawers trying to figure out what to wear")
+		userChoice3 = prompt("Hmmm, what to wear what to wear\n\n1: Black Shirt, Tan Pants, Black Shoes\n2: Red Shirt, Black Pants, Red Shoes")
+		}
+		
+	if (userChoice2 == 2) {
+		alert("Squeeze: No, School hasn't even started and I already want to go home.")
+		alert("Mom: Well, you'll be fine, you should be excited its your first day of high school")
+		alert("Squeeze: *Sarcastically* Woohoo! The beginning of another 180 days of hell")
+		alert("Mom: Stop being so pessimistic, go get ready for school, I'm making breakfast.")
+		alert("You roll out of bed, turn your alarm clock off and walk to the bathroom")
+		alert("You grab your toothbrush and the toothpaste put the toothpaste on the toothbrush and commence to brushing your team")
+		alert("You grab your rag and wash you face, once you finish, you walk back to your room and close the door")
+		alert("Squeeze: Good Morning !")
+		alert("Pet Gecko: Mornin' Squeeze, Big day for you, First day of high school, I remember my first day of high school.")
+		alert("Squeeze: Sayguh you're a gecko you've never been to high school and stop calling me Squeeze") 
+		alert("Sayguh: Oh yeah, I forgot and shut up kid, your mom is literally the only person that calls you Shawn")
+		alert("You open up your drawers trying to figure out what to wear")
+		userChoice3 = prompt("Hmmm, what to wear what to wear\n\n1: Black Shirt, Tan Pants, Black Shoes\n2: Red Shirt, Black Pants, Red Shoes")
+		}
+
+	if (userChoice3 == 1) {
+		alert("Sayguh: Nice choice kid, I'm a big fan of the Black and Tan combination, you're gonna make a great first impression")
+		alert("Squeeze: Thanks!")
+		alert("You look over at your clock, and see that its 7:45, you rush downstairs into the kitchen and see the breakfast your mom prepared for you")
+		alert("You think to yourself, This looks too good to miss out on but the bus comes at 7:55 if I stay and eat I might miss the bus, but atleast I wont be hungry") 
+		userChoice4 = prompt("Aww man, what do I do?\n\n1: Stay, eat and risk missing the bus\n2: Skip out on breakfast, catch the bus, but be hungry until lunch")
+		}
+		
+	if (userChoice3 == 2) {
+		alert("Sayguh: Change clothes kid, that Red looks ugly, don't want to make a bad first impression")
+		alert("Squeeze: Shut up, you're a gecko, you have no Idea what looks good and what doesn't")
+		alert("You look over at your clock, and see that its 7:45, you rush downstairs into the kitchen and see the breakfast your mom prepared for you")
+		alert("You think to yourself, This looks too good to miss out on but the bus comes at 7:55 if I stay and eat I might miss the bus, but atleast I wont be hungry") 
+		userChoice4 = prompt("Aww man, what do I do?\n\n1: Stay, eat and risk missing the bus\n2: Skip out on breakfast, catch the bus, but be hungry until lunch")
+		}
+	
+		
+	if (userChoice4 == 1) {
+		alert("You make your plate, sit down at the table and try to eat your food as quickly as possible")
+		alert("After scarfing down your whole plate, you look over at the clock and see that it is 7:52 and you only have 3 minutes to walk 5 blocks")
+		alert("Squeeze: Oh god, I hop the bus doesn't leave me")
+		alert("You run back upstairs, grab your bookbag and your phone, and rush out the door")
+		alert("You take off down the street in a full sprint, you check your phone while your running 7:54")
+		alert("You think: 2 Blocks, one minutes I can make it")
+		alert("You get to the corner of the street you're on and the street that the bus picks you up and see the other kids boarding the bus")
+		alert("You run as fast as you can and get there just as the door are closing")
+		alert("You step onto the bus with a sigh of relief... Phew... I made it.")
+		}
+		
+	if (userChoice4 = 2) {
+		alert("Sorry mom, no time to eat, don't want to miss the bus on my first day of school")
+		alert("You kiss your mother on the cheek and jog down to where the bus picks you up")
+		alert("You get to the bus stop at 7:54 and the bus hasn't arrived yet, you don't any of the kids at your bus stop, so you just sit on a stoop and wait for the bus")
+		alert("Once on the bus you see two of your friends, Carlos & Tony sitting in seperate spots")
+		alert("Carlos: Come sit with me Squeeze\nTony: No come sit with me")
+		alert("Notice: Who ever you choose here will become your Second best friend throughout the rest of the story so choose carfully")
+		userChoice5 = prompt("1: Sit with Carlos (A very popular, basketball, and football player, good with the ladies, and could help you make the basketball team and find a great homecoming date\n2: Sit with Tony (A bit clumsy, very reliable and friendly, a total nerd but is somehow very personable, and has excellent people skills. Tony works in the school store and can get you a pass out of class anytime you need one")
+	}
+	
+	//---------------- QUEST 3: Choosing Your Best Friend ------------------
+		
+		
+		
+		
+
+		
+}
+
+
+</script>
+</body>
+</html>

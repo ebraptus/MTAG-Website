@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>LOST</h2>
+
+<button onclick="displayItems()">Items</button>
+<button onclick="displayStore()">Bob's Cabin</button>
+<button onclick="theVitals()">My HP</button>
+<button onclick="theCurrency()">Money Pack</button>
+<button onclick="pickPath()">Begin Quest</button>
+
+
+
+
+
+<p id="demo"></p>
+
+<script>
+// Part a:  
+//Programmer: Andre Hood
+//Date Last Modified: 10-18-17
+//Goal/Purpose: Create a game where you guess the number that is randomized.
+
+// week 6
+
+
+// Variables section
+var pathsDone=0;
+var darkAnswerthree = "darkness" || "Darkness";
+var darkGuesstwo;
+var darkGuess;
+var darkAnswer =  "shadow" || "Shadow";
+var darkAnswertwo = "owl" || "Owl"
+var myCoins = 100;
+var myHealth = 100;
+var theInventory;
+var	theStore;
+var whichItem;
+var baseItem;
+var toDisplay = "";
+var inventory = ["Lantern","Watch","Compass","Aid-kit","Water Bottle",
+"Sleeping Bag",
+"Camera",
+"Leftovers",
+"Hammer",
+"Map"
+];
+
+
+var store = ["Combat Knife.", "Energy Drink", "Torch", "Lighter",
+"Traps", "Pot & Pan", "Gun", "Flashlight", "Night Goggles", "The Book"]; //Store items are listed here.
+
+
+var prices = [30,10,45,11,50, 15, 120,50,80,1000]; // This array creates the prices corresponding to the items int the variable inventory.
+
+
+
+ 
+
+	
+
+// Function section
+function displayItems(){
+	toDisplay = "";
+	for(i=0;i<inventory.length;i++){ // Creates the limit of items listed
+	
+	toDisplay += (i+1)+" . "+ inventory[i]+"\n";
+	
+	} 
+	theInventory = (prompt(toDisplay)-1); // Displays a prompt for the youser to select an item.
+	
+	alert("You have equipped the "+inventory[theInventory])
+}
+function displayStore(){
+	
+	toDisplay = "";
+	
+	for(i=0;i<store.length;i++){
+	
+	toDisplay += (i+1)+" . "+ store[i]+"\n"; // Displays the inventory items with a list.
+	
+	}
+	
+	whichItem = (prompt(toDisplay)-1); //Displays a prompt for the user to select an item out of the store.
+	//confirm("You have chosen "+store[whichItem]+"\n It costs: "+ prices[whichItem]);
+	
+	if (confirm("You have chosen "+store[whichItem]+"\n It costs: "+ prices[whichItem]) == true){ //
+	
+	buyItem(); //Calls the buyItem function.
+	}
+}
+
+
+
+function buyItem(){
+	
+	if(myCoins >= prices[whichItem]){ // "if" statement for buying items if your coins equal the price amount you get the item.
+		myCoins -= prices[whichItem] // This subtracts the price from the price of the selected item. 
+	
+	alert("You've bought this special item!");
+	
+	inventory.push(store[whichItem]); // Adds the item that was successfully purchased.
+	
+	theCurrency(); // calls the currency function.
+	
+	//whichItem = store.slice(store[whichItem]);
+	
+	}
+	
+	else{ // "else" statement that pops up if player doesn't have the right amount.
+	alert("No money...I'll just take something from you maggot!");
+	
+	inventory.splice(theInventory,1); // first num is WHICH item goes away // 2nd num is HOW MANY items to take
+	} 
+	
+}
+function theVitals(){
+	
+	document.getElementById("demo").innerHTML = myHealth + " HP is left! ";
+	
+
+
+}
+
+function theCurrency(){
+	
+	document.getElementById("demo").innerHTML = myCoins + " coins left child!";
+	
+
+
+}
+
+function pickPath(){
+	pathsDone++;
+	if(pathsDone==1) { darkPath() }  // all done testing... make this live again
+	//if(pathsDone==1) { path1() }
+	if(pathsDone==2) { path2() }
+	/*if (pathsDone==3) { path3 () }
+	if (pathsDone == 4) { path4 () }
+	if (pathsDone == 5) { path5 () } */
+}
+
+function path2(){
+//function battlePath
+	alert("You are now in the battle path where you will make a action based decision to defend yourself.");
+	
+	alert ("The only things you can do to the enemies in this path are shoot it, stab it, or sneak past it.");
+	
+	alert("You must ONLY choose shoot, stab, or sneak!")
+	
+var battleAction = prompt("You've encountered a creeper what's the best course of action?!")
+
+var battleAnswer = "shoot"
+
+	if (battleAction == battleAnswer){
+	
+		alert("Great you shot it they're slower than bullets!");
+	
+	}
+	else {
+		
+		
+		alert("No you can't stab or run from them they're too fast!");
+		
+		alert("You died!");
+		
+		myHealth-=1000;
+		
+		location.reload();
+	}
+		var battleActiontwo = prompt ("Whoa it's a cursed stork, what are you going to do?")
+		var battleAnswertwo = "shoot";
+		
+		if(battleActiontwo == battleAnswertwo){
+		
+			alert("Great job I see you're actually smart!")
+			
+		}
+		
+		else{
+			
+			alert("You can't stab it, if you do close combat you'll catch the curse!")
+			alert("Also it's keen eye prevents you from getting away!")
+		
+			location.reload();
+		}
+			var battleActionfinal;
+			var battleAnswerfinal = "sneak";
+			
+			if (confirm("A feral bear is coming would you like to shoot its leg chest? You may end up dying?") == true){
+			
+				alert("You chose to shoot its chest!")
+				alert("All of a sudden a lights shines!")
+				alert ("You've been taken to your campsite as if nothing happenend!")
+				location.reload();
+			}
+			else {
+				
+				alert("You decided not too shoot it but you still must do something!")
+			
+				battleActionfinal = prompt("It's still here you gotta do something kid!")
+				
+				if(battleActionfinal == battleAnswerfinal){
+				
+					alert("Good you should avoid it, they are pretty dumb so they'll barely notice your escape.")
+					alert("Wait actually that was the last creature and look its a pathway to a campsite!")
+					alert("Is this what you were searching for all this time kid? Well you've found it I guess.")
+					alert("You've found your family's campsite and made it back in one piece.")
+					 location.reload();
+				}
+				else{
+					alert("Oh no feral bears are resistent to bullets and knives!")
+					alert("The feral bear ripped you apart!")
+					location.reload();
+				
+					}  
+				
+				
+				
+				
+			
+				}
+				document.getElementById("demo").innerHTML = battleActionfinal;
+			    document.getElementById("demo").innerHTML = "Do something about the bear!";
+			
+			
+			
+			
+			
+	
+	
+}
+function path3(){
+	alert("path 3")
+}
+function path4(){
+	alert("path 4")
+}
+function path5(){
+	alert("path 5")
+}
+
+function darkPath(){
+
+alert("You have chosen the Dark Path, you will blinded by the void of darkness that it is in this path...but it may be the quickest way to your goal.");
+
+alert("You will be given questions by the spirits who haunt this path and with each wrong answer we will take your sources of light!")
+
+var darkGuess = prompt("What follows you in light but dissapears in darkness?");
+
+var darkAnswer = "shadow";
+
+	if (darkGuess != darkAnswer){
+	
+		//var darkAnswer = "shadow";
+
+		
+		alert("Too bad, but I'm taking your LIGHT child!")
+		
+		inventory.splice(0,10);
+		
+		myHealth-=20;
+		
+		alert("Your items have just been stolen!")
+		
+		location.reload();
+	
+	
+	
+	}
+
+	
+	else if (darkGuess == darkAnswer){
+	
+		alert("You have answered correctly child..you may move on to the next question." );
+	
+		darkGuesstwo = prompt("What animal comes at night but can see clearly in the darkness. (Think of a drib.)")
+		
+		
+		
+		if (darkGuesstwo != darkAnswertwo){
+			alert("Sorry mortal you LOSE!")
+			
+			myHealth-=20;
+			myCoins-=20
+		
+			inventory.splice(0,10);
+			location.reload();
+		}
+		
+		else {
+			
+			myHealth+=20;
+			
+			alert("I see your actually pretty bright...")
+			
+			darkGuessthree = prompt("What is always there but the more of it that's around you the less you can see it?")
+			
+			if (darkGuessthree != darkAnswerthree){
+			
+				alert("It was the last question..but sadly you FAILED!")
+			
+				inventory.splice(0,10);
+				
+				location.reload();
+			}
+			else {
+			
+				myHealth+=40;
+			
+				myCoins+=200;
+			
+				alert("Well done mortal you have passed and became closer to your goal.")
+			
+			}
+		
+		}
+		
+		
+		
+	}
+	
+	/*
+	else if (darkGuesstwo != darkAnswertwo){
+	
+		alert("Too bad, but I'm taking your LIGHT child!")
+		
+		darkGuesstwo = prompt("What animal comes at night but can see clearly in the darkness. (Think of a drib.)")
+	
+	
+		 
+	      
+	}
+	
+	else if (darkGuesstwo == darkAnswertwo){
+	
+		alert("I see your actually pretty bright...") 
+		
+	
+	}
+	
+	*/
+		
+	
+	
+}
+	if (myHealth == 0){
+	
+	alert ("You died!")
+	
+	location.reload();
+	}
+	
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	toDisplay = "";
+
+
+// Main section
+
+//indexof()
+
+
+
+
+</script>
+
+</body>
+</html>
+

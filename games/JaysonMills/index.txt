@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>codePractice1</title>
+	</head>
+
+<button onclick="startGame()">Start Game</button>
+<button onclick="displayInventory()">Check Bag</button>
+<button onclick="displayGoodie()">Findings</button>
+<button onclick="displayCurrency()">Wallet</button>
+	<body>
+
+	
+
+	<script type="text/javascript">
+
+	
+	
+	
+	
+	
+	
+// COMMENTS SECTION
+
+
+/*
+// Part a:  
+Programmer: Jayson Mills 
+Date Last Modified: 11/21/17
+Goal/Purpose: Begin MTAG 
+Status: Work in Progress
+*/
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ // Variables section
+
+var inventory = ["Flashlight", "Rope", "Backpack"];
+
+var character;
+
+var toDisplay="";
+   
+var goodie = ["batteries", "Key", "bear trap", "scent", "black cloak", "knife", "flare", "map", "energy drink", "paddle"]; //Store function
+
+var price = [ 1 , 3 , 2 , 2 , 2 , 4 , 3 , 5 , 1 , 4 ]; //Number of correct guesses in game, substitute for $$$$
+
+var answer = ["Run", "Wait", "Try to Hide", "Fight"]; //Options for user playing game
+
+var itemUse = ["Use item", "Save item"]; //Lets user decide if they want to use item or not
+
+var currency=0;
+
+var userGoodie; 
+
+var txt;
+
+var userAnswer=0;
+
+var status; 
+
+var newItem;
+
+
+
+
+
+
+// Functions section
+
+	function startGame()/*Allows player to begin game*/ {
+    
+		var person = prompt("Please enter your name:", "");
+		if (person == null || person == "") {
+        alert("User is not capable of survival.");
+		} 
+		else {
+        alert("Hello " + person + ",\nAre you capable of survival?");
+		alert("You have found yourself lost in the woods with 4 things: Your backpack, a dying flashlight, a little bit of rope, and the will to survive...Are you ready?")	
+	 
+		displayChoice()
+	}
+    
+}
+
+
+
+	function displayGoodie()/*This function displays the store when the button is clicked*/ {
+		 
+			toDisplay=""
+				for (i= 0; i < goodie.length; i++) {//Puts stuff into a list
+
+				toDisplay += (i+1)+". "+ goodie[i]+"\n";//Puts store stuff into a list
+		}
+		
+		
+		userGoodie= prompt(toDisplay+"\nYou Have Found:");
+		userGoodie--; 
+		
+		alert(goodie[userGoodie]);
+		
+		alert ("The price of "+goodie[userGoodie]+"\n is "+price[userGoodie]  );//Displays price of item
+		
+		buyItem();
+}
+
+
+
+	function displayInventory() /*Displays what user is carrying ((INVENTORY))*/{
+
+		toDisplay=""
+		for (i= 0; i < inventory.length; i++) {
+
+			toDisplay += (i+1)+". "+ inventory[i]+"\n";//makes inventory into a list
+		
+		}
+	
+		
+	alert(toDisplay);
+
+}	
+	
+
+	
+	function buyItem() /*lets user turn in currency for items*/ {
+
+		if (currency >= price[userGoodie])/*Makes sure user has enough money. if not they dont get item*/ {
+		
+			alert("You have successfully picked up "+ goodie[userGoodie])
+		
+		}
+		
+		else {
+		
+			alert("The Killer is too close to pick up this item") 
+			inventory.push(goodie[userGoodie]) //When user doesnt have enough money, This appears
+			
+		}
+	}
+		
+	function displayChoice()/*Displays what user can do within the story, ((Options))*/ {
+		 
+			toDisplay="";
+		for (i= 0; i < answer.length; i++) {
+																	//Puts answers into a list
+			toDisplay += (i+1)+". "+ answer[i]+"\n";
+			
+		}
+	
+		alert("As you begin to try to remember where you are, you notice a figure coming towards you at an alarming rate...") 
+		
+		userAnswer = prompt("What do you want to do?\n"+toDisplay);
+		userAnswer--;
+		
+		
+		alert("Once you make the decision of\n" +(answer[userAnswer])+ "\nYou notice the figure is a man whos intentions do not look pleasing, so you begin to flee deeeper into the woods");
+		
+		if (answer[userAnswer] == "Run") {
+			currency++;
+		alert("Since you have decided to do so, you have gained space between you and the killer")
+		
+		}else {
+		
+			alert("You have not gained any ground on the killer due to your decision") 
+			
+		
+	}
+		alert("As you turn around exhausted from running, you notice the killer is far behind but approaching still. You decide to cross through the remainder of the woods and continue on")
+	
+		alert("It begins to get dark after an hour of running and hiding from the killer. You check your bag and have to make a decision of using your half-dead flashlight or continuing on through the dark to save it for later.")
+		
+		userAnswer = confirm("Would you like to use it?")
+		
+		if (userAnswer == true) {
+		
+		alert("You have used your flashlight and gained major ground due to seeing where you have gone. You have also found a key")
+		
+		newItem = goodie[1]
+		
+		inventory.push(newItem)
+		
+		goodie.splice(1,1)
+		
+		currency+= 2
+		
+	
+	} else {
+	
+	alert("You have managed to trip, fall, and break your leg traveling through the dark. The killer finds you and rips you to pieces. GAME OVER!!!!")
+	
+	}
+	
+	userAnswer=confirm("You approach a camp that seems to inhabit no life at all, you see an office cabin and decide to check the door. It is locked. Would you like to use your key?")
+	 
+	if (userAnswer == true) {
+	
+	alert("You have entered the cabin and notice nothing except overturnt furniture. You also cannot get the key out of the lock so you leave it behind.")
+	 
+	 inventory.splice(3,1)
+	
+	} else {
+	
+	alert("You decide to continue trecking away from the oncoming killer, As you do so you lose the key from your pocket....")
+	inventory.splice(3,1)
+	
+	}
+	
+	
+	
+		
+	alert("You continue on through the camp and notice a car at the entrance, The door is unlocked and you find batteries for your flashlight, a map, and an animal scent")
+	
+	//newItem = goodie[0, 3, 5]
+	//alert("Current list of goodeis is: \n"+goodie)
+	//alert("About to add: "+goodie[0]+", "+goodie[2]+", "+goodie[6]+", ")
+	inventory.push(goodie[0])
+	inventory.push(goodie[2])
+	inventory.push(goodie[6])
+	goodie.splice(0,1)
+	goodie.splice(1,1)
+	goodie.splice(4,1)
+	//alert("Current list of goodeis is: \n"+goodie)
+	
+	alert("The killer becomes very close to you due to your fatigue. You are forced to use your scent to throw the killer off")
+	inventory.splice(,1)
+	
+	
+	
+	
+	}
+	
+	
+	
+	
+	
+
+			
+	
+
+
+	
+	
+	
+
+
+
+
+
+
+
+
+ 
+
+
+	
+	
+
+// MAIN program execution
+   
+
+	
+
+	
+    </script>
+	</body>
+</html>

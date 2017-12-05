@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<style>
+    body{
+    background-image: url("http://3.bp.blogspot.com/-K1IsyeTN73E/Um1mYV0caHI/AAAAAAADEMg/718DiJwaxUI/s1600/1201-Laurel-Way33.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    }
+    .center {
+	padding: 70px 0;
+	text-align: center;
+}
+	h1 {
+		 color: Maroon
+	}
+	p {
+		color: Maroon;
+		
+	}
+	
+	
+
+
+    </style>
+   
+    <div class="center">
+   	 <h1 style="font-family:bookman old style;"> Mini Text Adventure Game </h1>
+   	 <p style="font-family:bookman old style;"> Created By: JAIDON ANDREWS </br>
+   	 How to play: First choose a character then you will have access to the store and inventory. </p>
+	 <p style="font-family:bookman old style;" id= "currency"></p>
+   	 
+	 
+	 
+	 <button onClick="character()">Start</button>
+	 <button onClick="displaygameInventory()">Inventory</button>
+   	 <button onClick="showStore()">Store</button>
+	 <button onClick="quest1()">Start Quest</button>
+   </div>
+  
+	
+
+
+<p id="demo"></p>
+
+<p id="currency"></p>
+
+<script>
+/*
+Programmer:Jaidon andrews
+Date Last Modified:10/18/17
+Goal/Purpose:have random number and able to get up to three guess
+Status:done/
+*/
+//Variable Section
+var toDisplay =""; // initialize variable 
+var whichCharacter ="";
+var selectCharacter = ["Michael Greyser", "Macy Greyser", "Max Greyser"]
+var description = ["Athletic, plays basketball and football, two time MVP, secretly a math genius, in football WR, PF in basketball. Mic is 6’5 230 lbs., Muscular","On the surface pretty, all the girls wanna be her. Everyone asks for her help and she’s got her own fan club to do her bidding. But she also has some hidden talents", "A very intelligent person who prefers to be independent. Although he has a few friends, he generally isn’t fond of people, but approaches them in a light-hearted demeanor. Max is 5’7, 178 lbs., Gaunt"]
+var inventory = ["basketballs,football, IPhone X", "lip gloss, mirror, headphones, Iphone 8", "Books, Science kit, Calculator, Glasses, Samsung Note 8", ]
+var openInventory = "";
+var shelves = "";
+var whichItem;
+var currency = 50;
+var shopItems = ["Gud-Gud Bar", "bookies", "Orange JUICC", "Grilled Chess", "Chicken Nugs", "Bizza", "Slim Stick", "Sweat Shirt", "Hoodie", "Sweat Pants"];
+var price = [1, 2, 3, 2, 4, 5, 3, 8, 9, 10];
+var gameInventory = ["Car keys", "jacket", "charger"]
+
+//var carInventory = ["spare tire", " tire jax and tire iron", "Fix-a-Flat", "WD-40", "jumper cables"]
+//var confirmPurchase = "";
+
+
+//Function Section
+function character(){
+	whichCharacter = "";
+	for(i=0; i<selectCharacter.length; i++){
+		toDisplay += (i+1)+". "+ selectCharacter[i]+"\n";
+	//alert(character[i])
+	
+	}
+	//alert(toDisplay)
+	whichCharacter = prompt(toDisplay);
+	whichCharacter--; //
+	   alert("description:\n" + description[whichCharacter]);
+	   alert("inventory:\n" + inventory[whichCharacter]);
+	//selectCharacter();
+	location.reload();
+}
+//function myCharacter
+	//for(i=0; i<selectCharacter.length; i++){
+		//toDisplay += (i+1)+". "+ selectCharacter[i]+"\n";
+
+function displaygameInventory() {
+	openInventory = "";
+	for (i = 0; i <= gameInventory.length-1; i++) {
+		openInventory += (i+1) + ". " + gameInventory[i] + "\n";
+	}
+	alert(openInventory)
+	alert(currency + " dollars")
+}
+
+function showStore() {
+	alert("Hello! What can I get for you?");
+	shelves = "";
+	for (i = 0; i <= shopItems.length-1; i++) {
+		shelves += (i+1) + ". " + shopItems[i] + "\n";
+		//alert(shelves)
+	}
+	whichItem = prompt(shelves);
+	alert(price[whichItem-1] + " dollars"); // making the items equal the right item
+	buyItem();
+	//confirmPurchase=confirm("Would you like to buy this?");       
+			
+}
+
+
+function buyItem() {
+	if (currency >= price[whichItem-1]) {
+		confirmPurchase();
+		//inventory.push(shopItems[whichItem-1])
+	}
+	else {
+	alert("Sorry! You don't have enough to purchase this!")
+	}
+}
+
+function confirmPurchase() {
+	if (confirm("Would you like to buy this?") == true) {
+		currency -= price[whichItem-1];		
+		alert ("You have " + currency + " dollars left" )
+		gameInventory.push(shopItems[whichItem-1])
+		//document.getElementById("currency").innerHTML = currency;	
+	}
+	
+}
+
+function quest1() {
+	userPlay = prompt("Your the coolest guy there is and you have two other sibling that are pretty cool Macy and Max. Yall going on a road trip to different colleges and then go to Oklahama to see a basketball game and science center. So you go outside and pick a car.\n\n1: Jeep Liberty \n2: Tahoe")
+	
+	if(Userplay == 1){
+		alert("You pick Jeep Liberty and get ready for a fun and wild college road ever.")
+		alert("Our first stop is at Uof M and this is the college that Michael is thiking about going to and he thinks he like it.")
+		alert("You continue driving to the other colleges and we run by three of the colleges pretty quickly(Duke,University of South California, and University of Chicago) and they all are attention grabber.")
+		alert("Now we going to Macy college with are  U of Alabama and Colorado State and but we going to U of Alabama last because it is close to Oklahama.")
+		userplay2 = prompt("You driving from Alabama and as you was driving you get a flat tire\n\n1: Do you fix it yourself\n2: Call Triple A and let them fix it")
+	}
+	if(userPlay1 == 2){
+	alert("You have pick a Tahoe and you are driving but before you  drive; you have to use the bathroom but your silbing is in the bathroom taking too long.	")
+	alert("Your sibling is out and your able to use the bathroom so hurry up.")
+	alert("You walk out to the car and started up to the car and get on your way")	
+	
+	}
+		
+	if(userPlay2 == 1){
+	alert(carInventory)
+	alert("")
+	
+	
+	
+	
+	
+	}
+		
+	
+	
+	
+	
+	
+	
+	
+	}
+	 //Let character make choices...
+	 //if else setup
+	 //possible randomness
+	
+	 //update status based on above
+	
+	//end of current quest
+	
+	
+	quest2();
+	//Auto to next or allowcharacter to choose to start the quest
+	//confirm next quest
+	//show/hide
+
+
+function quest2(){
+alert ("top of quest 2")
+quest3();
+}
+
+function quest3(){
+alert ("top of quest 3")
+
+
+}
+
+
+</script>
+</body>
+</html>

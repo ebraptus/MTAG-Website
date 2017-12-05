@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+	</head>
+
+	<body>
+	<button onclick=townInn()>Copper Cottage (shop)</button>
+		<br><br><br><br><br><br><br><br><br><br><br><br>
+		<button onclick=storyStarter()>Quest Board</button>
+		<br><br><br><br><br>
+		<button onclick=conVo()>Talk To..</button>
+		<br><br><br><br><br><br><br>
+		<button onclick=vantasInventory()>Satchel</button >
+		<button onclick=displayMoney()>Coin Pouch</button >
+		
+
+
+	<script>
+
+
+ /*  
+ Coder: Cameron Ford
+ Last Edited Nov. 29
+ 
+ //wk6
+ 
+*/
+// Variables section
+var vantasPouch = ["Clan Cloak", "Wiz Cap","Apple", "Inn Keeper Tunic","Inn Keeper Pants ","Training Gaunlets"] ;
+
+
+var goldCurrancy = 3000 
+
+var Reknown	= -5 //will be used for which quest you can use
+
+var  showPouch = "";
+
+var enterShop = 0	
+
+var notEnough = 0		
+
+
+// Functions section
+function startText() {
+	alert("Ive been here for a bit too long,")
+	alert("I've mooching off Penny, and living in her attic, for almost my entire life now and I think its time for me to go and try something else for once.")
+	
+	
+	
+}
+
+function storyStarter() {
+//this is what opens up the quest board
+	
+	alert("(I wonder if I have everything I need before going?)")
+	theAnswer = confirm ("(Have you finished your business here?)")
+		if (theAnswer == true) {
+			openQuest()	
+		}
+		else if (theAnswer == false){
+			alert("(Better finish up first then)")
+		}
+
+}
+
+function openQuest(){
+	showQuest = "";
+	
+	var questBoard
+	
+	var chosenQuest
+	
+	var questChoice = ["Slime slayer.", "Farm Help.","Templal of Kitzuna","Running the shop","Bandit Camp","(Ask Around)"]
+	
+	var questRep = [5,0,15,-5,10,10]
+		
+		alert("Alright then, lets see whats avalable")
+		
+		alert("Alright then lets see here...")
+		
+		alert("Hmmm,Oh! How about...")
+		
+			for (i=0;i<questChoice.length;i++) {		
+			showQuest += (i + 1)+ ". " + questChoice[i] + "\n";
+			}
+			
+			
+		questBoard = (prompt(showQuest)-1)
+		
+		if (questRep[questBoard] <=  Reknown){
+		// this is what makes you have a response with enough rep
+			alert(questChoice[questBoard] + " should be fine.")
+				
+			chosenQuest = (confirm("(Should I do the quest?)"))
+				
+				if (chosenQuest == false){
+					alert("Oh well, might aswell find something else to work on")
+					 tryQuestsAgain()
+				}
+				else if(chosenQuest == true){				
+					//made functions to go with each quest
+					
+					if(questBoard == 0){quest_1()}
+					
+					else if(questBoard == 1){quest_2()}
+					
+					else if(questBoard == 2){quest_3()}
+					
+					else if(questBoard == 3){quest_4()}
+					
+					else if(questBoard == 4){quest_5()}
+					
+					else if(questBoard == 5){quest_6()}
+				
+				
+				
+				
+				}
+			
+		
+		}
+		else if(questRep[questBoard] >=  Reknown){
+		// this is what makes you have a response with enough rep
+			alert("I dont think they'll let me do "+questChoice[questBoard]+", might need to gain some trust first.")
+			alert("Lets try something that requires less trust")
+			alert("(you dont have enough REP for that task)")
+				tryQuestsAgain()
+		
+		}
+		
+
+
+}
+
+function quest_1(){
+	alert("~After readying up you equiped your robes\n~putting on your face paint and went out to the east platea")
+	alert("Once youve gotten there you found yourself con-fronted with 3 slimes of different size variations")
+    alert("~you equip your most favored gauntlets and make quick work of the slimes having enough time to look around the area~")
+    rega=confirm("should you go home, or explore the area?")
+    	if(rega == true){
+        	
+            gG=Math.floor(Math.random() *10)
+            
+           if(gG > 5){
+           	alert("~You found yourself at some sort of temple, it looks crumbled and worn down")
+            alert("Vanta: This place looks crumbled and worn down")
+            alert("~I just said that~")
+            alert("As you inch closer to the towering temple; right outside you triggered a trap door that droped  you into the ground bellow...\n\n\n its dark down here...")
+            alert("thanks for playing, sorry for the sudden ending; but hey lets see what you can do next")
+            alert("*SnAP")
+            
+            location.reload();
+         
+           
+           }
+           else {
+            alert("~you looked around the forrest aimlessly for 3 hours~")
+            alert("~idiot~")
+            alert("you went home exausted and wanted nothing more than to sleep")
+           alert("+10 REP")
+           
+           }
+        
+        
+        
+        
+        }
+        else if (rega == false ){
+        
+        	alert("~its for the best if we stay away from this area due to the fact that we havent been around here in our entire lives~")
+        	alert("~after you head to the lake to get the slime washed off you then decide to head home to get your chlothing wash and to collect your reward ")
+            alert("(the people of the town now trust you!)")
+            alert("+10 REP")
+        	alert("+300 g")
+            alert("|ALL QUESTS NOW AVALABLE!|")
+      	 		goldCurrancy+=300
+				
+       }
+	
+	
+	Reknown+=10 ;
+	
+	}
+
+function quest_2(){
+	alert("You meet up with the farmer at his barn where he was waitin for you, with stuff to do.")
+	alert("creepy....")
+	alert("~You spent the afternoon working on the farm helping with the harvest, when you are about done the farmer ask for you to go and deliver the goods to the market~")
+   
+   yareYare=(confirm("(Do you want to?)"))
+    	
+        if(yareYare == true){
+        	alert("~though you hate being in public; you felt like it would be rude not to help to fullest~")
+            alert("Vanta: Um..,sure; where do they go anyway")
+            alert("Farmer: Oh, just to the town square market, your fine getting there on your own right?")
+            alert("Vanta: Y..ya..yes, i should be fine one my own thanks!")
+            alert("You then procced to lie once more, you just dont want them to know of your extreme fear of crowds")
+            alert("~Once you have found yourself in the town you procced to quickly give the harvest to the salesmen~")
+            
+            alert("salesmen:Thanks Lass, I was a little suspicios of yas at first when you moved in to Pennys place, but i guess you aint alls bad")
+            alert("Vanta:Uhm, tha..")
+            alert("salesmen: I actualy have another thing for ya to do..")
+            alert("salesmen: I herd that you can take and give a punch so i have somethin for yas to do")
+            alert("~He hands you a map~")
+            alert("The traders of the east wont come here anymore untill the slimes are taken care of, ya think you can handle that.")
+            alert("~FINALY A CHANCE FOR AN ADVENTURE TO PROVE MY STRENGTH~")
+            alert("Vanta:Uh, sure its been awhile though I might be a little rusty")
+            alert("~you sure do lie alot huh.~")
+            alert("~before he could say any thing else you head back to your quarters to sleep the day away so you can prepare for tommorow~")
+          alert("~when you wake up it seems that the map the salesman gave you had a little gift inside,how nice!~ ")
+          alert("+5 REP")
+          alert("+200 g")
+          alert("Item: Map added to your pouch")
+          alert("Quest: SLIME SLAYER| now available")       
+        
+        goldCurrancy+=200
+        vantasPouch.push("Map of the land")
+        }
+        else if (yareYare == false){
+        	alert("vanta: sorry pal, i've gotta go home and help around the shop again...")
+            alert("(This is a lie; you just hate being in public)")
+            alert("~The farmer understood and has paid you even for your good work~")
+            alert("~You went home and procceded to sleep like a baby~")
+            alert("When you woke up penny was telling you of a slime problem going on in the east platae, (wonder what)")
+         alert("+5 REP")
+            alert("+100 g")
+        
+        goldCurrancy+=100 ;
+        
+        
+        }
+	
+	
+	
+	
+	
+	Reknown+=5 ;
+	}
+
+function quest_3(){
+
+	alert("You felt more confident walking around town after everyone put thier trust in you.\n you started to walk around town square durring the festival and over herd some group of kids talking about the temple in the woods of the east platea.\n~weird how we missed it too~ ")
+    alert("you went back to the clifside to adventure the forrest a little more untill you find a some what paved pathway to your next goal.")
+	alert("~You found yourself at some sort of temple, it looks crumbled and worn down")
+            alert("Vanta: This place looks crumbled and worn down")
+            alert("~I just said that~")
+            alert("As you inch closer to the towering temple; right outside you triggered a trap door that droped  you into the ground bellow...\n\n\n its dark down here...")
+            alert("thanks for playing, sorry for the sudden ending; but hey lets see what you can do next")
+            alert("*SnAP")
+            
+            location.reload();
+         
+           
+	
+	
+	
+	Reknown+=5 ;
+	}
+
+
+function quest_4(){
+	alert("(Penny has been needing a little help with the inn.)\n(Might aswell see what i can do around here )")
+	alert("~Vantablok worked for the day mostly keeping things tidy until Penny asks for you to handle the shop while she went out ~")
+	alert("~While you were running the place the towns farmer got a chance to talk to you; after you explained why Penny wasnt around he was quite estatic about how your helping willingly to keep the shop open; He even offered you to work on his farm.")
+	alert("(Its not adventuring but its definetly a way to get my name out there)")
+	alert("+5 REP")
+	alert("Quest: Farm Help| now avalable")
+	
+	
+	
+	
+	
+	Reknown+=5 ;
+	}
+
+function quest_5(){
+	alert("The bandits werent there for some reason, they might have gone out to a hunt or something stupid")
+    alert("~you then decide to just place a bunch of lethal traps for them to get caught on\n~Its better than waiting here for hours... ")
+    alert("you went hoemto see if you can find a more compitent quest to go on.")
+	
+	Reknown+=5 ;
+	}
+
+function quest_6(){
+	alert("sorry, due to time constrants i havent added this part yet\n but to help you fell better here")
+    alert("(+99999999999999999 g)")
+   alert("it wont do anything but you can get the dell computer")
+	
+	goldCurrancy+=99999999999999999
+	Reknown+=5 ;
+	}
+
+
+
+function tryQuestsAgain(){
+
+//repeat function with the quest board here
+	showQuest = "";
+	
+	var questBoard
+	
+	var chosenQuest
+	
+	var questChoice = ["Slime slayer.", "Farm Help.","Templal of Kitzuna","Running the shop","Bandit Camp","(Ask Around)"]
+	
+	var questRep = [5,0,15,-5,10,10]
+		
+		
+			for (i=0;i<questChoice.length;i++) {		
+			showQuest += (i + 1)+ ". " + questChoice[i] + "\n";
+			}
+			
+			
+		questBoard = (prompt(showQuest)-1)
+		
+		if (questRep[questBoard] <=  Reknown){
+		// this is what makes you have a response with enough rep
+			alert(questChoice[questBoard] + " should be fine.")
+				
+			chosenQuest = (confirm("(Should I do the quest?)"))
+				
+				if (chosenQuest == false){
+					alert("Oh well, might aswell find something else to work on")
+						 tryQuestsAgain()
+				}
+				else if(chosenQuest == true){				
+					//made functions to go with each quest
+					
+					if(questBoard == 0){quest_1()}
+					
+					else if(questBoard == 1){quest_2()}
+					
+					else if(questBoard == 2){quest_3()}
+					
+					else if(questBoard == 3){quest_4()}
+					
+					else if(questBoard == 4){quest_5()}
+					
+					else if(questBoard == 5){quest_6()}
+				
+				
+				
+				
+				}
+			
+		
+		}
+		else if(questRep[questBoard] >=  Reknown){
+		// this is what makes you have a response with enough rep
+			alert("I dont think they'll let me do "+questChoice[questBoard]+", might need to gain some trust first.")
+			alert("Lets try something that requires less trust")
+			alert("(you dont have enough REP for that task)")
+				tryQuestsAgain()
+		
+		}
+		
+
+
+}
+
+
+
+
+ 
+function vantasInventory() {
+		showPouch = "";
+		
+		for (i=0;i<vantasPouch.length;i++) {		
+		showPouch += (i + 1)+ ". ~" + vantasPouch[i] + "\n";
+		}
+		
+		alert("Vantablok's items \n" + "________________________________\n" + showPouch ) ;
+	
+			
+}
+
+function townInn() {
+		var shopItems = ["Boxers Gauntlets", "dueling duel wielded swords", "Festival Dress", "festival tunic", "Mage Robes", "Water canister", "Hp Serum", "Mana Serum", "dell computer", "stamina elixer"]
+		
+		var shopDescriptions = ["is more comonly used in the arenas."
+		, "is more usfull to those that have devoted their life to the blade.","was made by the towns tailor Jesepi; his stuffs realy great.","was made by the towns tailor Jesepi; his stuffs realy great.", "is well favorited by most mages out there; not sure why though.","simply stores water.", "wil make you feel like new; vigor wise I mean.","will also give an aditional amount to your max manna; I think", "Dell manufactures, sells, repairs, and supports personal computers (PCs), servers, data storage devices, network switches, computer software, computer peripherals, high-definition televisions, cameras, printers, and electronics built by other manufacturers. ... Dell is eponymously named after its founder, Michael Dell.", "almost imediantly restores your stamina; I dont know how it works."]
+		
+		var shopPrices = [80, 120, 1300, 1000, 20, 10, 100, 100, 99999999999999999, 10 ]
+
+		var itemList = ""
+		
+		var playerSelection 
+		
+		var playerChoice
+		
+		
+	//+ pictures[whichPicture]+ use as referance dont un comment
+	
+	for (i=0;i<shopItems.length;i++) {		
+		itemList += (i + 1)+ ". " + shopItems[i] + "\n";
+		}
+	
+	//playerSelection = (prompt(itemList)-1) dont un comment
+		
+	if (enterShop >= 1 ){
+		alert("Penny: Welcome Back.")
+		alert("Penny: Have you been well?")
+		
+		playerSelection = (prompt(itemList)-1)
+		
+			
+		
+		alert("Ooohh tryin to buy the "+ shopItems[playerSelection] + "; Did you know that it " + shopDescriptions[playerSelection])
+		
+		alert("Sorry if you already knew that.")
+		
+		alert("Any way if you want to buy that you'll need about " 
+		+ shopPrices[playerSelection] +"g. to buy the " +shopItems[playerSelection] )
+		
+		playerChoice = confirm("Do you want to buy this." +"\n {You have "+ goldCurrancy +"g.}"  )
+		
+		
+					if(playerChoice == true && shopPrices[playerSelection] > goldCurrancy){
+				
+					alert("Alright then.....wait.")
+					alert("Sorry Vanta, you dont have enough for that...")
+				tryAgain()
+					//notEnough++ good idea
+				
+				//be sure to move to the other area
+								
+			
+		
+					}
+			else if(playerChoice == true && shopPrices[playerSelection] <= goldCurrancy){
+				alert("Thanks again!")
+				alert("+" +shopItems[playerSelection] +" added to my pouch.")
+					vantasPouch.push(shopItems[playerSelection])
+					
+					goldCurrancy-= shopPrices[playerSelection]
+			
+				}
+			else if(playerChoice == false){
+				alert("Oh, come back soon then.")
+				
+			}
+		
+				
+				
+				
+				
+				
+				
+			
+		
+	}
+	else 
+	{
+	
+		alert(" Penny: Good Day Vanta.")
+	
+		playerSelection = (prompt(itemList)-1)
+		
+		alert("Ooohh tryin to buy the "+ shopItems[playerSelection] + "; Did you know that it " +shopDescriptions[playerSelection])
+		
+		alert("Sorry if you already knew that.")
+		
+		alert("Any way if you want to buy that you'll need about " +
+		shopPrices[playerSelection] +"g. to buy the " +shopItems[playerSelection] )
+		
+		playerChoice = confirm("Do you want to buy this." +"\n {You have "+ goldCurrancy +"g.}"  )
+		
+			
+				if(playerChoice == true && shopPrices[playerSelection] > goldCurrancy){
+				
+					alert("Alright then.....wait.")
+					alert("Sorry Vanta, you dont have enough for that...")
+				tryAgain()
+					//notEnough++ good idea
+				
+				//be sure to move to the other area
+								
+			
+		
+					}
+			else if(playerChoice == true && shopPrices[playerSelection] <= goldCurrancy){
+				alert("Thanks again!")
+				alert("+" +shopItems[playerSelection] +" added to my pouch.")
+					vantasPouch.push(shopItems[playerSelection])
+					
+					goldCurrancy-= shopPrices[playerSelection]
+			
+				}
+			else if(playerChoice == false){
+				alert("Oh, come back soon then.")
+				
+			}
+		
+		
+		
+		
+	}
+	
+	
+	enterShop++ ;
+	
+
+}
+
+
+
+function displayMoney() {
+	alert(goldCurrancy +"g")
+
+}
+
+
+
+function tryAgain() {
+
+	var shopItems = ["Boxers Gauntlets", "dueling duel wielded swords", "Festival Dress", "festival tunic", "Mage Robes", "Water canister", "Hp Serum", "Mana Serum", "dell computer", "stamina elixer"]
+			
+			var shopDescriptions = ["is more comonly used in the arenas."
+			, "is more usfull to those that have devoted their life to the blade.","was made by the towns tailor Jesepi; his stuffs realy great.","was made by the towns tailor Jesepi; his stuffs realy great.", "is well favorited by most mages out there; not sure why though.","simply stores water.", "wil make you feel like new; vigor wise I mean.","will also give an aditional amount to your max manna; I think", "Dell manufactures, sells, repairs, and supports personal computers (PCs), servers, data storage devices, network switches, computer software, computer peripherals, high-definition televisions, cameras, printers, and electronics built by other manufacturers. ... Dell is eponymously named after its founder, Michael Dell.", "almost imediantly restores your stamina; I dont know how it works."]
+			
+			var shopPrices = [80, 120, 1300, 1000, 20, 10, 100, 100, 99999999999999999, 10 ]
+
+			var itemList = ""
+			
+			var playerSelection 
+			
+			var playerChoice
+			
+			
+		//+ pictures[whichPicture]+ use as referance dont un comment
+		
+		for (i=0;i<shopItems.length;i++) {		
+			itemList += (i + 1)+ ". " + shopItems[i] + "\n";
+			}
+			
+		playerSelection = (prompt(itemList)-1)
+		
+		alert("Ooohh tryin to buy the "+ shopItems[playerSelection] + "; Did you know that it " +shopDescriptions[playerSelection])
+		
+		alert("Sorry if you already knew that.")
+		
+		alert("Any way if you want to buy that you'll need about " +
+		shopPrices[playerSelection] +"g. to buy the " +shopItems[playerSelection] )
+		
+		playerChoice = confirm("Do you want to buy this." +"\n {You have "+ goldCurrancy +"g.}"  )
+		
+			
+				if(playerChoice == true && shopPrices[playerSelection] > goldCurrancy){
+				
+					alert("Alright then.....wait.")
+					alert("Sorry Vanta, you dont have enough for that...")
+				tryAgain()
+					//notEnough++ good idea
+				
+				//be sure to move to the other area
+								
+			
+		
+					}
+			else if(playerChoice == true && shopPrices[playerSelection] <= goldCurrancy){
+				alert("Thanks again!")
+				alert("+" +shopItems[playerSelection] +" added to my pouch.")
+					vantasPouch.push(shopItems[playerSelection])
+					
+					goldCurrancy-= shopPrices[playerSelection]
+			
+				}
+			else if(playerChoice == false){
+				alert("Oh, come back soon then.")
+				
+			}
+		
+		
+		
+		enterShop++ ;
+	}
+	
+function conVo() {
+		alert("They seem to be sleeping..")
+		alert("Havent made this yet sorry!")
+	
+	}
+	
+	
+	
+
+
+
+
+
+
+// MAIN program execution
+    
+ 
+startText();
+	
+    </script>
+	</body>
+</html>

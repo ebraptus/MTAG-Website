@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Text Adventure</title>
+		<meta charset="utf-8">
+		<link rel= "stylesheet" href="MTAGformating.css">
+		<style>
+		body {
+		background-image: url('http://2b9sqw2iiqxr36ntqa1exnal-wpengine.netdna-ssl.com/wp-content/uploads/2010/09/4Denfeld4.jpg');
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center; 
+		background-size: 1500px 850px;
+		color: red;
+	}
+		</style>
+	</head>
+	<body>
+	<div id="wrapper">
+		<header>
+			<h1>The Invasion You Could Never See Coming</h1>
+		</header>
+	<main>
+	<p><b>As you sit there you take a second to catch your breath then peek through the hedges at the house. You see the robot thing come out on the porch look around for a few seconds then walks back inside. Just then you feel a hand clasp around your mouth! You turn to see who the hand belongs to and there you see the kid that gave you the glasses. "Don't panic, keep quiet and follow me" he whispers. You nod and then start to follow him down two streets. To where you assume to be his house and into an open window where you follow. You find yourself in the basement of this house surrounded by 3 other people. "Hello, Adam. My name is Johnson, or John for short." States the boy that you followed here. "This is Monty, our shop keeper, and this is Jasmine, our class specialist." States John. "To make this quick I assume by the way you ran out of Elizabeth's place, you used the glasses and saw what she truly was. That was called a synth they look human but are actually robots that have taken the place of a human, we have been investigating these beings for some time but have not been able to do anything thus far. The glasses show what they trully are and are the only way to find a synth. That's why the synth's want them so bad, so no one will ever be able to find them." Exclaims John. "However Jasmine believes that you can be taught to take these things out and help us solve this issue. So here you are, you got all that?" Asks John. "Uhm, I think so." You answer. "Great, now talk to Jasmine to get a class then I'll give you your first task. Then talk to Monty to get some new gear." Orders John. "We have also got you some ice and bandages to get you back to full strength." John says.</p></b>
+	Programmer: Chandler Shettleroe
+	</main>
+	
+	<script type="text/javascript">
+	// COMMENTS SECTION
+
+/* 
+// Part a:  
+Need any help go to https://www.youtube.com/watch?v=Sw4bN9t4Co4&feature=youtu.be
+Need any help for random number: http://www.screencast.com/users/Johnvader1/folders/Jing/media/0afef2cd-b3d3-4859-a38b-3de007624313
+Programmer: Chandler Shettleroe
+Date Last Modified:11-28-17
+Goal/Purpose:Make a text adventure.
+*/
+   
+// Variables section
+var health =32;
+var money=3.00; //make a random number for random encounters to earn money for future use.
+var userInput = 1;
+var toDisplay="";
+//var check;
+var inventory = ["Pencils","English text book","Scraps of paper","Raspberry Pi (the coding tool)","Notebooks", "Weird Glasses"];
+var questOneComplete = true;
+var questTwoComplete = false;
+var questThreeComplete= false;
+var questFourComplete= false;
+var questFiveComplete= false;
+var bloodWarrior = false;
+var knight = false;
+var mage = false;
+var hunter = false;
+var amount = 4;
+var alive = true;
+var thePlace=false;
+var enemiesDefeated= 0;
+
+var shop = ["Excalibur","Reinforced shield","Enchanted wand","Potion of minor healing","Potion of major healing","Splash potion of minor healing","Splash potion of major healing","Scroll of revival","The book of the great Forrest Le Torneau","Reinforced bow" ];
+var shopPrices = [1.50, 1.00, 1.50, 0.50, 0.75, 0.75, 1.00, 1.50, 1.50, 1.00];
+//function section
+function checkBackpack(){
+	var toDisplay="";
+	alert("You look in your backpack")
+	for(i=0; i<inventory.length; i++){
+		toDisplay+=(i+1)+". " + inventory[i]+"\n"; //shows the player their inventory
+	}
+	alert (toDisplay);
+}
+function visitStore(){
+	var toDisplay="";
+	
+	for(i=0; i<shop.length; i++){
+		toDisplay+=(i+1)+". " + "$" + shopPrices[i]+ " " + shop[i]+"\n"; //shows all the items in the shop
+	}
+	
+	var userInput = prompt("Choose what you would like to buy from the list?\n\n"+toDisplay);
+	userInput--;
+	if (money >= shopPrices[userInput]){
+		var reallyBuy = confirm ("Are you sure you want to buy " + shop[userInput]+ "?")
+		if (reallyBuy == true){
+			inventory.push(shop[userInput])//puts the item into the players inventory
+			alert("You have bought" + " "+ shop[userInput])//tells the player what item they bought
+			money-=shopPrices[userInput]//takes the player's money away for the item purchased.
+			alert("You have" + " $" +money +" "+"left in your bag.")//shows the player how much money they have left
+		}
+		else {
+			alert("Ok, be like that, I don't need your money anyway.")
+		}
+	}
+	else{
+	alert("You don't have enough money.") 
+	} 
+}
+function checkMoney(){ //function for the player to see how much money they have
+	var toDisplay="";
+	alert ("You check the front pocket of your bag, checking how much money you have.")
+	alert ("You have " + "$" + money)
+}
+function first(){
+	if ((mage==false) && (hunter==false) && (knight==false)){ //sets the players class to Blood Warrior(work in progress)
+	bloodWarrior=true
+	if (bloodWarrior==true){
+	alert ("Hey Adam, I am putting a lot of faith in you, so don't mess up. Anyway, you want to be a Blood Warrior huh? Good choice, you get more health and can take health away from enemies. Swords are best used with this class. You will be equiped with a weak one to start.")
+		inventory.push("flimsy sword")
+		health = 35
+	}
+	}
+	else {
+	alert ("You have already picked a class.")
+	}
+questTwoComplete=true
+alert ("Now that you picked a class, we have seen possible synths hanging around the school, we need you to head there and take out 5 synths.")
+quest3();
+}
+function second(){
+	if ((mage==false) && (hunter==false) && (bloodWarrior==false)){//sets the players class to knight (work in progress)
+	knight=true
+	if (knight==true){
+	alert ("Hey Adam, I am putting a lot of faith in you, so don't mess up. Anyway, you want to be a Knight huh? Nice choice, knights get more health and can use shields to get even more health. A sword and a shield are best used with this class. You will be equiped with a weak ones to start.")
+		inventory.push("flismy sword")
+		inventory.push("wooden shield")
+		health = 40
+	}
+	}
+	else {
+	alert ("You have already picked a class.")
+	}
+questTwoComplete=true
+alert ("Now that you picked a class, we have seen possible synths hanging around the school, we need you to head there and take out 5 synths.")
+quest3();
+}
+function third(){
+	if ((bloodWarrior==false) && (hunter==false) && (knight==false)){//sets the players class to mage (work in progress)
+	mage=true
+	if (mage==true){
+	alert ("Hey Adam, I am putting a lot of faith in you, so don't mess up. Anyway, you want to be a Mage huh? Nice choice, Mages get more damage. Wands are best used with this class. You will be equiped with a weak one to start.")
+		inventory.push("wooden wand")
+	}
+	}
+		else {
+		alert ("You have already picked a class.")
+		}
+questTwoComplete=true
+alert ("Now that you picked a class, we have seen possible synths hanging around the school, we need you to head there and take out 5 synths.")
+quest3();
+}
+function fourth(){
+	if ((bloodWarrior==false) && (knight==false) && (mage==false)){ //sets the players class to hunter (work in progress)
+	hunter=true
+	if(hunter=true){
+	alert ("Hey Adam, I am putting a lot of faith in you, so don't mess up. Anyway, you want to be a Hunter huh? Nice choice, Hunters get more damage and can summon a wolf to fight with them. Bows are best used with this class. You will be equiped with a weak one to start.")
+		inventory.push("wooden bow")
+	}
+	}
+		else {
+		alert ("You have already picked a class.")
+		}
+questTwoComplete=true
+alert ("Now that you picked a class, we have seen possible synths hanging around the school, we need you to head there and take out 5 synths.")
+quest3();
+}
+function quest3(){
+alert ("You head to the high school with Monty and John ")
+}
+function explore(){ //random event for the player to get more money
+amount--;
+var randomNumber = Math.floor(Math.random()* 10+1);
+	if ((randomNumber <2) && (amount > 0)){
+		alert ("After taking a few odd turns, you find yourself at a rocky hill with a messed up sidewalk. You trip up the hill and hurt your knee and still there for a bit before getting back up.")
+		alert (" You take two points of damage")
+		health-=2
+		alert("You have " + health + " health left.")
+			if (health<=0){
+			alert ("You are not dying right now to scrapped up knees, your health has been set to one. Try to be more careful next time.")
+			health=1
+			}
+	}
+	else if ((randomNumber <5 ) && (amount > 0)){
+		money+=0.05
+		alert ("You are walking down the street when you see a nickel just lying there." + " You now have $" + money + ".")
+	}
+	else if ((randomNumber <8) && (amount > 0)){
+		money+=0.10
+		alert ("After some time of wandering, you find yourself at the local dollar store, you don't have time to go shopping right now. However, you find yourself dime on the ground." + " You now have $" + money +".")
+	}
+	else if ((randomNumber <10) && (amount > 0)){
+		money+=0.25
+		alert ("You pass by the town park, and you find a spare quarter on the ground. You now have $" + money + ".")
+	}
+	else if ((randomNumber==10) && (amount > 0)){
+		money+=1.00  
+		alert ("Wow, it's your lucky day you found a dollar on the ground, you now have $" + money + ".")
+	}
+		else if(amount<=0){
+			alert ("You finally arrive at the school.")
+			thePlace=true;
+		}
+}
+function synthFights(){
+alert ("You get to the school and put on the weird glasses to look for synths.")
+	var greatNumber= Math.floor(Math.random()*10+1)//see what enemy you encounter
+	var DPS=Math.floor(Math.random()*12+2); //how much damage the player can do
+	var enemy = "Tier 1 Synth" //default name for an enemy
+	var enemyHealth=0 //default enemy health
+	var damage = 0 //default enemy damage
+	var playerInput = 1
+	if (enemiesDefeated<6){
+		if (greatNumber<5){
+		enemy = "Tier 1 synth"
+		damage = 3 //changes enemy's damage
+		enemyHealth = 20 //changes enemy's health
+		}
+			else if (greatNumber<8){
+			enemy = "Tier 2 synth" //changes enemy name
+			damage = 5 //changes enemy's damage
+			enemyHealth = 25 //changes enemy's health
+			}
+			else if (greatNumber<11){
+			enemy = "Tier 3 synth" //changes enemy name
+			damage = 7 //changes enemy's damage
+			enemyHealth = 30 //changes enemy's health
+			}
+		alert ("You found a " + enemy +".") //tells the player what enemy they encountered
+			while (enemyHealth > 1){ //while the enemy's health is greater than 0, run this funciton.
+			playerInput=prompt ("What are you going to do?\n1: Attack\n2: Use a minor potion\n3: Use a major potion", playerInput)
+				if (playerInput==1){
+				DPS=Math.floor(Math.random()*12+2)
+				alert ("You did " + DPS + " damage to " + enemy) //tells the player how much damage they did
+				enemyHealth-=DPS //subtracts the damage the player did from the enemy's health
+				}
+				if (enemyHealth>0){ //while the enemy's health is greater than 0, run this function
+						alert (enemy+ " comes charging at you and hits you with a hard punch dealing " + damage + " damage to you.")
+						health-=damage //subtracts the damage done by the enemy from the player's health
+						alert ("You have " + health + " left")
+						if (health<1){
+						alert ("You have perished and the synths now have the glasses. The world is doomed")
+						location.reload()//reloads the page on a defeat
+						}
+						}
+					if (enemyHealth<1){ //if the enemy's health is less than 1, run this funtion
+					alert ("You knock the synth to the ground and John instructs you to take out a from the back of the robots head. You continue looking for more synths.")
+					enemiesDefeated++ //quest tracker, adds one every time an enemy is defeated
+			}	
+			}
+			if (enemiesDefeated == 5){ //once enemies defeated equals 5, the quest is done.
+			quest4();
+			}
+			else {
+			alert ("You need defeat 5 synths total still.")
+	}
+	}
+	
+	function quest4(){ //fourth quest start.
+	thridQuest=true
+	if(thridQuest==true){
+	alert("Alright nicely done, now we need to find the boiler room, we suspect that is where they are hiding the people they have kidnapped.")
+	}
+}
+}
+
+// MAIN program execution
+   //checkBackpack();
+   
+	
+
+	
+    </script>
+</body>
+	<footer>
+	<h2>What will you do?</h2>
+	<a href="theEnd.html">Find the boiler room</a>
+	<input type= "button" value = "Be a Blood Warrior" onClick="first()">
+	<input type= "button" value = "Be a Knight" onClick="second()">
+	<input type= "button" value = "Be a Mage" onClick="third()">
+	<input type= "button" value = "Be a Hunter" onClick="fourth()">
+	<input type= "button" value = "Head to the school" onClick="explore()">
+	<input type= "button" value = "Find a synth" onClick="synthFights()">
+	<input type= "button" value = "Check Inventory" onClick="checkBackpack()">
+	<input type= "button" value = "Check how much money you have" onClick="checkMoney()">
+	<input type= "button" value = "Visit the store" onClick="visitStore()">
+	
+	</footer>
+</html>

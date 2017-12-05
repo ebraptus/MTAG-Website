@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Text Adventure</title>
+		<meta charset="utf-8">
+		<link rel= "stylesheet" href="MTAGbedroomtext.css">
+		<style>
+		body {
+		background-image: url('http://hashook.com/wp-content/uploads/2015/03/bedroom-inspiration-charming-green-wall-finished-as-inspiring-amazing-boys-bedroom-paint-ideas-added-industrial-pendant-light-over-blue-cover-wooden-beds-in-small-space-room-designs-startling-boys-be.jpg');
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center; 
+		background-size: 1440px 1000px;
+	}
+		</style>
+	</head>
+	<body>
+	<div id="wrapper">
+		<header>
+			<h1>The Invasion You Could Never See Coming</h1>
+		</header>
+	<main>
+	<p><b>"Adam, Adam" you hear a low deep voice call out. "Hello? Who's there?" You exclaim back. "Someone that cares about you. Now, I don't have much time, so I need to say this quickly. You will need great strength in these next few days, something is wrong around here and you are the only one to able fix it. That is all the time I have for now, now it is time for you to go." states the mysterious voice."Wait! Fix what? What is going on?" You shout back. "All will be answered soon, you must go Adam, Adam...Adam! Adam! Wake up! You are going to be late!" You are shaken awake while the low voice is drowned out by the estatic shouts of your mom. "It's time to get ready for your first day of school at Pleasant Hill High!" Exclaims your mother."Do I have to?" You groan back. "Yes, I know it's a new school, but you have to. Now, get dressed and get ready to go." Says your mother as she walks out. "Fine" you sigh as you roll out of your bed. As, you get dressed, you wonder about the odd dream that you had and decide that it was nothing.</b></p>
+	<p><b>Programmer: Chandler Shettleroe			If you wish to skip the story, click skip the story below. (You will not miss any of the game, best if you are testing or don't care for the story)</b></p>
+	</main>
+	
+	<script type="text/javascript">
+	// COMMENTS SECTION
+
+/* 
+// Part a:  
+Need any help go to https://www.youtube.com/watch?v=Sw4bN9t4Co4&feature=youtu.be
+Need any help for random number: http://www.screencast.com/users/Johnvader1/folders/Jing/media/0afef2cd-b3d3-4859-a38b-3de007624313
+Programmer: Chandler Shettleroe
+Date Last Modified:11-20-17
+Goal/Purpose:Make a text adventure.
+*/
+   
+// Variables section
+var health;
+var money=3.00; //make a random number for random encounters to earn money for future use.
+var userInput = 1;
+var toDisplay="";
+//var check;
+var inventory = ["Pencils","English text book","Scraps of paper","Raspberry Pi (the coding tool)","Notebooks"];
+// Functions section
+function checkBackpack(){
+	var toDisplay="";
+	alert("You look in your backpack")
+	for(i=0; i<inventory.length; i++){ //shows all itmes that are in the player's inventory.
+		toDisplay+=(i+1)+". " + inventory[i]+"\n";
+	}
+	alert (toDisplay);
+}
+function checkMoney(){
+var toDisplay="";
+alert ("You look in the front pocket of your bag, checking how much money you have.")
+alert ("You have " + "$" + money)//shows the player how much money they have
+}
+
+
+// MAIN program execution
+   //checkBackpack();
+   
+	
+    </script>
+</body>
+	<footer>
+	<h2></h2>
+	<h3><a href="LivingRoom.html">Head down stairs</a></h3>
+	<h3><a href="itBegins.html">Skip the Story</a></h3>
+	</footer>
+</html>

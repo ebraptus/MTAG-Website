@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Text Adventure</title>
+		<meta charset="utf-8">
+		<link rel= "stylesheet" href="MTAGformating.css">
+		<style>
+		body {
+		background-image: url('http://2b9sqw2iiqxr36ntqa1exnal-wpengine.netdna-ssl.com/wp-content/uploads/2010/09/4Denfeld4.jpg');
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center; 
+		background-size: 1500px 850px;
+	}
+		</style>
+	</head>
+	<body>
+	<div id="wrapper">
+		<header>
+			<h1>The Invasion You Could Never See Coming</h1>
+		</header>
+	<main>
+	<p><b>
+	Programmer: Chandler Shettleroe
+	</main>
+	
+	<script type="text/javascript">
+	//<input id="checkInventory" type="text" value="Check Inventory"> maybe not use a text input, just use buttons...
+	// COMMENTS SECTION
+
+/* 
+// Part a:  
+Need any help go to https://www.youtube.com/watch?v=Sw4bN9t4Co4&feature=youtu.be
+Need any help for random number: http://www.screencast.com/users/Johnvader1/folders/Jing/media/0afef2cd-b3d3-4859-a38b-3de007624313
+Programmer: Chandler Shettleroe
+Date Last Modified:11-28-17
+Goal/Purpose:Make a text adventure.
+*/
+   
+// Variables section
+var health=15;
+var money=3.00; 
+var userInput = 1;
+var toDisplay="";
+//var check;
+var inventory = ["Pencils","English text book","Scraps of paper","Raspberry Pi (the coding tool)","Notebooks","Weird Glasses"];
+
+var shop = ["Excalibur","Reinforced shield","Enchanted wand","Potion of minor healing","Potion of major healing","Splash potion of minor healing","Splash potion of major healing","Scroll of revival","The book of the great Forrest Le Torneau","Reinforced bow" ];
+var shopPrices = [1.50, 1.00, 1.50, 0.50, 0.75, 0.75, 1.00, 1.50, 1.50, 1.00];
+//function section
+function checkBackpack(){
+	var toDisplay="";
+	alert("You look in your backpack")
+	for(i=0; i<inventory.length; i++){
+		toDisplay+=(i+1)+". " + inventory[i]+"\n"; //shows the player their inventory
+	}
+	alert (toDisplay);
+}
+function visitStore(){
+	var toDisplay="";
+	
+	for(i=0; i<shop.length; i++){
+		toDisplay+=(i+1)+". " + "$" + shopPrices[i]+ " " + shop[i]+"\n"; //shows all the items in the shop
+	}
+	
+	var userInput = prompt("Choose what you would like to buy from the list?\n\n"+toDisplay);
+	userInput--;
+	if (money >= shopPrices[userInput]){
+		var reallyBuy = confirm ("Are you sure you want to buy " + shop[userInput]+ "?")
+		if (reallyBuy == true){
+			inventory.push(shop[userInput])//puts the item into the players inventory
+			alert("You have bought" + " "+ shop[userInput])//tells the player what item they bought
+			money-=shopPrices[userInput]//takes the player's money away for the item purchased.
+			alert("You have" + " $" +money +" "+"left in your bag.")//shows the player how much money they have left
+		}
+		else {
+			alert("Ok, be like that, I don't need your money anyway.")
+		}
+	}
+	else{
+	alert("You don't have enough money.") 
+	} 
+}
+function checkMoney(){ //function for the player to see how much money they have
+	var toDisplay="";
+	alert ("You check the front pocket of your bag, checking how much money you have.")
+	alert ("You have " + "$" + money)
+}
+
+function findRoom(){
+	var roomFind=Math.floor(Math.random()*2+1) //picks a number 1 or 2 
+	if (roomFind==1){// if the number is one, you find the room and start quest 5
+	alert("We found the room, be cautious when entering. We don't know what's in here. Oh God what is that?!")
+	quest5();
+	}
+	else if(roomFind==2){ //if the number is 2, you have to fight another enemy.
+	alert ("We couldn't find the boiler room, but we found a synth!")
+	var greatNumber= Math.floor(Math.random()*10+1)//see what enemy you encounter
+	var DPS=Math.floor(Math.random()*10+1); //how much damage the player can do
+	var enemy = "Tier 1 Synth" //default name for an enemy
+	var enemyHealth=0 //default enemy health
+	var damage = 0 //default enemy damage
+	var playerInput = 1
+		if (greatNumber<5){
+		enemy = "Tier 1 synth"
+		damage = 3  //changes enemy's damage
+		enemyHealth = 20 //changes enemy's health
+		}
+			else if (greatNumber<8){
+			enemy = "Tier 2 synth" //changes enemy name
+			damage = 5 //changes enemy's damage
+			enemyHealth = 25 //changes enemy's health
+			}
+			else if (greatNumber<11){
+			enemy = "Tier 3 synth" //changes enemy name
+			damage = 7 //changes enemy's damage
+			enemyHealth = 30 //changes enemy's health
+			}
+		alert ("You found a " + enemy +".") //tells the player what enemy they encountered
+		while (enemyHealth > 1){  //while the enemy's health is greater than 0, run this funciton.
+			playerInput=prompt ("What are you going to do?\n1: Attack\n2: Use a minor potion\n3: Use a major potion", playerInput)
+				if (playerInput==1){
+				DPS=Math.floor(Math.random()*12+2)
+				alert ("You did " + DPS + " damage to " + enemy) //tells the player how much damage they did
+				enemyHealth-=DPS //subtracts the damage the player did from the enemy's health
+				}
+				if (enemyHealth>0){ //while the enemy's health is greater than 0, run this function
+						alert (enemy+ " comes charging at you and hits you with a hard punch dealing " + damage + " damage to you.")
+						health-=damage //subtracts the damage done by the enemy from the player's health
+						alert ("You have " + health + " left")
+						if (health<1){
+						alert ("You have perished and the synths now have the glasses. The world is doomed")
+						location.reload() //reloads the page on a defeat
+						}
+						}
+					if (enemyHealth<1){ //if the enemy's health is less than 1, run this funtion
+					alert ("You knock the synth to the ground and John instructs you to take out a from the back of the robots head.")
+					enemiesDefeated++
+			}	
+			}
+}
+}
+function quest5(){
+alert ("You seemed to have found the boss of this whole thing. And boy is he big..")
+	var enemy = "Boss Synth" //sets the enemy's name for a variable
+	var enemyHealth=35 //sets the enemies health
+	var damage = 8
+	var playerInput = 1
+	var DPS=Math.floor(Math.random()*12+2); //how much damage the player can do
+	while (enemyHealth>1){ //while the enemy's health is greater than 0, run this funciton.
+	playerInput=prompt ("What are you going to do?\n1: Attack\n2: Use a minor potion\n3: Use a major potion", playerInput)
+			if (playerInput==1){
+			DPS=Math.floor(Math.random()*12+2)
+			alert ("You did " + DPS + " damage to " + enemy)//tells the player how much damage they did
+			enemyHealth-=DPS //subtracts the damage the player did from the enemy's health
+			}
+			if (enemyHealth>0){ //while the enemy's health is greater than 0, run this function
+						alert (enemy+ " comes charging at you and hits you with a hard punch dealing " + damage + " damage to you.")
+						health-=damage //subtracts the damage done by the enemy from the player's health
+						alert ("You have " + health + " left")
+						if (health<1){
+						alert ("You have perished and the synths now have the glasses. The world is doomed")
+						location.reload() //reloads the page on a defeat
+						}
+						}
+					if (enemyHealth<1){ //if the enemy's health is less than 1, run this funtion
+					alert ("You wind up for another hit and take the boss synth down. All is quiet for a moment just, then you hear people calling out for help down a hallway. You rush over there and find the people the synths kidnapped and disquised as. They all thank and praise you for saving them. You ask one of them why and how the synths took them. The person answered that the synths gave their parents all paid vacations for 2 and then kidnapped me when they were gone. They were saying how they needed a pair of glasses to make sure no one ever could figure out if they were a synth.")
+					alert ("Congragulations for beating my game! I hope you had a great and fun time.")
+			}	
+		else {
+			alert ("You need to make it to the school first")
+		}	
+	}
+}
+// MAIN program execution
+	
+    </script>
+</body>
+	<footer>
+	<h2>What will you do?</h2>
+	<input type= "button" value = "Look for the boiler room" onClick="findRoom()">
+	<input type= "button" value = "Check Inventory" onClick="checkBackpack()">
+	<input type= "button" value = "Check how much money you have" onClick="checkMoney()">
+	
+	</footer>
+</html>

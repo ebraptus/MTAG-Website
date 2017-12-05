@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>MTAG</title>
+	</head>
+
+	<body>
+
+	<style>
+	body{
+		background-image: url("https://s-media-cache-ak0.pinimg.com/originals/e5/49/52/e549528f05dc46d1de50eef5d87193cb.jpg"); 
+	}
+	.center {
+		padding: 70px 0;
+		text-align: center;
+	}
+	
+	</style>
+	
+	<div class="center">
+		<h1 style="font-family:bookman old style; background-color:white;"> Mini Text Adventure Game </h1>
+		<p style="font-family:bookman old style; background-color:white;"> Created By: Arianna Byars </br> How to play: First choose a character then let the story begin! </p>
+		<p style="font-family:bookman old style; background-color:white;" id= "currency"></p>
+		<button onClick="character()">Choose Character</button> 
+		<button onClick="inventory()">Inventory</button>
+		<button onClick="store()">Store</button>
+	</div>
+	
+	<script type="text/javascript">
+// COMMENTS SECTION
+
+/* 
+// Part a:  
+Programmer: Arianna Byars
+Date Last Modified: 11/29/17
+Goal/Purpose: To make a mini text adventure game 
+Status: Choose Character/Inventory/Store are Wking
+
+// Part b: Need to keep wking on story line. Max's And Mic's have yet to be made. As of 11/21 - Inventory shows all items Bought, store has 10 everyday items to match with their own prices. Can choose only 1 of three different characters.
+As of 11/28 - Random events are happening and first quest.
+As of 11/29 - Completion of quests 2-5
+*/
+   
+// Variables section
+var displayCharacter= "";
+var whichCharacter=""; 
+var chooseCharacter=["Macy Greyser (MC)"/*, "Michael Greyser (Mic)", "Max Greyser (Maximilian)"*/];
+var characterFirstName=["Macy"/*, "Mic","Max"*/];
+var infoCharacter=["MC is 5'5, 160 lbs. On the surface pretty, all the girls wanna be her. Everyone asks for her help and she has her own fan club to do her bidding. But she also has many hidden talents.","Mic is 6'5 230 lbs.,Muscular. Athletic, plays basketball and football, two time MVP, secretly a math genius, in football WR, PG in basketball.","Max is 5'7, 178 lbs., Gaunt. A very intelligent person who prefers to be independent. Although he has a few friends, he generally isn't fond of people, but approaches them in a light-hearted demeanor."];
+var displayInventory="";
+var inventoryContent=["Cell phone"];
+var displayStore="";
+var whichItem="";
+var storeContent=["Candy Bar","Arizona","Oreo Cookies","Fruit Snacks","Cheetoes","Baseball Cap","World's Best Student Mug","Hoodie","Bumber Sticker","Flag"]; // 10 everyday items 
+var storePrices=[1.00, 1.00, 1.50, 1.00, 0.75, 10.00, 15.00, 20.00,12.00, 30.00];
+var money=30.00;
+var randomEvent="";
+var status=""; // Holds player stats from each quest 
+var carInventory =["Spare Tire", "Tire Jax and Tire Iron", "Fix-a-Flat", "WD-40", "Jumper Cables"];
+var displayCarInventory="";
+var whichCarPart="";
+
+// Functions section
+function character() {
+	displayCharacter="";
+    for (i = 0; i < 1; i++){
+        displayCharacter += (i+1) + ". " + chooseCharacter[i] + "\n"; // Lists all the characters 
+    }
+	whichCharacter = (prompt(displayCharacter)-1);
+	alert("Character Description:\n" + infoCharacter[whichCharacter]);
+	confirmCharacter();
+}
+
+function confirmCharacter() {
+	if (confirm("Do you want this character?")== true) {
+		alert ("You have chosen this character!");
+		story();
+	} // Confirms that the character was chosen
+	else {
+		alert("You didn't choose this character! Please pick again?");
+	}
+}
+
+function inventory() {
+	displayInventory="";
+    for (i = 0; i < inventoryContent.length; i++){
+		displayInventory += (i+1) + ". " + inventoryContent[i] + "\n"; // Lists all the items in the inventory
+    }
+	alert(displayInventory);
+}
+
+function store() {
+	displayStore="";
+    for (i = 0; i < storeContent.length; i++){
+        displayStore += (i+1) + ". " + storeContent[i] + "\n";
+	}
+	whichItem = (prompt(displayStore)-1); // Take away one to match with display
+	alert("Would you like this item at $" + storePrices[whichItem] +"?");
+	confirmPurchase();
+}
+
+function carStore() {
+	displayCarInventory="";
+    for (i = 0; i < carInventory.length; i++){
+        displayCarInventory += (i+1) + ". " + carInventory[i] + "\n";
+	}
+	whichCarPart = (prompt(displayCarInventory)-1); // Take away one to match with display
+	alert("Would you like this item at $" + storePrices[whichCarPart] +"?");
+	confirmCarPartPurchase();
+}
+
+function confirmCarPartPurchase() {
+	if (money < storePrices[whichCarPart] || money == 0) {
+		alert("You don't have enough money!");
+	}
+	else if (confirm("Do you want this item?")== true) {
+		alert ("You have chosen this item!");
+		money-=storePrices[whichCarPart];// Subtracting from original list
+		inventoryContent.push(carInventory[whichCarPart]);
+		document.getElementById("currency").innerHTML = money;
+	} 
+	else {
+		alert("You didn't choose this item!");
+		alert("Good-Bye! Please come again?");
+	}
+}
+
+function confirmPurchase() {
+	if (money < storePrices[whichItem] || money == 0) {
+		alert("You don't have enough money!");
+	}
+	else if (confirm("Do you want this item?")== true) {
+		alert ("You have chosen this item!");
+		money-=storePrices[whichItem];// Subtracting from original list
+		inventoryContent.push(storeContent[whichItem]);
+		status = "" + storeContent[whichItem] + " ";
+		document.getElementById("currency").innerHTML = money;
+	} 
+	else {
+		alert("You didn't choose this item!");
+		alert("Good-Bye! Please come again?");
+	}
+}
+
+function story() { // Same start for each character
+	alert("Now that you have chosen a character it's time to let the story begin.");
+	alert("You are " + characterFirstName[whichCharacter] + " and currently sitting alone in your room.");
+	alert("Right now you are preparing to go on a college trip with your two siblings. When....");
+	alert('"' + characterFirstName[whichCharacter] + ', Are you ready to eat breakfast?"');
+	if(characterFirstName[whichCharacter] == "Macy") {
+		storyMacy();
+	}
+	else if (characterFirstName[whichCharacter] == "Mic") {
+		//storyMic();
+	}
+	else {
+		//storyMax();
+	}
+}
+
+function storyMacy() { // Macy's story line and the star of quest 1
+	alert('"No, mom! I am not done packing. I have to bring my favorite shoes, you say back."');
+	alert('"Ok!"');
+	if (confirm("Do you want to look for your favorite shoes?")==true) {
+		alert("You find your favorite shoes in the closet.");
+		inventoryContent.push("Favorite Shoes");
+		alert("You now have 'Favorite Shoes' in your inventory!");
+		status = "Favorite Shoes"; // Changes the status
+	}
+	else {
+		alert("You didn't find your favorite shoes in the closet.");
+	}
+	alert("So, you come down stairs and find..... ");
+	randomEventsOccur();
+	alert ("Now you all hop into the car and start your rode trip.");
+	alert ("This is your status: " );
+	inventory();
+	quest2();
+}
+
+function quest2 () { // The drive to OCU!
+	if (status == "Favorite Shoes" || status == "Car keys") {	
+	document.body.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJRwvK3FEQQIlyJt5wn_BAGAC-8c0Tr-j8FmBU0uwdDXLK6FoI')";
+		alert ("Welcome to Quest two! \n" + "The Drive to OCU!");
+		alert ("After five hours on the road you find a store.");
+		store();
+			if (confirm("Do you let your brother, Max, drive after the store?")==true) {
+				alert("'Max's Favorite Book' is given to you.");
+				inventoryContent.push("Max's Favorite Book"); // Adds an item to inventory
+				alert("You now have 'Max's Favorite Book' in your inventory!");
+				status = "Favorite Book";
+				alert("You guys then continue the drive.");
+				alert("This is your status: " );
+				inventory();
+				quest3();
+			}
+			else if (confirm("Do you let your brother, Mic, drive after the store?")==true) {
+				alert ("'Mic's Favorite Ball' is given to you.");
+				inventoryContent.push("Mic's Favorite Ball");
+				alert("You now have 'Mic's Favorite Ball' in your inventory!");
+				status = "Favorite Ball";
+				alert("You guys then continue the drive.");
+				alert ("This is your status: " );
+				inventory();
+				quest3();
+			}
+			else {
+				alert("You guys then continue the drive.");
+				alert ("This is your status: " );
+				inventory();
+				quest3();
+			}
+	}
+	else {
+		alert("You didn't find the item to pass the quest!");
+		if (confirm("Do you want to restart Quest one?")== true) {
+			location.reload(storyMacy());
+		}
+		else {
+			alert("Now you have to start from the beginning.");
+			location.reload(); // Reloads to the beginning
+		}
+	}
+}
+
+function quest3 () { // Pre-game problems! (Mic prepares for game || Mc and Max hang out) 
+	if (status == "Favorite Book" || status == "Favorite Ball") {	
+	document.body.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRer4ISV00puzUfmq1ouocmu4nVFLYNRfC52dkxJ2dzfXCJpQXmDw')";
+		alert("Welcome to Quest three! \n" + "Pre-game problems!");
+		alert("You guys arrive at OCU. Your brother, Mic, goes to prepare for the game whlie you and your brother, Max, go check the sights.");
+		alert("As you start walking, you come across... ");
+		randomEventsOccur2();
+		alert("On your way back you see a fight.");
+		if (confirm("Do you step into the fight?")== true) {
+			alert ("You stop the fight and the victim gives you a 'OCU Ring'");
+			inventoryContent.push("OCU Ring");
+			alert("You now have a 'OCU Ring' in your inventory!");
+			status = "OCU Ring";
+			alert ("You find Max and head to the game.");
+			alert("This is your status: " );
+			inventory();
+			quest4();
+		}
+		else {
+			alert ("You find Max and head to the game.");
+			alert("This is your status: " );
+			inventory();
+			quest4();
+		}
+	}
+	else {
+		alert("You didn't find the item to pass the quest!");
+		if (confirm("Do you want to restart Quest two?")== true) {
+			location.reload(quest2());
+		}
+		else {
+			alert("Now you have to start from the beginning.");
+			location.reload();
+		}
+	}
+}
+
+function quest4 () { // The Game!
+	if (status == "OCU Flag" || status == "OCU Ring") {	
+	document.body.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1hk5KaqUo6bqCdwdxRS6od2kvhRTXmkgmWMiX9RM1mFHumSd89g')";
+	alert ("Welcome to Quest four! \n" + "The Game!");
+	alert("You and Max go to find your seats?");
+		if (confirm("Do you sit in the front row?")==true) {
+			alert("You end up getting hit in the head with a ball."); 
+			alert("This is your status: " );
+			inventory();
+			quest5();
+		}
+		else {
+			alert("Mic scores the winning shot!");
+			inventoryContent.push("Winning Ball");
+			alert("You now have the 'Winning Ball' in your inventory!");
+			status = "Winning Ball";
+			alert("This is your status: " );
+			inventory();
+			quest5();
+		}
+	}
+	else {
+		alert("You didn't find the item to pass the quest!");
+		if (confirm("Do you want to restart Quest three?")== true) {
+			location.reload(quest3());
+		}
+		else {
+			alert("Now you have to start from the beginning.");
+			location.reload();
+		}
+	}
+}
+
+function quest5 () { // On the way back home!
+	if (status == "Winning Ball") {	
+	document.body.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJRwvK3FEQQIlyJt5wn_BAGAC-8c0Tr-j8FmBU0uwdDXLK6FoI')";
+	alert ("Welcome to Quest five! \n" + "On the way back home!");
+	alert("Now you are on the way back, when you get a flat tire.");
+	alert("Here's a store to repare the car.");
+	carStore();
+	alert("You now have '" + carInventory[whichCarPart] + "' in your inventory!");
+	status = "" + carInventory[whichCarPart] + " ";
+	alert("This is your status: " );
+	inventory();
+		if (status == "" + carInventory[whichCarPart] + " " || status == "" + storeContent[whichItem] + " ") {
+			alert("You have all the parts! Now the car is fixed and you can go home.");
+			alert ("The End!");
+		}
+		else if(status == "") {
+			alert("You don't have all the parts! So, the car still needs fixing!");
+			carStore();
+		}
+		else {
+			alert("Game Over!");
+		}
+	
+	}
+	else {
+		alert("You didn't find the item to pass the quest!");
+		if (confirm("Do you want to restart Quest four?")== true) {
+			location.reload(quest4());
+		}
+		else {
+			alert("Now you have to start from the beginning.");
+			location.reload();
+		}
+	}
+}
+
+function storyMic() { // Mic's story line
+	alert ("Not yet complete!");
+}
+
+function storyMax() { // Max's story line
+	alert ("A work in progress!");
+}
+
+function randomEventsOccur() {
+	randomEvent= Math.floor(Math.random() * 8 + 1);
+	//alert(randomEvent); // To see the random number
+	if (randomEvent == 1 || randomEvent == 8) {
+		alert("...that the place is a mess! Do you: ");
+		alert("Blame it on your brothers or Say a tornado kicked in?");
+		if (confirm("Blame it on your brothers.")== true) {
+			alert ("Your mom believes you and your brothers get in trouble.");
+			inventoryContent.push("Car keys");
+			alert("You now have 'Car keys' in your inventory!");
+			status = "Car keys";
+		}
+		else {
+			alert("Your mom knows you lied. Now you are in trouble.");
+		}
+	}
+	else if (randomEvent == 2 ) {
+		alert("... a box?");
+		alert("OPEN or Leave it?");
+		if (confirm("OPEN")== true) {
+			alert("You find your 'Car keys'!");
+			inventoryContent.push("Car keys");
+			alert("You now have 'Car keys' in your inventory!");
+			status = "Car keys";
+		}
+		else {
+			alert("You find 10 dallors.");
+			money += 10;
+			document.getElementById("currency").innerHTML = money;
+		}
+	}
+	else if (randomEvent == 3 || randomEvent == 6) {
+		alert("... your siblings fighting over the car keys.");
+		alert("Do you take the keys, Give them to Mom, or Give them to one of your siblings?");
+		if (confirm("Take the keys")== true) {
+			alert('"I am going to be driving the car!"');
+			inventoryContent.push("Car keys");
+			alert("You now have 'Car keys' in your inventory!");
+			status = "Car keys";
+		}
+		else if (confirm("Give them to Mom")== true) {
+			alert('"Mom is going to be driving the car!"');
+			inventoryContent.push("Car keys");
+			alert("You now have 'Car keys' in your inventory!");
+			status = "Car keys";
+		}
+		else {
+			alert("One of your other siblings is going to drive the car!");
+			inventoryContent.push("Car keys");
+			alert("You now have 'Car keys' in your inventory!");
+			status = "Car keys";
+		}
+	}
+	else {
+		alert("... nothing!");
+	}
+	
+}
+
+function randomEventsOccur2() {
+	randomEvent= Math.floor(Math.random() * 3 + 1);
+	//alert(randomEvent); // To see the random number
+	if (randomEvent == 1) {
+		alert("... a School Gear shop.");
+		if (confirm("Do you want to enter?")==true) {
+			alert("You go in and buy a 'OCU Flag'.");
+			inventoryContent.push("OCU Flag");
+			alert("You now have a 'OCU Flag' in your inventory!");
+			status = "OCU Flag";
+		}
+		else {
+			alert ("You don't go into the store and walk away.");
+		}
+	}
+	else if (randomEvent == 2) {
+		alert("... a person hold two flags.");
+		if (confirm("Do you want to talk to that person?")==true) {
+			alert("You go and he gives you a 'OCU Flag'.");
+			inventoryContent.push("OCU Flag");
+			alert("You now have a 'OCU Flag' in your inventory!");
+			status = "OCU Flag";
+		}
+		else {
+			alert ("You don't go talk to the person and walk away.");
+		}
+	}
+	else {
+		alert("...nothing on your walk.");
+	}
+}
+			
+// MAIN program execution
+//alert ("hi!"); // To make sure code is working 
+document.getElementById("currency").innerHTML = money; // Shows the money currently
+    </script>
+	
+	</body>
+
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>The Raven's Call, A Mini Text Adventure Game</title>
+		<style>
+		</style>
+	</head>
+	<body align="center"; style="background-image:url(assets/background.jpg); height: 100%; background-position: contain; background-attachment: fixed; background-repeat: no-repeat; background-size: cover; color: #000">
+	<h1>The Raven's Call</h1>
+	Created by: Jane Kosakowski
+	<br><br><br><br><br><br><br><br><br><br><br><br>
+	You stand in the center of a small village surrounded by numerous forests.<br>
+	The village is named Breezeholm.<br>
+	What do you want to do?<br>
+	<button id="shop" onclick="storeVisit()">Visit the store.</button><br>
+	<button id="inventory" onclick="viewInventory()">View inventory.</button><br>
+	<button id="job" onclick="splitWood()">Split logs for gold.</button><br>
+	<button id="explore" onclick="exploration()">Explore the forests.</button><br>
+	<button id="quest" onclick="questing()" disabled>Go on a quest.</button><br>
+	<button id="hundredpercent" onclick="hundredpercented()" disabled>Admire your treasures.</button>
+	
+	<script type="text/javascript">
+//COMMENTS SECTION
+/*
+Programmer: Jane Kosakowski
+Date Last Modified: 11-20-17
+Goal/Purpose: Create a small-scale text adventure game.
+Status: In development, has inventory and working shop.
+
+Release Notes:
+-Working Inventory, 11/6
+-Working Shop (Buy), 11/6
+-Working Shop (Sell), 11/8
+-Way to earn money, 11/13
+-Story in development, 11/17
+-Store kicks you out when out of stock/you have no items, 11/27
+-Random exploration in-dev, 11/28
+-Random exploration finished 11/29
+-Quest in-dev 11/29
+-Quest complete 11/29
+-Added check to inventory that tell you that you have nothing instead of being blank. 12/4
+*/
+   
+//Variables
+var inv = ["Copper Dagger", "Leather Armor"];
+var invPrice = [50, 100];
+var playerInv = "";
+var storeInv = ["Copper Longsword", "Studded Leather Armor", "Iron Dagger", "Steel Plate Armor", "Iron Longsword", "Tempered Steel Plate Armor", "Iorite Dagger", "Yondite Carapace", "Iorite Longsword", "Polished Yondite Carapace", "Whisper", "Deathwalker's Ward"];
+var storePrice = [200, 400, 400, 800, 600, 1200, 800, 1600, 1000, 2000, 10000, 20000];
+var storeChoices = "";
+var storePlayerInv = "";
+var storeBuy;
+var playerGold = 500;
+var exploreNumber;
+var foundTomb = 0;
+var wasGivenRelic = 0;
+var solvedRiddles = 0;
+var finishedGame = 0;
+var allItems = 0;
+
+//Functions
+
+function viewInventory() {
+	//runs a loop to assign a variable to display the player's inventory.
+	for (playerInvVar=0;playerInvVar<inv.length;playerInvVar++) {
+		playerInv += (playerInvVar+1) +". "+ inv[playerInvVar] + ", valued at " + invPrice[playerInvVar] + " gold.\n";
+	}
+	if (inv.length == 0) {
+		alert("You look in your bag at your belongings...\n\nNothing. \n\nYou also have " + playerGold + " gold.");
+		playerInv = "";
+	} else {
+		alert("You look in your bag at your belongings...\n\n" + playerInv + "\nYou also have " + playerGold + " gold.");
+		playerInv = "";
+	}
+}
+
+function storeVisit() {
+	//used for listing buy items
+	function storeListInv() {
+		for (b=0;b<storeInv.length;b++) {
+			storeChoices += (b+1) +". "+ storeInv[b] + " for " + storePrice[b] + " gold.\n";
+		}
+	}
+	//used for listing sell items
+	function storeListPlayerInv() {
+		for (s=0;s<inv.length;s++) {
+			storePlayerInv += (s+1) +". "+ inv[s] + " for " + invPrice[s] + " gold.\n";
+		}
+	}
+	//used to buy items
+	function storeBuying(storeBuyalog) {
+		if (storeInv.length == 0 || storeInv.length == null) {
+			alert('Enora smiles. "Alright! Give me a moment, please." She walks into the pack for a few minutes and walks out with wide eyes. "Uh... We don' + "'" + 't exactly have anything left, ' + "'" + 'cause you musta bought it all. In that case... Uh..." She awkwardly tells you to leave.')
+		} else {
+			var storeBSelect = prompt(storeBuyalog);
+			if (isNaN(storeBSelect)==true || storeBSelect < 0 || storeBSelect > storeInv.length) {
+				storeBuying('"Huh? What item is that?"\nYou have ' + playerGold + ' gold.\n\n' + storeChoices);
+			} else if (storeBSelect == "" || storeBSelect == null) {
+				alert('You turn around and walk out of the store after bidding farewell. Enora gives an exaggerated wave with a bright smile and says to you as you leave, "See ya later!"')
+			} else {
+				if (confirm("Are you sure you want to buy the " + (storeInv[storeBSelect-1]) + " for " + storePrice[storeBSelect-1] +" gold?")==true) {
+					if (playerGold < storePrice[storeBSelect-1]) {
+						storeBuying('"You don' + "'" + 't have enough gold for that!"\n(You have ' + playerGold + ' gold.)\n\n' + storeChoices);	
+					} else {
+						playerGold -= storePrice[storeBSelect-1];
+						alert("You bought the " + storeInv[storeBSelect-1] + " for " + storePrice[storeBSelect-1] + ". You have " + playerGold + " gold left.")
+						storeBuy = storeInv.splice(storeBSelect-1,1);
+						storeBoughtPrice = storePrice.splice(storeBSelect-1,1);
+						storeBoughtPrice /= 2
+						invPrice.push(storeBoughtPrice);
+						inv.push(storeBuy);
+						storeChoices = ""
+						storeListInv();
+						storeBuying('Enora places the item on the counter. You take the item and put it in your inventory. "Anything else you wanna buy from me?"\nYou have ' + playerGold + ' gold.\n\n' + storeChoices);
+					}
+				} else {
+					storeBuying('"Ok, what else would you like?"\nYou have ' + playerGold + ' gold.\n\n' + storeChoices);
+				}
+			}
+		}
+	}
+	//used to sell items
+	function storeSelling(storeSellalog) {
+		if (inv.length == 0 || inv.length == null) {
+			alert('Enora smiles. "Alright! Let' + "'" + 's see what you ha- Wait a moment..." She looks at the empty bag you set on the counter. "You don' + "'" + 't have anything to sell! Come back when you wanna sell something and not waste my time." She frustratedly tells you to leave.')
+		} else { 
+			var storeSSelect = prompt(storeSellalog);
+			if (isNaN(storeSSelect)==true || storeSSelect < 0 || storeSSelect > storeInv.length) {
+				storeBuying('Enora cocks her head. "Huh? What item is that?"\nYou have ' + playerGold + ' gold.\n\n' + storePlayerInv);
+			} else if (storeSSelect == "" || storeSSelect == null) {
+				alert('You turn around and walk out of the store after bidding farewell. Enora gives an exaggerated wave with a bright smile and says to you as you leave, "See ya later!"')
+			} else {
+				if (confirm("Are you sure you want to sell the " + (inv[storeSSelect-1]) + " for " + invPrice[storeSSelect-1] +" gold?")==true) {
+					playerGold += invPrice[storeSSelect-1];
+					alert("You sold the " + inv[storeSSelect-1] + " for " + invPrice[storeSSelect-1] + ". You have " + playerGold + " gold now.")
+					storeSell = inv.splice(storeSSelect-1,1);
+					storeSoldPrice = invPrice.splice(storeSSelect-1,1);
+					storeSoldPrice *= 2
+					storePrice.push(storeSoldPrice);
+					storeInv.push(storeSell);
+					storePlayerInv = "";
+					storeListPlayerInv();
+					storeSelling('Enora stores the item under the counter. "Anything else you wanna sell to me?"\nYou have ' + playerGold + ' gold.\n\n' + storePlayerInv);
+				} else {
+					storeSelling('She shrugs off your indecision. "Ok, what else would you like to sell?"\nYou have ' + playerGold + ' gold.\n\n' + storePlayerInv);
+				}
+			}
+		}
+	}
+	function storeEnter(storeEnterDialog) {
+	//used when player enters store
+		var storeEnterSelect = prompt(storeEnterDialog)
+		if (storeEnterSelect == null || storeEnterSelect == "") {
+		alert('You turn around and walk out of the store after bidding farewell. Enora gives an exaggerated wave with a bright smile and says to you as you leave, "See ya later!"')
+		} else if (storeEnterSelect.toLowerCase() == "selling" || storeEnterSelect.toLowerCase() == "sell" || storeEnterSelect.toLowerCase() == "sellin'" || storeEnterSelect.toLowerCase() == "sellin" || storeEnterSelect.toLowerCase() == "s") {
+			storeSelling('"Sure, I' + "'" + 'll take a look at your things."\nYou have ' + playerGold + ' gold.\n\n' + storePlayerInv);
+		} else if (storeEnterSelect.toLowerCase() == "buying" || storeEnterSelect.toLowerCase() == "buy" || storeEnterSelect.toLowerCase() == "buyin'" || storeEnterSelect.toLowerCase() == "buyin" || storeEnterSelect.toLowerCase() == "b") {
+			storeBuying('"What can I get you?"\nYou have ' + playerGold + ' gold.\n\n' + storeChoices);
+		} else {
+		storeEnter('Her eyes dart around and she giggles nervously. "Uh... Buying or selling...?"');
+		}
+	}
+	storeListInv();
+	storeListPlayerInv();
+	storeEnter('As you enter the store, you see numerous weapons and armor suits layed out on display on display stands and tables alike. You are then greeted by a happy young woman behind the counter. \n"Welcome to Enora' + "'" + 's Emporium! I' + "'" + 'm Enora. So, buyin' + "'" + ' or sellin' + "'" + '?"')
+	storeChoices = "";
+	storePlayerInv = "";
+}
+
+function splitWood() {
+	//Job function, allows player to get gold.
+	function woodJob(woodQuestion) {
+		var woodChop = prompt(woodQuestion);
+		if (woodChop == null) {
+			alert('You lean the axe against the stump and wipe the sweat from your brow. The woodmill' + "'" + 's worker walks over to you. "Great work! Hope I can count on ye to cut some more wood for us soon. We could really use someone like ye workin' + "'" + ' full time." He hands you the bag of gold, your pay, and walks back to his work area on the saw mill.');
+		} else if (woodChop.toLowerCase() == "chop") {
+			playerGold += 10;
+			woodJob('In one fell swoop, you split a log. The workers shouts out to you, "Ha-HA! Amazing cut!" He' + "'" + 's keeping count of how many logs you' + "'" + 've cut so far by placing 10 gold pieces into a bag after every chop. \n\nType ' + "'" + 'chop' + "'" + ' to split another log. \nYou now have ' + playerGold + ' gold.');
+		} else {
+			woodJob('You miss the log completely. You can faintly hear the sound of the worker stifling a laugh. You shrug it off and prepare for another swing.  \n\nType ' + "'" + 'chop' + "'" + ' to split the log. \nYou have ' + playerGold + ' gold.');
+		}
+	}
+	woodJob('You notice a piece of parchment tacked to the town' + "'" + 's notice board. You search for a few minutes across numerous pieces of news and offers until one offer strikes your eye. It has a picture of a tree and an axe that reads "Help wanted! Log cutter for 10 gold a log! Pay after every log!" You decide to take up the offer and head to the saw mill. A worker walks over to you and asks, "Are ye here for work? Great!" He points to a stump with an axe leaning into it, a large pile of small logs in a monstrous pile next to it. "Just head over there and start cuttin' + "'" + '. I' + "'" + 'll keep count of how many ye chop." He walks over to a table that overlooks the logging area. You walk over to the stump and pick up the axe. You then place a log square on the stump and prepare a swing. \n\nType ' + "'" + 'chop' + "'" + ' to split the log. \nYou have ' + playerGold + ' gold.');
+}
+
+function questing() { //5 part quest, only activates after exploring and reaching a certain event.
+	function questpart1() { //starting the quest
+		alert('You gear up and set off on your quest to find the cultists who desecrated Vax' + "'" + 'ildan' + "'" + 's tomb. After numerous hours of searching, you end up at a cave' + "'" + 's mouth. You hear chanting coming from within. As you sneak through, you see the cultists performing a ritual. What is happening...?');
+		questpart2();
+	}
+	
+	function questpart2() { //checks for a hidden item ooooooo
+		if (Boolean(solvedRiddles)==true){
+			alert("You slip on the Ring of Invisibility and slowly start to kill every cultist in the cave. After the deed is done and the ritual stopped, you leave the cave. Your quest is over. \n\n You gained 50000 gold!")
+			playerGold += 50000;
+			alert('You win! Thanks for playing! Either keep playing and try to get every item, or refresh to play again!');
+			finishedGame = 1;
+			document.getElementById('hundredpercent').disabled = false;
+		} else {
+			alert('A cultist turns around and notices you. The last thing you see is a cultist bee-lining you with a black mace.');
+			alert('You awaken in a dark realm. Black tendrils reach out and fill the edges of your vision. This is it, this must be her.');
+			alert('The Raven Queen. The Goddess of Death herself.');
+			alert('"Who is this little insolent one, trespassing into my domain? We' + "'" + 'll see why they call me the Raven Queen soon." She bellows. A flock of ravens shoot out from behind her. They all dart towards you.')
+			questpart3();
+		}
+	}
+	
+	function questpart3() { //checks for the dagger
+		var hasDagger = storeInv.includes('Whisper');
+		if (hasDagger == false) {
+			questpart4();
+		} else {
+			alert('The ravens engulf you. You feel the burning pain of multiple piercing beaks hit you. You are ripped, torn, and devoured alive by the Raven Queen' + "'" + 's unkindness of ravens. The last thing you see before you slip unconscious is a raven dive at your eye.');
+			alert('You die. Game over. \nRestarting the game.')
+			location.reload();
+		}
+	}
+	
+	function questpart4() { //checks for the armor
+		alert('The Raven Queen hesitates, ordering the unkindness to fly over you. "Wait. This one is different..." The ravens land around you, standing at attention. "You have it. Whisper. My Vax' + "'" + 's dagger. You wouldn' + "'" + 't happen to have..."');
+		var hasArmor = storeInv.includes("Deathwalker's Ward");
+		if (hasArmor == false) {
+			questpart5();
+		} else {
+			alert('"No... You' + "'" + 're just a filthy usurper. You must be purged." She orders the ravens to swarm you, and they do as she asks. You get pelted with the razor-sharp beaks of hundreds of ravens as they tear the flesh from your bone.')
+			alert('You die. Game over. \nRestarting the game.')
+			location.reload();
+		}
+	}
+	
+	function questpart5() { //quest/game ending, only reachable with the dagger and armor.
+	alert('"Yes... You have Vax' + "'" + 's gifts. You are truly one trying to help. This once, I will let you leave." She points a finger at a recently opened portal to the cultist' + "'" + 's cave. "Go." Without hesitation, you run through the portal, stumbling as you get up. As you exit through the portal to the cave, the portal shuts behind you, the Raven Queen appeased...');
+	alert('...For now.');
+	playerGold += 30000;
+	alert('You win! Thanks for playing! Either keep playing and try to get every item, or refresh to play again!');
+	finishedGame = 1;
+	document.getElementById('hundredpercent').disabled = false;
+	}
+	if (finishedGame == 0) {
+		questpart1();
+	} else {
+		alert('You can' + "'" + 't seem to find the cave where you encountered the Raven Queen anymore. You then remember that quest is completed.');
+	}
+}
+
+function exploration() {
+	exploreNumber = Math.floor(Math.random()*10)
+	alert('You gear up and leave town to explore the area outside the village.');
+	switch (exploreNumber) {
+		case 0: //minor positive event.
+			playerGold += 250
+			alert('You wander through the forest and stumble upon an inanimate skeleton. Next to the skeleton is a small pouch of gold, which you take. You return to Breezeholm and count the gold in the pouch, adding it to your own funds as you count.\n\nYou gained 250 gold! \nYou now have ' + playerGold + ' gold.');
+			break;
+		case 2: //the only negative event.
+			playerGold -= 100
+			alert('While wandering through the forests, you hear soft, dull thudding. You shrug it off and continue wandering. When you return to the village, you notice that your gold pouch is a bit lighter.\n\nYou lost 100 gold! \nYou now have ' + playerGold + ' gold.');
+			break;
+		case 4: //major positive event, only able to be encountered once.
+			if(Boolean(wasGivenRelic)==false) {
+				alert('While leaving the town, an older townswoman runs up to you hurriedly. "Here, take this! Don' + "'" + 't tell anyone or I' + "'" + 'll gut you like a deer." She puts a bag in your hand. It isn' + "'" + 't gold, but an item. \n\nYou got an odd valuable gemstone!');
+				inv.push("Odd Valuable Gemstone");
+				invPrice.push(25000);
+				wasGivenRelic = 1;
+			} else {
+				alert('You wander through the same place the townswoman gave you that dusty relic, before exploring the forests for a few hours.')
+			}
+			break;
+		case 6: //the quest event.
+			if(Boolean(foundTomb)==false){
+			alert('Wandering through the forests, you find a clearing with a stone mausoleum, adorned with carvings of ravens in flight and assassins in the night. You feel as if you' + '"' + 've seen this before. This is this tomb of the great rogue-paladin who was apart of a legendary group who saved the world.')
+			alert('This is the tomb of Vax' + "'" + 'ildan of Vox Machina.')
+			alert('Creeping closer to the tomb, you hear crows in the distance. You reach for the iron-wrought fence and grip it, chills running up your spine. Inside the mausoleum is an altar, etched into the platform is the rogue, Vax, wielding his legendary dagger Whisper while clad in his signature armor, the Deathwalker' + "'" +'s Ward. Dried blood crusts its surface. It seems as if someone has been making offerings to the Raven Queen using Vax' + "'" + 'ildan' + "'" + 's altar as a conduit.')
+			alert('You need to find who is doing this. You take note of this and return to the village, post haste.\n\nMake sure you stock up on special gear at the store.')
+			foundTomb = 1;
+			document.getElementById('quest').disabled = false;
+			} else {
+			alert('You find the tomb of Vax' + "'" + 'ildan again while wandering through the forest. Ravens caw in the distance. You turn back and return to the village.')
+			}
+			break;
+		case 8: //the riddle event for the hidden item.
+			function riddlebug1(riddleGuess1) { //first riddle
+				var playerSolve1 = prompt(riddleGuess1);
+				if (playerSolve1.toLowerCase() == "pencil lead") {
+					alert('"Correct! Let' + "'" + 's move on to the next one!"');
+					riddlebug2('Try and name an eight letter word that has kst in the middle, in the beginning, and at the end.');
+				} else {
+				alert('"Wrong! Maybe someday you' + "'" + 'll figure it out!" You feel a breeze, and as you blink, the Riddlebug is gone, taken with the wind. You travel back to the village.')
+				}
+			}	
+			function riddlebug2(riddleGuess2) { //second riddle
+				var playerSolve2 = prompt(riddleGuess2);
+				if (playerSolve2.toLowerCase() == "inkstand") {
+					alert('"Correct again! Let' + "'" + 's move on to the final riddle!"');
+					riddlebug3('You carry it everywhere, but it never gets heavy. What is it?');
+				} else {
+				alert('"Wrong! Maybe someday you' + "'" + 'll figure it out!" You feel a breeze, and as you blink, the Riddlebug is gone, taken with the wind. You travel back to the village.')
+				}
+			}	
+			function riddlebug3(riddleGuess3) { //third riddle, gives you hidden item, which can be sold for idiots who dont want to beat the game quickly :^)
+				var playerSolve3 = prompt(riddleGuess3);
+				if (playerSolve3.toLowerCase() == "your name" || playerSolve3.toLowerCase() == "my name" || playerSolve3.toLowerCase() == "name" || playerSolve3.toLowerCase() == "a name") {
+					alert('"Aha! You got them all correct! Here, take this!" A breeze blows by as you blink, and the Riddlebug has disappeared. However, you notice that the tree has a small hidden compartment that opened; A silver ring with a yellow gemstone on it. You take the ring, which at first is unassuming, but then as you put it on, your hands fade away before your very eyes! A magic ring! \n\nYou gained the Ring of Invisibility!')
+					inv.push('Ring of Invisibility');
+					invPrice.push(1250);
+					solvedRiddles = 1;
+				} else {
+				alert('"Wrong! Maybe someday you' + "'" + 'll figure it out!" You feel a breeze, and as you blink, the Riddlebug is gone, taken with the wind. You travel back to the village.')
+				}
+			}	
+			if (Boolean(solvedRiddles)==false) {
+				alert('In the deeper part of the woods, you hear a voice call out to you. "Psst, hey! Hey, you!" You look towards the sound and... A tree? No, that doesn' + "'" + 't seem right... "No, dummy, over HERE! On the leaf!" You look at one of the leaves on the tree and spot a bright purple and orange beetle. "They call me the Riddlebug. Wanna solve some riddles? I got something for ya if you do!"');
+				if (confirm('This is probably the weirdest thing to happen to you. Do you want to solve riddles that this Riddlebug is giving you?')==true) {
+					alert('"Alright! I gots three riddles for ya. Let' + "'" + 's see..."');
+					riddlebug1('"I am stolen from the depths of earth and sealed away in a case of wood, from which I will never be released. But yet, I am used by nearly everyone. What am I?"')
+				} else {
+					alert('"Aww, okay. Do come back though! I get lonely..." You say farewell to the Riddlebug and wander back to Breezeholm.');
+				}
+			} else {
+			alert('You wander upon the same tree the Riddlebug is on. Ahh... Good times... You walk back to the village after exploring for a little while.');
+			}		
+			break;
+		default:
+			alert('After wandering around the forests outside Breezeholm for a while, nothing interesting happens. You return back to town.');
+	}
+}
+
+function hundredpercented() {
+	var itemCheck = 16 - inv.length;
+	if (allItems == 1) {
+		alert("You've already collected every item in the game. What more could you wish for?");
+	} else {
+		if (inv.length >= 16) { //checks for every item in the game
+			alert("As you lay out everything you've earned through your travels, you smile as everything that you wish to see is there. However, you notice something that wasn't there before. A small silver ovoid object, glistening in the sun.");
+			alert("It smells really, REALLY bad.")
+			alert("It's poop covered in tin foil.")
+			alert("You gained the Silver Squish Stone!")
+			inv.push("Silver Squish Stone");
+			invPrice.push("1000000000");
+			allItems = 1;
+		} else {
+			alert("You lay out everything you've earned through your travels, and frown slightly. You feel like you're missing something... \n\n You're missing " + itemCheck + " item(s).");
+		}
+	}
+}
+	
+
+	
+    </script>
+	</body>
+</html>

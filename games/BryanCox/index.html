@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>THE MTAG</h2>
+
+<button onclick="displayInventory()">Inventory</button>
+
+<button onclick="displayStore()">Store</button>
+
+<button onclick="quest1()">Start</button>
+
+<button onclick="checkQuest()">Continue/Next Quest</button>
+
+<p id="demo"></p>
+<script>
+// COMMENTS SECTION
+
+/* 
+// Part a:  
+Programmer: Bryan Cox
+Date Last Modified: 11/20/17
+Goal/Purpose: Mini Text Adventure Game
+Status: Incomplete
+
+// Store and inventory completed, need to work on main story
+// Develop input box to allow player input and choices
+*/
+
+// Variables section
+
+var hasNotebook = 0;
+
+//used for quest 3
+
+var whichChoice;
+
+//prompt for quest 1
+
+var whichChoice2;
+
+//prompt for quest 2
+
+var whichChoice3;
+
+//prompt for quest 3
+
+var whichChoice4;
+
+//prompt for quest 4
+
+var whichChoice5;
+
+//prompt for quest 5
+
+var status = 0;
+
+//used to track quest progress
+
+var toDisplay = "";
+
+//prompt used for store
+
+var playerInv = "";
+
+//used as variable to display player inventory, reset afterwards
+
+var backpack;
+
+//variable used to alert the "playerInv" variable upon button press
+
+var whichItem;
+
+//displays the "toDisplay" variable in a prompt for the store
+
+var storeItems = [
+"Sword",
+"Map", 
+"Worn Armor", 
+"Strange Shard", 
+"Waraxe", 
+"Dusty Spellbook", 
+"Stranger's Notebook", 
+"Healing Potion", 
+"Mana Potion", 
+"Titanium Armor"];
+
+//items displayed in store
+
+var storePrices = [
+10, 
+5, 
+20, 
+100, 
+50, 
+25, 
+7, 
+30, 
+15, 
+150];
+
+//prices for each item displayed in store
+
+var inventory = [
+"Notebook", 
+"Worn Out Clothes", 
+"Old Flashlight"];
+
+//starting inventory for player
+
+var goldCount = 20;
+
+//starting amount of currency for player, being gold
+
+
+// Functions section
+
+function displayInventory(){
+	for(i=0; i<inventory.length; i++){
+
+		playerInv += inventory[i]+","+"\n"
+	
+	}
+	
+	backpack = (alert(playerInv)-1)
+	
+	alert("You Have"+" "+goldCount+" "+"Gold.")
+	
+  if (goldCount==0){
+    
+	alert("Looks like you're broke, my guy.")
+  
+  }
+	
+	playerInv = ""
+}
+
+//function used to display the player inventory
+
+function displayStore(){
+	for(i=0; i<storeItems.length; i++){
+
+		toDisplay += (i+1)+"."+" "+storeItems[i]+" "+"("+storePrices[i]+" "+"Gold"+")"+"\n";
+    }
+  
+  whichItem = (prompt(toDisplay)-1);
+  
+  if (goldCount>=storePrices[whichItem]){
+	
+	goldCount-=storePrices[whichItem];
+	inventory.push(storeItems[whichItem]);
+	alert("You have bought"+" "+storeItems[whichItem]+" "+"for"+" "+storePrices[whichItem]+" "+"gold.")
+	alert("You now have"+" "+goldCount+" "+"Gold.");
+  
+  }else {
+  
+    alert("You can't afford this item right now, try again later.")
+  
+  }
+  
+  if (goldCount==0){
+  
+    alert("Looks like you're broke, my guy.")
+  
+  }
+ 
+  toDisplay = "";
+  
+
+}
+
+//main function for the store in-game
+
+function checkQuest(){
+  if(status==1){
+    quest2()
+ }
+  if(status==2){
+    quest3()
+ }
+  if(status==3){
+    quest4()
+ }
+   if(status==4){
+    quest5()
+ }
+
+}
+
+function quest1(){
+ alert("You awake, cold and dark in the depths of a forest. You feel groggy and weak, hardly able to stand. You can't remember anything about your past, but something seems off. In the distance you spot a nearby village.")
+ whichChoice = prompt("What should you do?\n 1. Don't trust the village and wander past\n 2. Stumble your way towards the village\n 3. Do nothing")
+
+  if (whichChoice==1){
+    alert("You continue to stumble your way through the forest until you eventually get lost and collapse. Probably shoulda trusted that village, huh?")
+    alert("Game Over")
+  }
+  
+  if (whichChoice==2){
+    alert("As you stumble into the village, you collapse on the ground nearby an old, worn house. The resident of the house sees this, and throwing you over his back, he carries you into his house, and onto a bed. He gives you some water and feeds you before you eventually drift off to sleep.");
+    status++;
+  }
+  
+  if (whichChoice==3){
+    alert("Why did you even choose this? I literally made this choice as a joke not thinking anyone would choose it. You know what? I'm taking all of your gold. I'm disappointed in you.")
+    goldCount-=20;
+  }
+  
+}
+
+function quest2(){
+ alert("As you wake from your rest, you are greeted with a smile from the man who took you in. He asks you if you can remember anything from the past few days.")
+ whichChoice2 = prompt("You don't know if you can trust this guy. Do you want to:\n 1. Tell him the truth\n 2. Lie to him")
+
+  if(whichChoice2==1){
+    alert("You explain that you can't remember anything at all, the last thing you can remember is waking up in the forest and wandering towards the village.")
+	alert("He tells you he remembers watching you walk into the forest about a week ago, but shortly after he saw someone run out of the forest carrying a strange glowing ball, but there seemed to be a piece missing. He tells you he saw him run off towards the nearby castle of Andenburg, but he seemed to have dropped his notebook, which the shopkeeper stole. You wonder if he had anything to do with your amnesia.")
+	alert("He gives you some food and water, and sends you on your way.")
+    status++;
+  }
+  
+  if(whichChoice2==2){
+    alert("He explains you looked a bit banged up, he was just curious what had happened. He gives you more food and water, but informs you that you can't stay in the village any longer.")
+	alert("You decide to try to find refuge in the forest, just to sleep through the night. This doesn't last long, however, as a bear attacks you while your sleeping. At least it's better than starving to death.")
+	alert("Game over")
+  
+  }
+}
+
+function quest3(){
+ alert("This quest is supposed to be inaccessible without the notebook in the shop, but I haven't finished the code yet. This will change in the final version of the game.")
+ alert("You decide to read the contents of the notebook. The writing is scrawled, but you can make out some of the text. From what you understand, that stranger with the orb was actually the baron of castle Andenburg, and he seemed to be rambling about taking someone's past life. You seem to be getting somewhere, but you aren't sure if you want to confront him yet.")
+ whichChoice3 = prompt("Choices:\n 1. Ask around town for some background information on the baron\n 2. Start journeying towards the castle\n 3. Live in the village, forget about your past")
+  
+   if(whichChoice3==1){
+    alert("You ask whoever you can about the baron, and his castle. From what most of the townsfolk said, he's just a mysterious old man who lives in his castle, they didn't know much about him. However, as you go to question one in particular, he seems a bit off, fidgeting in his seat and acting nervous as soon as you begin to question him. He begins to warn you to stop investigating, and turn around before it's too late. You decide to question him further, as he seems to know more about this situation than the other townsfolk, but are cut short when he pulls out a gun from his back pocket and shoots you. Might have been a good idea to heed his warning.")
+	alert("Game over")
+  
+  }
+
+  if(whichChoice3==2){
+    alert("You decide to")
+  
+  }
+
+}
+</script>
+</body>
+</html>

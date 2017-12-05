@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+body {
+	background-image: url('https://images4.alphacoders.com/552/552093.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position:center;
+	background-size: 1440px 1000px
+}
+</style>
+<button onclick="Showinventory">Inventory</button>
+<button onclick="shop()">Shop</button>
+<button onclick="Quest1()">Quests</button>
+<button onclick="storyIntro()">story introduction</button>
+
+
+<script>
+//variables
+var inventory = ["Enrollment letter","Robes","Hat","Wand","Class Books","Familiar Caller"];
+var storeItems = ["Magic Book","Quill & Ink","Notebook","Mysterous Potion","Pebble","Flowers","Celestial Key","Empty vial","Sword","Shield"];
+var storePrice = ["25","5","10","0","10","10","30","5","2","2"];
+var currency = 80;
+var whichItem;
+var toDisplay;
+ /*
+ name: Sarah halladay
+ date last modified:11/30/17
+ goal/purpose: wanting a working text adventure game
+ status: Almost working... :')
+ */
+function storyIntro(){
+    alert("You're Kain ventorum, a son of a farmer. Your family never held anything special about them. You've grown up on the farm for most of your life, daydreaming of the protectors of the kingdom. The mages and knights are the guardians that are sworn to protect the crown, the highest honour to have.")
+    alert("You one day recieve a letter addressing a Kain Ventorum.")
+	alert("The letter goes into detail how you're invited to the Nix Academy of Knighthood and Magic as a transfer student of a mundane program they're implimenting.")
+	alert("You recieve a few items besides your enrollment letter.")
+}	
+	
+	
+function shop(){
+	toDisplay = "";
+
+	for (i = 0; i < storeItems.length; i++){
+		  toDisplay +=(i+1)+". "+storeItems[i]+"\n";
+		  //alert (buyitem)
+	}
+	alert(toDisplay)
+	
+	whichItem = prompt("whichItem(Use Number ID\n"+toDisplay) // stores user choice as a number
+	whichItem--;  // Why -->?  adjust to right element number
+	alert(whichItem)
+	if(whichItem < storeItems.length && buyItem>=1){
+		inventory.push(storeItem[whichItem]-1) // Final piece of transaction -- GIVES item to person
+	}
+	/*
+	if (currency >= storePrice[buyitem]) {
+	inventory.push(storeItems{buyitem])
+	alter("You have obtained" + storeItems[buyitem])
+	currency-= storePrice[buyitem]
+	}
+	*/
+}
+
+function Showinventory(){ //Displays/ calls inventory --- shows what we added to it from the store.
+	toDisplay = "";
+alert(showinventory)
+	
+	for (i = 0; i < inventory.length; i++){
+		  toDisplay +=(i+1)+". "+inventory[i]+"\n"; 
+		  //alert (buyitem)
+	}
+	alert(toDisplay)
+}
+/*
+function myFunction() {
+    storeItems.push("Store");
+    document.getElementById("demo").innerHTML = storeItems;
+	storeItems.splice();
+}
+*/
+function Quest1() {
+alert("you were dropped off without explination, left to your own devices.")
+alert("you wander around before bumping into the head of the Nix Academy.")
+alert("Director Swain: Go find your magic class, Kain. You're already late.")
+alert("You head down the hallway quickly noticing that the path splitting off in two directions.")
+alert("Choose the left or right path to continue on.")
+	
+
+alert("top of quest 2")
+quest2()
+}
+function quest2() {
+alert("You arrive out of breath at magical defense and recognition class.")
+alert("Professor Draven: You're late,Kain!Since you are here why don't you be our volunteer for this demonstration.")
+alert("At the front of the class would be a cage with a medium size beast. You'd reconize it as a Fel-Hound. A demon that can devour one's magic and leave them as a lifeless husk.")
+alert("Professor Draven:Your assignment is to tell me how to beat this beast or show me. Either way its beneficial, don't be late again.")
+alert("Figure out how to beat the Fel-Hound.")
+alert("Out of the corner of your eye a student was fiddling with a purple flower, the same one from the store.")
+
+alert("top of quest 3")
+quest3()
+}
+function quest3() {
+alert("After leaving magical defense class you wander towards your next class, history of the dark arts.")
+alert("as you enter the class would be focused up front.")
+alert("Professor Magni: And that class is how you tell the difference of a curse spell and a hex. Ah, welcome our new transfer, Kain Ventorum.")
+alert("The class stares at you wearily, muttering.")
+alert("Professor magni; Kain, tell me the difference of a curse and a hex! Let me see how well you know these things, buahah!")
+alert("Give the best possible answer.")
+
+
+alert("top of quest 4")
+
+quest4()
+}
+function quest4() {
+alert("You trudge towards the training field, feeling disheartened.")
+alert("When you arrive you're greeted with someone being thrown into you. You both went sprawling onto the ground.")
+alert("Combatant Bajeerah: Looks like our new recruit finally joins us. Lets see what you got, I dislike late students!")
+alert("Figure out how to beat the intructor.")
+alert("Top of quest 5")
+quest5()
+}
+function quest5() {
+alert("After leaving the training field with a headache. You walk towards you final class for the day, Potions and poisons.")
+Alert(" As you enter the class a big, pink explosion fill the class. Everyone was coughing.")
+alrert("Professor Phaeith: Sorry, sorry! I added too much fig root.")
+alert("The professor would be coated in pink substance as she looks around, beaming as she spots you!")
+alert("Professor Phaeith: Ah, come in come in! You must be kain, welcome to my class. I hope you like it here.")
+alert("Phaeith looks you over curiously.")
+alert("Did you by chance grab a potion or made any? I would love it if you came up front and demonstrate whatever you brought or make for us!")
+alert("Offer up a potion.")
+
+}
+
+shop();
+Showinventory();
+
+</script>
+</body>
+</html>

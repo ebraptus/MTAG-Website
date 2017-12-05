@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3 style="color:White;">The Lab</h3>
+<button onclick="michaelsInventory()">Michaels Gear</button>
+<button onclick="selectItem()">Matteo And Kittys Laboratory</button>
+<button onclick="startAdventure()">Enter The Chaos</button>
+<button onclick="startDLC()">SpiderTeens Wierd Dating Simulator</button>
+<p id="demo"></p>
+
+
+<body style ="background-image: url('https://cdnb.artstation.com/p/assets/images/images/001/449/445/large/adam-zemany-scifi-1.jpg?1446623735');">
+<script>
+
+var Money = 1000;
+var userChoice;
+var toDisplay = "";
+var whichItem;
+var whichChoice = "";
+
+var matteoAndKittysLaboratory = ["Health shot",
+"24 Bullets", 
+"Strength Enhancer",
+"Gun Repair kit",
+"Lightsaber Repair Kit",
+"Clothing Repair Kit" ];
+
+
+
+var prices = [20, 
+54,
+30,
+40,
+40,
+10
+];
+
+
+var michaelsGear = [".44 Colt Python", "Lightsaber", "Magnum Bullets", "Holster Belt", "Black Vest", "White Long Sleeved Under Shirt", "Speed Reloaders"]
+/*
+
+var userchoice = ;
+
+*/
+
+
+function selectItem() {
+alert("Matteo works at his lab as Kitty types away at her computer, at first they don't see you rapple upside down from the ceiling but eventually Kitty notices your presence and smiles at you. 'Hey, Michael! What brings you here?' she says, alerting Matteo of your presence. 'Whats up dude?' he says.")
+toDisplay = "";
+for(i=0; i<matteoAndKittysLaboratory.length; i++) {
+toDisplay += (i+1)+". "+ matteoAndKittysLaboratory[i]+"\n";
+}
+
+whichItem = (prompt(toDisplay));
+whichItem--;
+
+alert("You have chosen the " + matteoAndKittysLaboratory[whichItem] + " which costs "+ prices[whichItem]+ "."); 
+if(Money >= prices[whichItem]) {
+userSelect = confirm("Hey dude you sure you wanna get this? You've got " + Money + " cash to spend.")
+
+}
+
+if (userSelect == true){
+
+
+alert("You have bought the " +matteoAndKittysLaboratory[whichItem]+ ".")
+
+Money -= prices[whichItem]
+alert(Money + " is how much Money you have left. 'Well It was good seeing you again!' said Kitty. 'We'll, see you around hopefully.' said Matteo ")
+alert("1* Current gear is \n"+michaelsGear)
+michaelsGear.push(matteoAndKittysLaboratory[whichItem])	
+//pushes the item you buy into the inventory
+
+}
+
+
+
+else {
+alert("'Well, I'm sure we can find something around here you can use.' Says Kitty, staying optimistic.")
+}
+
+}
+
+function michaelsInventory() {
+showMichaelsGear = "";
+
+for (i=0;i<michaelsGear.length;i++) {
+showMichaelsGear += (i + 1)+ ". ~" + michaelsGear[i] + "\n"
+}
+alert("Michaels Gear \n" + "\n" + showMichaelsGear) ;}
+
+
+function startAdventure() {
+alert ("Mission Transmission to Michael Jackson 'SPIDERTEEN' & Jenny Wakeman 'XJ-9' from Hall, Matteo:")
+
+alert ("So it looks as if theres a SkyWay patrol base that operates more in secret on their payroll. You both have to go in there and take information from their main computer so it can be admissable as evidence in court and may finally take down SkyWay Patrol once and for all!")
+
+alert (" End Transmission")
+
+alert ("You and Jenny silently sneak to the side of the building. Around the corner are two guards manning the door. You look up and also see a ventalation shaft big enough for the both of you to climb through.")
+
+
+whichChoice = prompt ("What will you do? \n 1. Take out the guards out front. \n 2. Take the ventalation shaft. \n 3. Go home and relax. This really isnt that important! \n ");
+
+if (whichChoice == 1){
+alert ("You and Jenny take the guards by surprise. But the guards regain their wits and put up a good fight. During the scuffle one of them manage to escape into the building and set off an alarm. Locking the whole building down and keeping you both out. \n YOU FAILED.");
+location.reload();
+}
+else if (whichChoice == 2){
+alert ("You scale up the wall and Jenny silently jets up behind you. You place your hand on the wall and use your strength to pull the grate off. You move to the side holding the grate and Jenny hovers closer as she leans into the opening. She crawls in and deactivates her jets as you crawl in after her, placing the grate back on the vent. You both successfully start crawling through the vents.");
+alert ("You both climb through the vent, occasionally bumping into one another as the vent isn't the most spacious.")
+whichChoice = prompt ("You and Jenny reach a split in the shaft. One goes left, the other goes right. \n 1. Go down the left shaft. \n 2. Go down the right shaft. \n ");
+
+if (whichChoice == 1) {
+alert ("You and Jenny crawl down the hallway and accidentally fall down into a room where tou see a big drawing board of pictures of you and your various adventures dating back into your pre-teen days. It seems you have been followed throughout your dimensional travels and its pretty wieird.");
+location.reload();
+//trying to see if i can create an unlockable gallery of pictures
+}
+else if (whichChoice == 2){
+alert ("You and Jenny continue down the shaft and your spidersenses alert you that you are above the room you are looking for. You look inside and see that you are both above a computer room and there are also technicians working inside, tryping away at the computers.");
+alert ("Jenny taps your shoulder and her palm glows creating a small whirring sound.");
+alert ("Jenny: 'The frequency should be enough to put everyone in the room to sleep for a few hours. Cover your ears.'");
+alert ("You cover your ears as she activates the sound frequency. After a few seconds you check and see that everyone in the room is asleep. You rapple down quietly and Jenny hovers down with you.");
+alert ("Jenny goes over to the main mother board and her hand transforms into a USB port and she plugs herself into the computer. \n Jenny: 'This may take a bit to sort out the files we need and copy them. So try to keep an eye out.'");
+alert ("You walk around for around for a bit and check out the computers seeing nothing but normal boring work. You occasionally look at Jenny as she looks back shrugging confirming the fact that it wasn't done yet.");
+alert ("TSSSSSST!")
+alert ("Your spidersenses alert you as the door to the room opens. Blinding light spills from the doorway as figures step in.")
+alert ("Unknown: 'Well, well... It looks as if we meet again Jennifer Wakeman!' \n The figure is flanked by assumably strong soldiers carrying electric rifles. \n Jenny: 'Um... Michael... Hate to tell you this but I can't fight without messing with the process of the downloads..' \n you face the soldiers as your eyes adjust to the light.");
+alert ("You: 'Well, it looks like I'm going solo... I gotta say I feel bad for you guys. The fight doesnt even seem fair.' \n The blinding light subsides and the soldiers rush in to attack. In response you pull out your lightsaber and ignite it while unholstering your revolver and lunging at them.");
+alert ("You: 'HERE WE GO!'")
+alert ("You have just finished a small demo of The Astonishing SpiderTeen: ENTER THE CHAOS. There is more to come so do not fret! Thank you for playing!")
+//the end of the official demo
+}
+}
+else if (whichChoice == 3){
+alert ("You and Jenny look at each other and realize that its not worth going after Skyway Patrol anymore. The ongoing stuggle between you and them seems too trivial and childish to go after anymore. \n You and Jenny decide to run away toghter and get married in Vegas. \n Eventually Camille and Cupa join in and the harem is complete. Years later your children are all cross speices of cyborgs, half animal/half human, and two bright twin girls that can create explosions. \n \n \n \n Yeah it doesnt take a rocket scientist to figure out that you made the wrong choice. SHAME ON YOU FOR TRYING TO RUN FROM YOUR RESPONSIBILITIES. \n \n NOW START OVER YOU PRICK");
+location.reload();
+
+//alert ("You and Jenny continue down the")
+// this is a joke failure
+}
+
+//The starting point of the game is supposed to be a stealth segment.
+}
+function startDLC() {
+alert ("This DLC will contain only PG rated content. At least until later updates are implemented. But you must complete the game first and have the Love Gun Revolver to be able to begin");
+}
+</script>
+
+</body>
+</html>

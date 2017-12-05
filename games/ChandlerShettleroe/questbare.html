@@ -1,0 +1,55 @@
+function quest1(){
+alert ("Choose a class to fight with.")
+if (choice==true){
+	alert ("Good choice on the class!")
+}
+quest2();
+}
+
+function quest2(){
+alert ("Alright, now we need you to head to the school to take out some of these synths.")
+if (enemiesDefeated==10){
+	alert (Nicly done! That's less of the synths that we have to worry about.)
+}
+quest3();
+}
+
+function quest3(){
+alert ("Now with those synths out of the way, we need to find the boiler room. We believe that is where they are holding people")
+if (boilerRoom==true){
+alert ("Nicly done. Be careful in here, we are not sure what we will find in here.")
+}
+quest4();
+}
+
+function quest4(){
+alert ("Holy crap, we have never seen like this one before!!")
+alert ("Defeat the mega synth")
+if (bigGuys==true){
+alert ("We did it! Now all we have to do is find the people they captured.")
+}
+quest5();
+}
+
+function quest5(){
+alert ("Find the missing people")
+if (lostPeople==true){
+alert ("Oh thank you for finding us! We were not sure if we were ever going to get out!")
+}
+}
+
+var run=0
+var escape=Math.floor(Math.random()*2);
+if (playerInput==3 || playerInput==null){
+					escape=Math.floor(Math.random()*2);
+					if (escape==1){
+					alert ("You rush out the door and jump over a hedge, ducking behind it to hide")
+					run=1
+					elizabethHealth=0
+					}
+					else {
+					alert ("You tried to run but Elizabeth blocks the door and punches you, making you take one damage")
+					health--
+					alert ("You have " + health + " left" )
+					}
+					}

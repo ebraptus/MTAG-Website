@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Text Adventure</title>
+		<meta charset="utf-8">
+		<link rel= "stylesheet" href="MTAGformating.css">
+		<style>
+		</style>
+	</head>
+	<body>
+	<div id="wrapper">
+		<header>
+			<h1>The Invasion You Could Never See Coming</h1>
+		</header>
+	<main>
+	<p><b>Finally! That day seemed go on forever. All I could think about is hanging out with Elizabeth and thinking about what that guy said, what weird things was he talking about? I don't know, anyway I need to start heading to Elizabeth's if I want to be on time. You text your mom how your day went and that you are heading to a new friend's house and won't be home till later in the evening. You got Elizabeth's address from her in one of your classes and you head straight to her house. Once you get there you knock on the door and you are greeted by by Elizabeth. "Hey Adam, thanks for showing up. So sorry again for earlier, come on in." She offers. "Thanks, and it's no problem really." You say as you enter. You guys start to talk and the time seems to go by quickly. Before you know it, it's six and it's getting dark outside. "Wow is it really six already? I should be heading home but it's been nice hanging out." You state. "Are you sure you have to go? Do you want something to eat before you go?" She says. While she says that you notice her eye start to twitch, or are you imagining things? "Uhm, yeah I guess something to eat wouldn't hurt." You say hesitantly. "Great, I'll grab something. She says as she gets up, however you believe her voice almost sounded robotic...You remeber what that one guy said in the hallway. After a moment of contemplation you decide to give it a try, what could it hurt? You grab them from your bag and look towards Elizabeth, what comes next you could never have seen coming...</p></b>
+	Programmer: Chandler Shettleroe
+	</main>
+	
+	<script type="text/javascript">
+	//<input id="checkInventory" type="text" value="Check Inventory"> maybe not use a text input, just use buttons...
+	// COMMENTS SECTION
+
+/* 
+// Part a:  
+Need any help go to https://www.youtube.com/watch?v=Sw4bN9t4Co4&feature=youtu.be
+Need any help for random number: http://www.screencast.com/users/Johnvader1/folders/Jing/media/0afef2cd-b3d3-4859-a38b-3de007624313
+Programmer: Chandler Shettleroe
+Date Last Modified:11-28-17
+Goal/Purpose:Make a text adventure.
+*/
+   
+// Variables section
+var health;
+var money=3.00; 
+var userInput = 1;
+var toDisplay="";
+//var check;
+var inventory = ["Pencils","English text book","Scraps of paper","Raspberry Pi (the coding tool)","Notebooks", "Weird Glasses"];
+
+var shop = ["Excalibur","Reinforced shield","Enchanted wand","Potion of minor healing","Potion of major healing","Splash potion of minor healing","Splash potion of major healing","Scroll of revival","The book of the great Forrest Le Torneau","Reinforced bow" ];
+var shopPrices = [1.50, 1.00, 1.50, 0.50, 0.75, 0.75, 1.00, 1.50, 1.50, 1.00];
+//function section
+function checkBackpack(){
+	var toDisplay="";
+	alert("You look in your backpack")
+	for(i=0; i<inventory.length; i++){
+		toDisplay+=(i+1)+". " + inventory[i]+"\n"; //shows the player their inventory
+	}
+	alert (toDisplay);
+}
+function visitStore(){
+	var toDisplay="";
+	
+	for(i=0; i<shop.length; i++){
+		toDisplay+=(i+1)+". " + "$" + shopPrices[i]+ " " + shop[i]+"\n"; //shows all the items in the shop
+	}
+	
+	var userInput = prompt("Choose what you would like to buy from the list?\n\n"+toDisplay);
+	userInput--;
+	if (money >= shopPrices[userInput]){
+		var reallyBuy = confirm ("Are you sure you want to buy " + shop[userInput]+ "?")
+		if (reallyBuy == true){
+			inventory.push(shop[userInput])//puts the item into the players inventory
+			alert("You have bought" + " "+ shop[userInput])//tells the player what item they bought
+			money-=shopPrices[userInput]//takes the player's money away for the item purchased.
+			alert("You have" + " $" +money +" "+"left in your bag.")//shows the player how much money they have left
+		}
+		else {
+			alert("Ok, be like that, I don't need your money anyway.")
+		}
+	}
+	else{
+	alert("You don't have enough money.") 
+	} 
+}
+function checkMoney(){ //function for the player to see how much money they have
+	var toDisplay="";
+	alert ("You check the front pocket of your bag, checking how much money you have.")
+	alert ("You have " + "$" + money)
+}
+
+// MAIN program execution
+   //checkBackpack();
+   
+	
+
+	
+    </script>
+</body>
+	<footer>
+	<h2>What will you do?</h2>
+	<a href="Fight.html">Confornt her</a>
+	<a href="Run.html">Try to get out</a>
+	<input type= "button" value = "Check Inventory" onClick="checkBackpack()">
+	<input type= "button" value = "Check how much money you have" onClick="checkMoney()">
+	
+	</footer>
+</html>

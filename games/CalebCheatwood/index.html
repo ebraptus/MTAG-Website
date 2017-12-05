@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+</style>
+	<head>
+		<title>MTAG</title>
+
+</head>
+	<body>
+
+
+	<!---Testing by: Caleb Cheatwood--->
+	<center>
+	<h1>THE MTAG</h1>
+	</center>
+	<button id= "part1" type="button" onclick="part1()">Part 1</button>
+	<br>
+	<br>
+	<button id="Part2" type="button" onclick="part2()">Part 2</button>
+	<br>
+	<br>
+	<button type="button" onclick="inventoryCheck()">View Inventory</button>
+	<br>
+	<br>
+	<button id="Buy from Store" type= "button" onclick="buyFromStore()">Buy from Store</button> <button id="Sell at store" type= "button" onclick="sellAtStore()">Sell at store</button>
+	<br>
+	<br>
+	<button id="askStoreOwner" type= "button" onclick="askStoreOwner()">Ask Store owner</button>
+	<br>
+	<br>
+	<button id="chopwood" type="button" onclick="chopWood()">Chop Wood</button>
+	<br>
+	<br>
+	<!--<button id="castle" type= "button" onclick="">Go to Castle</button>
+	<br>
+	<br>-->
+	<button id="townwizard" type= "button" onclick="townWizard()">Go to Town Wizard</button>
+	<br>
+	<br>
+	<button type="button" onclick="currency$()">Currency</button>
+	<br>
+	<br>
+	<button type="button" onclick="quitGame()">Quit</button>
+	<script type="text/javascript">
+// COMMENTS SECTION
+/*
+wk6
+
+11/21/2017 	- Trying to get the game to seee if the sword and the shield is (in the array)on the player to continue the game.
+			- Trying to have the store get rid of the item I bought. It only shows undefined
+11/28/2017 	- The shop need to do something if I don't type anything in.
+			- Going to the wizard is "fully" functional.
+
+   */
+// Variables section
+var storeItems = ["Iron Sword", "Iron Shield", "Wand", "Apple"];
+var storePrice = [200, 250, 30, 10];
+var toDisplay = "";
+var inventory =["Leather shirt", "Leather pants"];
+var inventoryPrice = [30, 35];
+var displayInventory= "";
+var whichItem;
+var currency = 30;
+var questCount = 0
+
+// Functions section
+
+function part1(){
+//The first part of the game
+		alert("As wake up you hear the birds chirping for the morning sun rising, some rain still left behind from the storm that came last night.")
+		alert("You find yourself lying on the cold hard ground with some leaves on you as well as dirt. You get up and see your in the village made of bricks and stone,as you get the dirt and leaves off, you find a wide old figure approaching you.");
+		
+		alert("? : Hey buddy, you ok? That was one heck of a storm last night. I'm sorry allow me to introduce myself my name is Jerry.'");
+		
+		playerName = prompt("Jerry: and you are?");
+		
+		alert("Jerry: Well nice to meet you "+ playerName +", here let me help you up.");
+		alert("He grabs your hand only to find a cut on it, you wonder how it got there, and why you didn't feel it before he grabbed your hand," + "\n\nJerry: Whoa, you got injured during the storm, follow me to my store I'm sure i got something to help with that.");
+		alert("You follow Jerry to his store, you hand hurts more each time you move");
+		alert("You enter into a store somewhat still good, some glass is on the ground with some leaves, but it still looks nice," + "\n\nJerry: Not much, but its still good business");
+		alert("Jerry goes to the back of his shop looking for something to help you, you get sometime to look around. Its not a big shop but it definetly has good stuff to buy. Jerry then is back with some wrap.");
+		alert("Jerry: Here it is, now hold still so i can put the wrap on your hand.")
+		var u=confirm("Jerry: Now that you're good, do you want something in my store? I'm just asking you don't have to.");
+		if (u == true){
+		
+		document.getElementById("Buy from Store").disabled = false;
+		document.getElementById("Sell at store").disabled = false;
+		buyFromStore();		
+		}else{
+		alert("Jerry: All right, have a good day, come back any time.")
+		document.getElementById("Buy from Store").disabled = false;
+		document.getElementById("Sell at store").disabled = false;
+		}
+		alert("You can now visit the store");
+		document.getElementById("part1").disabled = true;
+		document.getElementById("Part2").disabled = false;
+		}
+		
+function part2(){
+//The second part to allow more buttons to be unlocked.
+alert("You go outside the village to find yourself instantly unconscious")
+alert("You hear the birds chirping, it's the same chirping you heard this morning, you open your eyes to find yourself at the same place your were when you woke up this morning.")
+alert("You get up on your feet and find yourself in pain, your hand has the same cut you got, you need answers, you need to find the town wizard."+ "\nIf anyone knows what's going on, it's him.")
+alert("Ask people if they know where the wizard is")
+document.getElementById("Part2").disabled = true;
+document.getElementById("askStoreOwner").disabled = false;
+}		
+		
+function buyFromStore(){
+var i;
+toDisplay="";
+for (i = 0; i < storeItems.length; i++){
+	toDisplay += (i+1) + ". " + storeItems[i] + "\n";
+	}
+	alert("Jerry: Anything you interested in?");
+	whichItem =(prompt("Currency: $" + currency + "\n\n" + toDisplay)-1);
+	
+if(whichItem == -1 || whichItem == null){
+	alert("All right, come back if you want anything.");
+}else{
+	var r = confirm("Jerry: The " + storeItems[whichItem] + " will be $" + storePrice[whichItem]+  ", do you want to buy this?");
+		if (r == true && currency >= storePrice[whichItem]) {
+			currency = currency - storePrice[whichItem]
+			inventory.push(storeItems[whichItem]);
+			storeItems.splice([whichItem],1);
+			inventoryPrice.push(storePrice[whichItem]);
+			storePrice.splice([whichItem],1);
+				
+			alert("Jerry: Ok, you have $" + currency + " left.");
+			{
+			var s = confirm("Jerry: Is there anything else you want?");
+			if (s == true){
+				buyFromStore();
+			}else{
+				alert("Jerry: Ok, Come back you here!" + "\nSeriously, I get lonely, please come back");
+			}}
+			}else if (r == true && currency < storePrice[whichItem]) {
+				alert("Jerry: I'm sorry, you don't have enough to buy " + storeItems[whichItem]);
+				{
+				var y = confirm("Jerry: Is there anything else you want?");
+				if (y == true){
+					buyFromStore();
+				}else{
+					alert("Jerry: OK, Come back you here!" + "\nSeriously, I get lonely, please come back");	
+			}}
+			}else{
+				var f = confirm("Jerry: Ok, is there anything else you want?");
+				if (f == true){
+					buyFromStore();
+				}else{
+					alert("Jerry: Come back you here!" + "\nSeriously, I get lonely, please come back");
+			
+	}}}}
+
+function sellAtStore(){
+var i;
+toDisplay="";
+for (i = 0; i < inventory.length; i++){
+	toDisplay += (i+1) + ". " + inventory[i] + "\n";
+	}
+	alert("Jerry: Anything you want to sell?");
+	whichItem =(prompt("Currency: $" + currency + "\n\n" + toDisplay)-1);
+if(whichItem == null || whichItem == -1){
+alert("Ok, come back any time.");
+}else{
+var r = confirm("Jerry: The " + inventory[whichItem] + " will be $" + inventoryPrice[whichItem]+  ", do you want to sell this?");
+	if (r == true) {
+		currency = currency + inventoryPrice[whichItem]
+		storeItems.push(inventory[whichItem]);
+		storePrice.push(inventoryPrice[whichItem]);
+		inventory.splice([whichItem],1);
+		inventoryPrice.splice([whichItem],1);
+		alert("Jerry: Ok, you have $" + currency + " left.");
+		var s = confirm("Jerry: Is there anything else you need to sell?");
+		if (s == true){
+			sellAtStore();
+		}else{
+			alert("Jerry: Ok, Come back you here!" + "\nSeriously, I get lonely, please come back");
+	}}else{
+		var f = confirm("Jerry: Ok, is there anything else you want to sell?");
+		if (f == true){
+			sellAtStore();
+		}else{
+			alert("Jerry: Come back you here!" + "\nSeriously, I get lonely, please come back");
+			
+		}}
+		
+		}}
+
+function askStoreOwner(){
+alert("Jerry: Hello Stranger, hey you got a good cut on your hand, let me get something for you to wrap thast with.");
+alert("Jerry goes to get the wrap and you can't stop thinking of why the day restarted");
+alert("Jerry has the wrap and gives it to you, you take it and begin wrapping your hand."+ "\n\nJerry: Hope that helps, I won't charge you for it");
+alert(playerName + ": Thank you"+ "\n\nYou say as you wrap you hand");
+alert(playerName +": Can I ask you something?");
+alert("Jerry: No one ever asked me a question so...sure, what's your question?");
+alert(playerName+": Where does the town wizard live?");
+alert("Jerry: Oh...he is on the other side of the forest, if you're wanting to see him you're gonna need some protection before you leave the village.");
+alert("Jerry: I see you are low on gold, I would recommend chopping some wood so you can get yourself a sword and shield.");
+alert("You can now chop wood");
+alert("You can visit the wizard if you bought the items.")
+document.getElementById("askStoreOwner").disabled = true;
+document.getElementById("townwizard").disabled= false;
+document.getElementById("chopwood").disabled = false; 
+}
+	
+function chopWood(){
+hitWood =prompt("Currency : $" + currency +"\nYou pick up and axe and get ready to hit the wood\n\nTutorial: Type in 'chop' to chop the wood to get 50 gold.");
+if(hitWood == "chop"){
+currency += 50
+alert("You chop the wood successfully, you hear some of the lumber jackmen clap for you");
+var y =confirm("Do you want to cut more wood?");
+	if (y == true){
+	chopWood();
+	}else{
+	alert("You put the axe down and return to the village");
+	}
+}else{
+alert("You miss and are laughed at by the lumber jackman");
+var y =confirm("Do you want try again?");
+	if (y == true){
+	chopWood();
+	}else{
+	alert("You put the axe down and return to the village");
+}
+}}	
+	
+function inventoryCheck(){
+//To see the inventory
+var i;
+displayInventory="";
+for (i =0; i < inventory.length; i++){
+	displayInventory += (i+1) + ". " + inventory[i] + "\n";
+	}
+	
+	alert(displayInventory);
+}	
+
+function nextQuest(){
+	questCount++;
+	if (questCount==1){
+	quest1();
+	
+	}
+	else if (questCount==2){
+	quest2();
+	
+	}
+	else if (questCount==3){
+	quest3();
+	
+	}
+	else if (questCount==4){
+	quest4();
+	
+	}
+	else {
+	questCount==5
+	quest5();
+	
+	}
+}
+
+function castle(){
+
+
+}
+
+function townWizard(){
+var e = inventory.includes("Iron Sword" && "Iron Shield"); 
+
+	if(e == true) {
+		alert("You walk out of town into the forest, you are not blacking out, you feel a sense of relief as you continue to walk to the wizard.");
+		alert("You then are stopped by a wild gray wolf, you prepare to attack");
+		action = prompt("Now would be a good time to attack...except the only time you ever attacked anything was with that chicken that took your bread, and you losed that battle"+ "\n\nTutorial: Let's try at attacking the wolf(Type in attack)");
+		if (action == "attack"){
+		alert("You attack the wolf with your sword, the wolf takes 10hp damage");
+		action = prompt("You doin good for attacking, but the wolf is going to attack you need to defend \n\nTutorial: type in 'defend' to defend yourself.")
+			if(action == "defend"){
+			alert("You defend yourself and only take 5hp of damage.");
+			alert("The wolf then looks at the sky and runs away, it looked scared as if somehting was coming");
+			alert("But no matter, you got through your first battle...sort of");
+			alert("You arrive to the wizards hut, it looks small, you ignore that and go to the wizards door");
+			action = prompt("You arrive at the wizards and...\n\n1. Knock on the door\n2. Do the chicken\n3. Yell for the wizard\n\nPress enter to do nothing");
+				if(action == 1){
+					alert("You knock on the door, and a trap goes off and you find yourself being lifted of the ground by nothing and are hanging upside down infront of the door.");
+					action = prompt("The door opens with the wizard coming out in yellow robes looking old with a long white beard, and he has his staff pointed at you\n\nWizard: Who are you, what are you doing here\n\n1.Tell the truth\n2.Snap at the wizard\n\nPress enter to Say nothing")
+					if(action ==1){
+						alert(playerName+": My name is "+ playerName +" and I need to ask you something");
+						alert("Wizard: I have no time for questions, go home.\n\nHe says as he turns around and snaps his fingers causing you to fall on the ground.")
+						alert("You get off the ground and get the dirt off of you.\n"+ playerName +": I need to ask you this, it's important.")
+						action =prompt("Wizard: What is it?, tell me now before I turn you into a toad!\n\n1. Ask the question\nPress enter to hesitate");
+						if(action ==1){
+							alert(playerName+": Ok...this may seem wierd but...I restarted this day and I don't know what to do.");
+							alert("Wizard: Wait..you restarted the day...\n\n"+ playerName +": Yes, I did.");
+							alert("Wizard: Oh boy...");
+							alert("Thank you for playing this demo...\n\nHave a nice day.");
+							location.reload();
+						}else{
+							alert("You hesitate and the wizards turns you into a toad...ribbit\n\nGAME OVER")
+							location.reload();
+						}
+					}else if(action == 2){
+						alert("You snap at the wizard and get struck with lightning by the wizard...\n\nGAME OVER")
+					}else{
+						alert("You did nothing but stare at the wizard...then you got eaten by a bear...\n\nGAME OVER")
+					}
+				}else if(action == 2){
+					alert("You do the chicken...and got eaten by a bear...probably wasn't a good idea...\n\nGAME OVER");
+					location.reload();
+				}else if(action == 3){
+					alert("You yell for the wizard and get zapped by lightning by the wizard...oops...\n\nGAME OVER");
+					location.reload();
+				}else{
+				alert("You stood there and did nothing till you died...wow, what's wrong with you?\n\nGAME OVER");
+				location,reload();
+			}
+		
+			}else{
+			alert("You failed to defend yourself and get eaten...\n\nGAME OVER");
+			
+			}
+		}else {
+		alert("You failed to attack the wolf and was eaten alive\n\nGAME OVER");
+		location.reload();
+	}}else{
+		alert("You must have both a weapon and a shield to go to the wizard\n\nYou can buy them from the store");	
+
+	}}
+
+function currency$(){
+//So you can see the money you have
+if (currency > 0){ 
+alert("You got $" + currency);
+}else{
+alert("You open you pockets to find nothing but dust."
+)
+}}
+
+function quitGame(){
+//If you want to quit the game
+var q = confirm("You sure you want to quit?")
+	if (q == true){
+	alert("OK, please come back...");
+	window.close();
+	}else{
+	alert("Oh thank god, because we still need your help.")
+}}
+
+function disableBtn1() {
+//To disable the buttons that you are not ready for yet.
+    document.getElementById("Buy from Store").disabled = true;
+	document.getElementById("Sell at store").disabled = true;
+	document.getElementById("Part2").disabled = true;	
+	//document.getElementById("castle").disabled = true;	
+	document.getElementById("townwizard").disabled = true;
+	document.getElementById("askStoreOwner").disabled = true;
+	document.getElementById("chopwood").disabled = true;	
+}
+
+
+// MAIN program execution
+disableBtn1();
+
+
+
+
+    </script>
+	</body>
+</html>

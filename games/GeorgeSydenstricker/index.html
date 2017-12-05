@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {
+    background-color: rgb(169, 130, 0)
+}
+</style>
+<body>
+<br><br><br><br><br><br><br><br><br><br>
+<center><button onclick=enterStore()>Store</button>
+<br><br><button onclick=showMoney()>Vials</button>
+<br><br><button onclick=openPack()>Backpack</button>
+<br><br><button onclick=explore()>Explore</button>
+
+<script>
+//Above is the code creating the buttons used to call on functions.
+
+
+// Testing by: George Sydenstricker
+	//Date Modified: 11/30/17
+  
+// Variables section
+var gatheredItems = ["Knife,Microtransactions"] ;
+
+var theVials = 200
+
+var openStore = 0	
+
+var exploration = 0
+
+// Functions
+//Below function just displays the story and gives an option to end the game immediately.
+function openStory () {
+alert ("You are a wandering hero. You've just stumbled on a village after years of searching.")
+alert ("Kane: Welcome to the village. I am Kane, the general.")
+alert ("Kane: We were a peaceful tribe until an attack by the violent silt tribe left us devastated.")
+alert ("Kane: We are forced to train for the next attack, always ready to defend the last safe place on earth.")
+alert ("Kane: Now we must depend on a hero of legend to come and release the land from it's plight.")
+if (confirm("Kane: Are you here to help us?") == true) {
+	alert ("Kane: Oh praise the sediments! Thank you!");
+	alert ("Kane: Feel free to look around.")
+	}
+else {
+	alert ("Kane: Then we can't help you.");
+	alert ("GAME OVER");
+	location.reload();
+}
+
+
+
+}
+//Below function is opening your inventory with starting object and all bought items.
+function openPack() {
+alert("Your Items \n" + "------------------------ \n" + gatheredItems) ;
+}
+
+//Function below opens and runs the whole store, from displaying the shop, to buying and seeing if you have enough money.
+function enterStore() {
+var shopItems = ["Steel sword","Steel shield", "Steel armor", "Sword of Sediments","Shield of Sediments","Sedimental armor","Sedimental sigil","Silt scarab","Mysterious medallion","Sand medal","Clay medal","Loam medal"]
+
+var shopDescriptions = ["just a regular steel sword.","just a steel shield.","just a regular steel plated armor set.", "best sword made by the village sedimancer. May be only way to defeat the silten king.","best shield made by the village sedimancer.","prize posession of the village sedimancer.","gives you nothing but happiness.","cute little creature, but vicious as well. Doesn't help. Or hurt.","might get you secret ending.","gives you an alliance with the sand faction.","gives you an alliance with the clay faction.","gives you an alliance with the loam faction."]
+
+var shopPrices = [100,100,200,450,450,550,300,500,200,300,300,300]
+
+var itemList = [""]
+
+var whichItem;
+
+var openStore = 0;
+
+for (i=0;i<shopItems.length;i++) {	
+itemList += (i + 1)+ ". " + shopItems[i] + "\n";
+}
+
+alert ("Shopkeeper: Welcome to the Sedimental Shop. Look around.")
+whichItem = prompt(itemList)
+if (whichItem == null){
+	alert ("Shopkeeper: Come back another time then.")
+	}
+else {
+alert("Shopkeeper: This be a "+ shopItems[whichItem-1] + "; " +shopDescriptions[whichItem-1]+ " It costs "+ shopPrices[whichItem-1]+" Vials.")
+	if (theVials >= shopPrices[whichItem-1])
+		if (confirm("Would you like to buy this for "+ shopPrices[whichItem-1]+ " vials? You have "+ theVials+ " vials.") == true) {
+			theVials -= shopPrices[whichItem-1];
+			gatheredItems.push (shopItems[whichItem-1]);
+			alert ("Shopkeeper: Thanks for your business!")
+			} 
+		
+		else {
+			alert ("Shopkeeper: Okay, come back any time.")
+			}
+	else {
+		alert ("Shopkeeper: You do not have enough vials to complete this transaction.")
+		alert ("Shopkeeper: Please come back when you have enough.")
+	}	
+		
+openStore++
+
+}
+}
+
+
+//Below code displays the amount of money you have if you click the button
+function showMoney() {
+	alert(theVials +" Vials")
+}
+
+
+
+function explore (){
+	if(exploration == 0){
+		mission1()
+	}
+
+	else if(exploration == 1){
+		mission2()
+	}
+	
+	else if(exploration == 2){
+		mission3()
+	}
+	
+	else if(exploration == 3){
+		mission4()
+	}
+	
+	else if(exploration == 4){
+		mission5()
+	}
+	
+	else{
+		mission6()
+	}
+}
+function mission6 () {
+	alert ("Kane: We have found the hidden silt fortress.")
+	alert ("Kane: We must decide to fight or wait.")
+	if (confirm("Do you want to challenge the final boss, Cameron, the silten king?") == true) {
+		if (gatheredItems[0] == "Mysterious medallion"|| gatheredItems[1] == "Mysterious medallion" || gatheredItems[2] == "Mysterious medallion" || gatheredItems[3] == "Mysterious medallion" || gatheredItems[4] == "Mysterious medallion"|| gatheredItems[5] == "Mysterious medallion"||gatheredItems[6] == "Mysterious medallion"||gatheredItems[7] == "Mysterious medallion"||gatheredItems[8] == "Mysterious medallion"||gatheredItems[9] == "Mysterious medallion"||gatheredItems[10] == "Mysterious medallion"||gatheredItems[11] == "Mysterious medallion"||gatheredItems[12] == "Mysterious medallion"||gatheredItems[13] == "Mysterious medallion"||gatheredItems[14] == "Mysterious medallion"||gatheredItems[15] == "Mysterious medallion"){
+			alert("The world suddenly explodes.")
+			alert("GAME OVER")
+			location.reload()
+		}
+		else{
+		alert ("Kane: To war we go!")
+		if (gatheredItems[0] == "Sword of Sediments"|| gatheredItems[1] == "Sword of Sediments" || gatheredItems[2] == "Sword of Sediments" || gatheredItems[3] == "Sword of Sediments" || gatheredItems[4] == "Sword of Sediments"|| gatheredItems[5] == "Sword of Sediments"||gatheredItems[6] == "Sword of Sediments"||gatheredItems[7] == "Sword of Sediments"||gatheredItems[8] == "Sword of Sediments"||gatheredItems[9] == "Sword of Sediments"||gatheredItems[10] == "Sword of Sediments"||gatheredItems[11] == "Sword of Sediments"||gatheredItems[12] == "Sword of Sediments"||gatheredItems[13] == "Sword of Sediments"||gatheredItems[14] == "Sword of Sediments"||gatheredItems[15] == "Sword of Sediments") {
+			alert ("You leap into the air and stab the silten king in the eye. Then you slice his knees before he can even recover. He screams and collapses.")
+			alert ("The village guards run up behind you.")
+			alert ("Kane: Adventurer! You've won! Now hand him over.")
+			alert ("You can either hand him over or kill him.")
+			if (confirm("Would you like to kill him?") == true){
+				alert ("You raise your weapon to strike him down when suddenly a silt arrow rips through your knee.")
+				alert ("The guards attack the silten king and restrain him as you are carried away on a stretcher.")
+				alert ("You wake up in the hospital feeling battered and broken. You can either fight to live and become a guard, or you can just die.")
+				if (confirm("Would you like to die?") == true){
+					alert ("You died and the village lived happily ever after.")
+					alert("GAME OVER")
+					location.reload()
+				}
+				else {
+					alert("You make a decent recovery, but will never be the same again.")
+					alert ("They offer you a job as a guard and because of your injury, you have to take the job.")
+					alert ("GAME OVER")
+					location.reload()
+				}
+			
+			}
+			
+			else {
+				alert("The guards restrain him and take him away.")
+				alert("You return to the city, but the king has died.")
+				alert("You are nominated as the new king and live happily ever after.")
+				alert("TO BE CONTINUED")
+				alert("Thanks for playing!")
+				location.reload()
+			}
+		}
+		else{
+			alert("You have lost.")
+			alert("You return to the village injured.")
+			alert("You die the next day.")
+			alert("GAME OVER")
+			location.reload()
+		}
+	
+	}
+	
+
+}else {
+		alert("You return to the village to prepare.")
+	}
+}
+function mission5(){
+	alert("Kane: We are close to finding the silt fortress.")
+	alert("Kane: You must interrogate a silt warrior to find it.")
+	alert("You find the group of enemies in the forest.")
+	alert("You have two choices: you could just attack them, or you can use stealth.")
+	if (confirm("Do you attack?") == true){
+		alert("You attack them and get stabbed. You are now infected with silt, and become a silt general.")
+		alert("You and the warriors go back to the village and kill everyone there, making silt the last living species.")
+		alert("GAME OVER")
+		location.reload()
+		}
+	else{
+		alert("You sneak around the side of a tree. You spot a tree held up by a vine.")
+		alert("You cut the vine and the tree lands on the warriors.")
+		alert("You captured one and head back.")
+		alert("Kane: Great job! You've been a great help in this war.")
+		alert("Kane: Now we can finally end this once and for all.")
+		alert("You've gotten 100 vials as a prize!")
+		theVials+=100
+	}
+	exploration++
+}
+
+function mission4(){
+	alert("Kane: We need to ready the troops for war.")
+	alert("Kane: Help them train.")
+	alert("You shoot an arrow at a target as a demonstration.")
+	alert("You can shoot either 25m away, or 125m away.")
+	if (confirm("Shoot from 25m?") == true){
+		alert("You hit the target dead on and impress the soldiers.")
+		alert("Kane: Congrats! You've successfully tought the soldiers how to shoot a bow!")
+		alert("Kane: Take this 100 vials as pay.")
+		theVials+=100
+	}
+	else{
+		alert("You aim from 125m and you fire.")
+		alert("You miss the target and accidentally hit a soldier in the knee.")
+		alert("Kane runs in and restrains you.")
+		alert("The next day, the trial is held. You are found guilty and sentenced to death.")
+		alert("GAME OVER")
+		location.reload()
+	}
+	exploration++
+}
+
+function mission3(){
+	alert("Kane: It turns out that the stone is made of sediment that is apparently their weakness.")
+	alert("Kane: We had a sedimancer years ago who made a weapon of amazing power.")
+	alert("Kane: It's in the shop for quite a few vials.")
+	alert("Kane: But you can just go find this legendary sword.")
+	alert("You can go to either the desert or the lake.")
+	if (confirm("Do you go to the desert?") == true){
+		alert("You go to the desert.")
+		alert("You manage to find a silt warrior, but he is trapped in a sedimental cage.")
+		alert("You walk forwards and set off a tripwire. You just barely manage to dodge the darts.")
+		alert("You find your way to the center of the desert.")
+		alert("There is an old man standing in the middle of a large hut.")
+		alert("Sedimancer: You have come for the sword, have you?")
+		alert("Sedimancer: You'll have to kill me for it.")
+		alert("You flip over the old man and he dodges your attack. He lunges, but you parry and knock him down.")
+		if (confirm("Kill the old man?") == true){
+			alert("You kill the old man, then realize that you don't know where the sword is.")
+			alert("Kane: What have you done? Now you have no chance at beating the silten king.")
+		}
+		else {
+			alert("Sedimancer: You have shown mercy. Have the sword.")
+			alert("Kane: Good job! You've found it!")
+			gatheredItems.push ("Sword of Sediments")
+		}
+	}
+	else{
+		alert("You go to the lake and find nothing but a small chest.")
+		alert("Inside are 100 vials.")
+		alert("Kane: You didn't find much, but it's something.")
+		theVials+=100
+	}
+	exploration++
+}
+
+function mission2(){
+	alert ("Kane: We found new evidence of the silt attacking on the east coast.")
+	alert ("Kane: Go check out the cave.")
+	alert ("You enter the dim cave and can see two different passages. One is straight and one is to the right.")
+	if (confirm("Do you turn right?") == true){
+		alert("You turn and start down the right tunnel.")
+		alert("You find a silt spider and immediately freeze.")
+		if (confirm("Do you attack?") == true) {
+			alert ("You attack and miss.")
+			alert ("You are killed in an ensuing rockslide.")
+			alert ("GAME OVER")
+			location.reload()
+			
+		}else{
+			alert("You dodge the spider's attack.")
+			alert("The spider misses you and rams into the wall, knocking down some rocks, crushing itself in the process, and dissolves.")
+			alert("Kane: Hmm. Looks like the weakness was not water after all.")
+			alert("Kane: We will take this rock and test it in the labs.")
+		}
+	}
+	else{
+		alert("You've stumbled on a treasure chest.")
+		alert("Inside is a strange rock and 100 vials.")
+		alert("Kane: This is a strange stone. I will give it to the labs to test.")
+		theVials+=100
+	}
+	exploration++
+}
+
+function mission1(){
+	alert ("Kane: Hey, we just recieved word that some silten warriors were spotted by the canyon.")
+	alert ("Kane: How about you check it out.")
+	alert ("You head to the canyon and see the silt warrior alone.")
+	if (confirm("Would you like to attack?") == true){
+		alert ("You rush in with your sword and strike at the creature.")
+		alert ("The warrior turns and strikes you in the chest.")
+		alert ("As you fall, you manage to find a stone on the ground and throw it at the creature.")
+		alert ("The warrior screeches as the rock makes contact, and it falls into the river and dissolves.")
+		alert ("Kane: Good job adventurer! You've found a weakness! Now we must make water cannons and end this war!")
+		if (confirm("The creature happened to drop 100 vials! Do you take them?") == true){
+			alert ("You've taken 100 vials.")
+			theVials+=100
+		}
+		else {
+			alert ("You left the vials.")
+		}
+	}
+	else{
+		alert ("You wait and watch, but the creature does nothing.")
+		alert ("You are suddenly attacked from behind by two more warriors.")
+		alert ("They kill you and dump your body in the river.")
+		alert ("GAME OVER")
+		location.reload()
+	}
+	exploration++
+}
+
+
+
+
+
+
+
+// MAIN program
+openStory ();
+
+
+
+   </script>
+</body>
+</html>

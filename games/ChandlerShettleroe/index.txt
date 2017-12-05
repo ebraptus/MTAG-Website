@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Text Adventure</title>
+		<meta charset="utf-8">
+		<link rel= "stylesheet" href="MTAGformating.css">
+		<style>
+		tbody {
+		background-image: url('http://2b9sqw2iiqxr36ntqa1exnal-wpengine.netdna-ssl.com/wp-content/uploads/2010/09/4Denfeld4.jpg');
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center; 
+		background-size: 1500px 850px;
+	}
+		</style>
+	</head>
+	<body>
+	<div id="wrapper">
+		<header>
+			<h1>MTAG(Placeholder)</h1>
+		</header>
+	<main>
+	Programmer: Chandler Shettleroe
+	</main>
+	
+	<script type="text/javascript">
+	//<input id="checkInventory" type="text" value="Check Inventory"> maybe not use a text input, just use buttons...
+	// COMMENTS SECTION
+
+/* 
+// Part a:  
+Need any help go to https://www.youtube.com/watch?v=Sw4bN9t4Co4&feature=youtu.be
+Need any help for random number: http://www.screencast.com/users/Johnvader1/folders/Jing/media/0afef2cd-b3d3-4859-a38b-3de007624313
+Programmer: Chandler Shettleroe
+Date Last Modified:11-27-17
+Goal/Purpose:Make a text adventure.
+*/
+   
+// Variables section
+var health;
+var money=5.00; //make a random number for random encounters to earn money for future use.
+var userInput = 1;
+var toDisplay="";
+//var check;
+var inventory = ["Pencils","English text book","Scraps of paper","Raspberry Pi (the coding tool)","Notebooks"];
+
+var shop = ["Foam sword", "Wooden sword","Long sword","Excalibur","Foam shield","Wooden shield","Reinforced shield","Fake wand","Wooden wand","Enchanted wand","Potion of minor healing","Potion of major healing","Splash potion of minor healing","Splash potion of major healing","Scroll of revival","Book of dark magic for Dummies","My first book of Necromancy(a children's guide)","Minor book of Necromancy","The book of the great Forrest Le Torneau","Unstrung bow","Wooden bow","Reinforced bow" ];
+var shopPrices = [0.10, 0.25, 0.50, 1.50, 0.10, 0.25, 1.00, 0.10, 0.25, 1.50, 0.50, 0.75, 0.75, 1.00, 1.50, 0.10, 0.25, 0.50, 1.50, 0.10, 0.25, 1.00];
+//function section
+function checkBackpack(){
+	var toDisplay="";
+	alert("You look in your backpack")
+	for(i=0; i<inventory.length; i++){
+		toDisplay+=(i+1)+". " + inventory[i]+"\n";
+	}
+	alert (toDisplay);
+}
+function visitStore(){
+	var toDisplay="";
+	
+	for(i=0; i<shop.length; i++){
+		toDisplay+=(i+1)+". " + "$" + shopPrices[i]+ " " + shop[i]+"\n";
+	}
+	
+	var userInput = prompt("Choose what you would like to buy from the list?\n\n"+toDisplay);
+	userInput--;
+	if (money >= shopPrices[userInput]){
+		var reallyBuy = confirm ("Are you sure you want to buy " + shop[userInput]+ "?")
+		if (reallyBuy == true){
+			inventory.push(shop[userInput])
+			alert("You have bought" + " "+ shop[userInput])
+			money-=shopPrices[userInput]//takes the player's money away for the item purchased.
+			alert("You have" + " $" +money +" "+"left in your bag.")
+		}
+		else {
+			alert("Ok, be like that, I don't need your money anyway.")
+		}
+	}
+	else{
+		alert("You don't have enough money.") 
+	} 
+}
+function checkMoney(){
+	var toDisplay="";
+	alert ("You check the front pocket of your bag, checking how much money you have.")
+	alert ("You have " + "$" + money)
+}
+/*
+alert (inventory);
+alert (prices);
+alert (shop);
+alert (shopPrices);
+*/
+// Functions section
+
+
+// MAIN program execution
+   //checkBackpack();
+   
+	
+
+	
+    </script>
+</body>
+	<footer>
+	<h2>What will you do?</h2>
+	<a href="Starting.html">Start your Adventure</a>
+	<input type= "button" value = "Check Inventory" onClick="checkBackpack()">
+	<input type= "button" value = "Check how much money you have" onClick="checkMoney()">
+	<input type= "button" value = "Visit the store" onClick="visitStore()">
+	
+	</footer>
+</html>
