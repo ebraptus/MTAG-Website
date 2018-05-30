@@ -37,14 +37,13 @@ function GameTemplate(iIndex, szName, szDesc){
 }
 
 function updateGameList(){
-    var output = '<div class="title">Text Adventure Games</div>' + '<div class="row">';
+    var output = "";
 
     for(var i = 0; i < GameList.length; i++){
         var game = GameList[i];
         output += GameTemplate(i, game.m_szName, game.m_szDesc);            
     }
-    output += '</div>';
-    document.getElementById("mainCont").innerHTML = output;
+    document.getElementById("games").innerHTML = output;
 }
 
 function viewCode(iIndex){
