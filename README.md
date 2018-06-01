@@ -17,4 +17,3 @@ This page is deployed on GitHub sites as it only runs on the frontend for the us
 ## Built With
 
 * [jQuery](http://jquery.com/) - A JavaScript Library for easier work
-* []()
