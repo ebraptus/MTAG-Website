@@ -1,6 +1,7 @@
 pages:
   stage: deploy
   script:
+    echo "Script Running"
   artifacts:
     paths:
     - public
