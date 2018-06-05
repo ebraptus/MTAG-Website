@@ -1,7 +1,8 @@
 pages:
   stage: deploy
   script:
-    echo "Script Running"
+    mkdir public
+    mv * public
   artifacts:
     paths:
     - public
