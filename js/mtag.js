@@ -7,6 +7,11 @@ function C_Game(szName, szDesc, szSubDir){
     this.m_szGameLink = "games/" + szSubDir + "/index.html";
 }
 
+function AddGame(szName, szDesc, szSubDir){
+    var newGame = new C_Game(szName, szDesc, szSubDir);
+    GameList.push(newGame);
+}
+
 function AddGame2(szSubDir){
     var directory = "games/" + szSubDir;
 
