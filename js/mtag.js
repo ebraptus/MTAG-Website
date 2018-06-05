@@ -30,8 +30,10 @@ function GameTemplate(iIndex, szName, szDesc){
     '<div class="card">' +
     '    <div class="title">' + szName + '</div>' +
     '    <div class="content">' + szDesc + '</div>' +
-    '    <button class="btn btn-primary" onclick="viewGame(' + iIndex + ')">View Game</button>' +
-    '    <button class="btn btn-primary" onclick="viewCode(' + iIndex + ')">View Code</button>' +
+    '    <div class="footer">' +
+    '       <button class="btn btn-primary" onclick="viewGame(' + iIndex + ')">View Game</button>' +
+    '       <button class="btn btn-primary" onclick="viewCode(' + iIndex + ')">View Code</button>' +
+    '    </div>' +
     ' </div>' +
     '</div>';
 }
