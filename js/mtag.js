@@ -7,11 +7,6 @@ function C_Game(szName, szDesc, szSubDir){
     this.m_szGameLink = "games/" + szSubDir + "/index.html";
 }
 
-function AddGame(szName, szDesc, szSubDir){
-    var newGame = new C_Game(szName, szDesc, szSubDir);
-    GameList.push(newGame);
-}
-
 function AddGame2(szSubDir){
     var directory = "games/" + szSubDir;
 
@@ -57,11 +52,6 @@ function viewGame(iIndex){
 
 // Start of adding games
 
-// AddGame("Dark Souls", "A darksouls based game where you are on a quest to save the the fallen lords", "darksouls");
-// AddGame("Battle The Principle", "You get your phone taken from by the principle and you have to get it back", "principle");
-// AddGame("Tom the Cat", "Tom the cat loves his peacful life at his house. but Jerry Nibbles and Spike invaded his home, help Tom get rid of these foes who have entered his home, fight enemies buy items from Toms friend Garfield the cat, adventure awaits in.... Adventures of Tom the cat.", "tomandjerry");
-// AddGame("Rat City", "A very meme heavy MTAG, we recommend reading all the lore", "ratcity");
-
 AddGame2("RYCH_DarkSouls");
 AddGame2("RYCH_Principle");
 AddGame2("RYCH_RatCity");
@@ -93,7 +83,4 @@ AddGame2("SantinoHorne");
 AddGame2("SarahHalladay");
 AddGame2("ThomasBarnes");
 
-
-
-// End of adding games - Update game list
 updateGameList();
